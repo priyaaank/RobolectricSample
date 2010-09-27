@@ -1,0 +1,15 @@
+gen/
+aidls/gen/
+code/gen/
+IntegrationTests/gen/
+bin/
+.settings
+.DS_Store
+.idea/workspace.xml
+out
+local.properties
+emulator15SdCard.*
+temp.json
+temp.xml
+temp.txt
+tmp/
