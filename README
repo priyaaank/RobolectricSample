@@ -1,0 +1,18 @@
+
+This is a sample project configured and setup to use Robolectric (droid-sugar).  This project shows how to configure
+your build file, how to layout your project, sample tests, etc.
+
+There are caveats:
+
+    This project is setup to use IntelliJ.  There currently is no support for Eclipse (Eclipse makes assumptions
+    about the project layout).  If you're interested in getting this running on Eclipse, we could use your help.
+
+    Currently the library has some requirements on using the Google API's versions of the SDK.
+
+- Create a new Android project (or copy this one and remove all the garbage you don't want).
+
+- Add the Robolectric (droid-sugar) git submodule to your application. In the root of your application run:
+
+     git submodule add git@github.com:pivotal/droid-sugar.git
+
+-
