@@ -29,15 +29,14 @@ import java.util.List;
 
 public class TestHelper implements TestHelperInterface {
 
-
     /**
      * This method is run before each test.  This is intended to be used as a global before each.
      */
     @Override
     public void before(Method method) {
         prepare();
+        FakeHelper.resetDroidSugarTestState();
     }
-
 
     /**
      * This method is run after  each test.  This is intended to be used as a global after each.
