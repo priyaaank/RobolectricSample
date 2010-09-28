@@ -4,7 +4,7 @@ import android.net.Uri;
 import com.xtremelabs.droidsugar.AbstractAndroidTestRunner;
 import com.xtremelabs.droidsugar.Loader;
 import com.xtremelabs.droidsugar.ProxyDelegatingHandler;
-import org.junit.internal.runners.InitializationError;
+import org.junit.runners.model.InitializationError;
 
 import java.lang.reflect.Method;
 
