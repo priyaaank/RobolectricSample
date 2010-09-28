@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.example"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <application android:label="TestingAndroid" android:icon="@drawable/icon">
-        <activity android:name="MyActivity"
-                  android:label="@string/app_name">
+          package="com.pivotallabs"
+          android:versionCode="1"
+          android:versionName="1.0">
+    <application
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name="com.pivotallabs"
+            >
+        <activity
+                android:name=".MyActivity"
+                android:configChanges="orientation|keyboardHidden"
+                android:screenOrientation="portrait"
+                >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-sdk android:minSdkVersion="3"/>
+    <!-- we test and support sdk 3 (android 1.5) but we need to build with sdk4 (android 1.6) to get support for alternate resources
+     (e.g. hi- vs. lo-res versions of the same drawable) -->
+    <uses-sdk android:targetSdkVersion="4"/>
 </manifest> 

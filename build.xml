@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TestingAndroid" default="help">
+<project name="Roblectric" default="help">
 
     <!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked in in Version
          Control Systems. -->
-    <property file="local.properties" />
+    <property file="local.properties"/>
 
     <!-- The build.properties file can be created by you and is never touched
          by the 'android' tool. This is the place to change some of the default property values
@@ -26,27 +26,27 @@
          should be checked in in Version Control Systems.
 
          -->
-    <property file="build.properties" />
+    <property file="build.properties"/>
 
     <!-- The default.properties file is created and updated by the 'android' tool, as well
          as ADT.
          This file is an integral part of the build system for your application and
          should be checked in in Version Control Systems. -->
-    <property file="default.properties" />
+    <property file="default.properties"/>
 
     <!-- Custom Android task to deal with the project target, and import the proper rules.
          This requires ant 1.6.0 or above. -->
     <path id="android.antlibs">
-        <pathelement path="${sdk.dir}/tools/lib/anttasks.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/sdklib.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/androidprefs.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/apkbuilder.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/jarutils.jar" />
+        <pathelement path="${sdk.dir}/tools/lib/anttasks.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/sdklib.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/androidprefs.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/apkbuilder.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/jarutils.jar"/>
     </path>
 
     <taskdef name="setup"
-        classname="com.android.ant.SetupTask"
-        classpathref="android.antlibs" />
+             classname="com.android.ant.SetupTask"
+             classpathref="android.antlibs"/>
 
     <!-- Execute the Android Setup task that will setup some properties specific to the target,
          and import the build rules files.
@@ -62,6 +62,110 @@
          This will ensure that the properties are setup correctly but that your customized
          build steps are used.
     -->
-    <setup />
+    <setup/>
 
+    <property name="aidl.dir" location="${aidl.dir}"/>
+    <property name="aidl.absolute.dir" location="${aidl.dir}"/>
+
+    <property name="test.absolute.dir" location="${test.dir}"/>
+    <property name="out.test-classes.dir" value="${out.absolute.dir}/testClasses"/>
+    <property name="out.test-classes.absolute.dir" value="${out.test-classes.dir}"/>
+    <property name="test.external.libs.dir" value="code/lib/test"/>
+    <property name="test.external.libs.absolute.dir" location="${test.external.libs.dir}"/>
+    <property name="publish.dir" location="${out.absolute.dir}/publish"/>
+
+    <property environment="env"/>
+    <condition property="build.number" value="${env.BUILD_NUMBER}" else="unknown">
+        <isset property="env.BUILD_NUMBER"/>
+    </condition>
+    <exec command="date" outputproperty="build.date"/>
+
+    <!-- Generates java classes from .aidl files. -->
+    <target name="-aidl" depends="-dirs">
+        <echo>Compiling aidl files into Java classes...</echo>
+        <apply executable="${aidl}" failonerror="true">
+            <arg value="-p${android.aidl}" />
+            <arg value="-I${source.absolute.dir}" />
+            <arg value="-o${gen.absolute.dir}" />
+            <fileset dir="${aidl.absolute.dir}">
+                <include name="**/*.aidl" />
+            </fileset>
+        </apply>
+    </target>
+
+    <target name="compile.tests" depends="compile"
+            description="compile module source; test classes" unless="skip.tests">
+        <mkdir dir="${out.test-classes.absolute.dir}"/>
+
+        <javac encoding="ascii" source="1.6" target="1.6" debug="true" extdirs=""
+               destdir="${out.test-classes.absolute.dir}"
+               verbose="${verbose}" classpath="${extensible.classpath}">
+            <src path="${test.absolute.dir}"/>
+            <src path="droid-sugar/src"/>
+            <classpath>
+                <pathelement path="${out.classes.absolute.dir}"/>
+                <path refid="android.target.classpath"/>
+                <fileset dir="${test.external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="${external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="droid-sugar/lib/main" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="clean" depends="android_rules.clean" description="cleanup module">
+        <delete dir="${out.test-classes.absolute.dir}"/>
+        <delete dir="${tmp.dir}"/>
+    </target>
+
+    <target name="test" depends="compile.tests" description="test all">
+        <mkdir dir="${basedir}/out/reports/tests"/>
+        <junit showoutput="true" failureproperty="junit.failure">
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest todir="${basedir}/out/reports/tests">
+                <fileset dir="${basedir}/code/test">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+            <classpath>
+                <pathelement path="${out.classes.absolute.dir}"/>
+                <pathelement path="${out.test-classes.absolute.dir}"/>
+                <fileset dir="${test.external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="${external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="droid-sugar/lib/main" includes="*.jar"/>
+                <path refid="android.target.classpath"/>
+            </classpath>
+        </junit>
+        <fail if="junit.failure" message="Unit test(s) failed.  See reports!"/>
+    </target>
+
+    <target name="client-publish">
+        <delete dir="${publish.dir}"/>
+
+        <mkdir dir="${publish.dir}"/>
+
+        <copy todir="${publish.dir}">
+            <fileset dir="${out.absolute.dir}">
+                <include name="**/*.apk"/>
+                <exclude name="**/*unaligned.apk"/>
+            </fileset>
+        </copy>
+
+        <checksum algorithm="sha1" totalproperty="publish.checksum">
+            <fileset dir="${publish.dir}">
+                <include name="*.apk"/>
+            </fileset>
+        </checksum>
+
+        <echo message="publish ${build.number} ${publish.checksum}"/>
+
+        <property name="publish.dir.final" value="${publish.dir}/build-${build.number}-${publish.checksum}"/>
+        <mkdir dir="${publish.dir.final}"/>
+
+        <move todir="${publish.dir.final}">
+            <fileset dir="${publish.dir}">
+                <include name="*.apk*"/>
+            </fileset>
+        </move>
+    </target>
 </project>
