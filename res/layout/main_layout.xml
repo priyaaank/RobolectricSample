@@ -12,15 +12,14 @@
         android:id="@+id/press_me_button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press me!"
+        android:text="Tests Rock!"
         />
     
-    <TextView
-        android:id="@+id/output_textview"
+    <ImageView
+        android:id="@+id/pivotal_logo"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
         />
 
 </LinearLayout>
