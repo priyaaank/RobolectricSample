@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -63,8 +62,6 @@ public class TestHelper implements TestHelperInterface {
             Implements implementsClass = genericProxy.getAnnotation(Implements.class);
             FastAndroidTestRunner.addProxy(implementsClass.value(), genericProxy);
         }
-
-        FastAndroidTestRunner.addProxy(Resources.class, FakeResources.class);
     }
 
 

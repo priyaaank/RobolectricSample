@@ -138,34 +138,5 @@
         </junit>
         <fail if="junit.failure" message="Unit test(s) failed.  See reports!"/>
     </target>
-
-    <target name="client-publish">
-        <delete dir="${publish.dir}"/>
-
-        <mkdir dir="${publish.dir}"/>
-
-        <copy todir="${publish.dir}">
-            <fileset dir="${out.absolute.dir}">
-                <include name="**/*.apk"/>
-                <exclude name="**/*unaligned.apk"/>
-            </fileset>
-        </copy>
-
-        <checksum algorithm="sha1" totalproperty="publish.checksum">
-            <fileset dir="${publish.dir}">
-                <include name="*.apk"/>
-            </fileset>
-        </checksum>
-
-        <echo message="publish ${build.number} ${publish.checksum}"/>
-
-        <property name="publish.dir.final" value="${publish.dir}/build-${build.number}-${publish.checksum}"/>
-        <mkdir dir="${publish.dir.final}"/>
-
-        <move todir="${publish.dir.final}">
-            <fileset dir="${publish.dir}">
-                <include name="*.apk*"/>
-            </fileset>
-        </move>
-    </target>
+   
 </project>

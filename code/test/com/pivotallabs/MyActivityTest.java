@@ -40,14 +40,14 @@ public class MyActivityTest {
         FakeActivity fakeActivity = proxyFor(myActivity);
         Intent startedIntent = fakeActivity.startedIntent;
         FakeIntent fakeIntent = proxyFor(startedIntent);
-        Class<NamesActivity> actualListActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
+        Class<NamesActivity> actualStartedActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
 
-        assertThat(actualListActivityClass, equalTo(NamesActivity.class));
+        assertThat(actualStartedActivityClass, equalTo(NamesActivity.class));
     }
 
     @Test
     public void shouldHaveALogo() throws Exception {
-        assertThat(proxyFor(pivotalLogo).visibility, equalTo(View.VISIBLE));
+        assertThat(pivotalLogo.getVisibility(), equalTo(View.VISIBLE));
         assertThat(proxyFor(pivotalLogo).resourceId, equalTo(R.drawable.pivotallabs_logo));
     }
 }

@@ -1,4 +1,4 @@
-This is a sample project configured and setup to use Robolectric (droid-sugar).  This project shows how to configure
+This is a sample project configured and setup to use Robolectric (aka droid-sugar).  This project shows how to configure
 your build file, how to layout your project, sample tests, etc.
 
 There are caveats:
@@ -9,6 +9,8 @@ There are caveats:
 
     - Currently the library has some requirements on using the Google API's versions of the SDK.
 
+    - Sometimes IntelliJ's module settings dialog re-adds the "code/gen" directory as a source in the main Android
+      module, causing an error to appear; just manually remove it to fix.
 
 To run this sample app and run the tests:
 
@@ -19,88 +21,44 @@ To run this sample app and run the tests:
 
     ant clean test
 
+
 PROJECT LAYOUT
 
-The project moves the source (and test) directory into a plain old Java module (named the code module)
-so IntelliJ won't run the dex step every time the project is built (every time you run tests).  The code module has a
+The project moves the source (and test) directory into a plain old Java module (named the code module) so IntelliJ
+won't run the really slow dex step every time the project is built (every time you run tests).  The code module has a
 compile dependency on android the sdk library, allowing you to write your classes as you normally would.
+
+The Android resources generated classes (R.class) is generated into the code module, so your code can refer to it.
+
+The main Android module depends on the code module, and performs the dex build step.
+
+The optional aidls module contains any service aidls for your project. The main module has a dependency to it, but code
+does not. Code generated from aidls is generated into the code module by the Android build task.
 
 
 WRITING TESTS
 
 If you're reading this, you probably know that the Android SDK jar is basically unusable outside of the Emulator or a
-device.  All sdk methods throw RuntimeExceptions(STUB!). Robolectric de-fangs the sdk jar by rewriting the contents of
+device.  All sdk methods throw RuntimeExceptions("STUB!"). Robolectric de-fangs the sdk jar by rewriting the contents of
 all the methods in the sdk at runtime. By default, the methods are rewritten to do nothing and return null.
-You may provide a fake class that the re-written sdk jar proxies to.  Robolectric provides many fake classes, but it
-is not completely faked out.  Most of what you'll need is there, but don't be surprised if you have to write a fake
-for the functionality you're testing.
+You may provide a fake class to handle specific method calls.  Robolectric provides many simplified fakes, but it
+is not complete, or necessarily completely realistic.  Most of what you'll need is there, but don't be surprised if you
+have to write a fake for the functionality you're testing.
 
-Robolectric requires that tests classes are annotated so that it has a chance to prepare for calls into the sdk.  Tests
-can then be written as you normally would write them.  Helper methods exist to provide access to the fakes backing the
-android objects.
+Robolectric requires that tests classes are loaded with a custom test runner so that it has a chance to prepare for
+calls into the sdk.  Tests can then be written as you normally would write them.  Helper methods exist to provide
+access to the fakes backing the android objects (proxyFor()).
 
-
-
-ALTERING YOUR EXISTING APPLICATION
-
-
-Before you open IntelliJ:
-
-    - Add the Robolectric (droid-sugar) git submodule to your application. (You'll probably want to fork the droid-sugar
-    repository so you can make changes, and hopefully you'll contribute your improvements back!)
-    In the root of your application run:
-
-     git submodule add git@github.com:pivotal/droid-sugar.git
-
-- Reorganize your project.  From the root of your project:
-
-    mkdir -p code aidls/src
-
-    mv src gen code
-
-        - find all *.aidl under code and move under aidls/src directory. If you don't have any aidl's in your project,
-        you'll probably want to add a dummy text file in the aidls/src directory so that the directories are not auto
-        deleted by IntelliJ.
+Robolectric handles inflation of views, string resource lookups, etc. Only some view attributes (id, visibility,
+enabled, text, checked, and src) are currently parsed and applied to inflated views.
 
 
-    mkdir -p code/lib/main
+GETTING STARTED
 
-        - place your project's production jars in this directory (I.E. roboguice jar)
-
-    mkdir -p code/lib/test
-
-         - place your project's test jars in this directory (I.E. junit jar)
+For now we recommend that you start with this skeleton application and add your code to it. For buggy and wrong pointers
+on how to convert your existing project, see CONVERTING-EXISTING-APPS.
 
 
-- add the following to the build.properties in the root of your project:
+CONTRIBUTING
 
-        source.dir=code/src
-        test.dir=code/test
-        aidl.dir=aidls/src
-        tmp.dir=tmp
-
-        external.libs.dir=code/lib/main
-
-- Open IntelliJ [this section is not correct/complete]
-
-    Go to Module Setup
-
-    Select Code module -> Dependencies -> Add -> Library -> Global Library... -> Android x.x
-        set the scope to: Complile
-
-    Select Code module -> Dependencies -> Add -> Library -> Module Library -> jar directory -> choose 'code/lib/test'
-        set the scope to: Test
-
-
-    Select (main project module) -> Android facet
-    Select (*) Generate Java files under other source root: [ .../code/gen ]
-
-    Select (main module) -> Dependencies
-    Add -> Module dependency -> Code
-    Add -> Module dependency -> Aidls
-
-    Create new module -> use existing iml with droid-sugar/droid-sugar.iml.
-    Select Code module -> Dependencies
-    Add -> Module dependency -> droid-sugar
-    Change scope from Compile to Test
-
+We welcome contributions. Please fork and submit pull requests!
