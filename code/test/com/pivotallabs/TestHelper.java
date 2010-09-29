@@ -2,6 +2,7 @@ package com.pivotallabs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -36,6 +37,7 @@ public class TestHelper implements TestHelperInterface {
     public void before(Method method) {
         prepare();
         FakeHelper.resetDroidSugarTestState();
+        FakeHelper.application = new Application();
     }
 
     /**
