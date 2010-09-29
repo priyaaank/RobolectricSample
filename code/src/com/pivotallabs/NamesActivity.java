@@ -18,6 +18,9 @@ public class NamesActivity extends Activity {
         names.add("Sponge Bob Square Pants");
         names.add("Kai Lan");
         names.add("Polly Pockets");
+        names.add("Sheriff Woody");
+        names.add("Lotso Bear");
+        names.add("Slinky Dog");
     }
 
     @Override
