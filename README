@@ -54,7 +54,7 @@ Before you open IntelliJ:
 
 - Reorganize your project.  From the root of your project:
 
-    mkdir code aidls/src
+    mkdir -p code aidls/src
 
     mv src gen code
 
