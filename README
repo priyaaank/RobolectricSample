@@ -12,7 +12,7 @@ There are caveats:
 
 To run this sample app and run the tests:
 
-    git clone git@pivotal-robolectric-sample:pivotal/RobolectricSample.git
+    git clone git@github.com:pivotal/RobolectricSample.git
     cd RobolectricSample
     android update project -p .
     git submodule update --init
