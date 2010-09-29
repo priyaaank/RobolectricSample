@@ -17,14 +17,32 @@ To run this sample app and run the tests:
     android update project -p .
     git submodule update --init
 
-    ant test
+    ant clean test
+
+PROJECT LAYOUT
+
+The project moves the source (and test) directory into a plain old Java module (named the code module)
+so IntelliJ won't run the dex step every time the project is built (every time you run tests).  The code module has a
+compile dependency on android the sdk library, allowing you to write your classes as you normally would.
+
+
+WRITING TESTS
+
+If you're reading this, you probably know that the Android SDK jar is basically unusable outside of the Emulator or a
+device.  All sdk methods throw RuntimeExceptions(STUB!). Robolectric de-fangs the sdk jar by rewriting the contents of
+all the methods in the sdk at runtime. By default, the methods are rewritten to do nothing and return null.
+You may provide a fake class that the re-written sdk jar proxies to.  Robolectric provides many fake classes, but it
+is not completely faked out.  Most of what you'll need is there, but don't be surprised if you have to write a fake
+for the functionality you're testing.
+
+Robolectric requires that tests classes are annotated so that it has a chance to prepare for calls into the sdk.  Tests
+can then be written as you normally would write them.  Helper methods exist to provide access to the fakes backing the
+android objects.
+
 
 
 ALTERING YOUR EXISTING APPLICATION
 
-The following steps will move your application source out of the Android module and into a plain old java module.  This
-this is done so that IntelliJ will not try to regenerate gen'd files and dexing every time you run tests. This is
-crucial for getting the tests running fast.
 
 Before you open IntelliJ:
 
