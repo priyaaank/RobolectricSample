@@ -1,3 +1,3 @@
 [submodule "droid-sugar"]
 	path = droid-sugar
-	url = git@github.com:pivotal/droid-sugar.git
+	url = git://github.com/pivotal/droid-sugar.git
