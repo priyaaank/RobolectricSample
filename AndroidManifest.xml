@@ -7,13 +7,14 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Light"
             >
-        <activity android:name="MyActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name="NamesActivity"/>
+        <activity android:name="TrackerAuthenticationActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

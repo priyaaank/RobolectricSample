@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MyActivity extends Activity {
+public class HomeActivity extends Activity {
 
     public static final String PACKAGE_NAME = "com.pivotallabs";
 
@@ -13,7 +13,7 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_layout);
+        setContentView(R.layout.home_layout);
 
         findViewById(R.id.press_me_button_id).setOnClickListener(new View.OnClickListener() {
             @Override

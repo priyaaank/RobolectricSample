@@ -15,14 +15,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(FastAndroidTestRunner.class)
-public class MyActivityTest {
+public class HomeActivityTest {
     private TextView pressMeButton;
     private ImageView pivotalLogo;
-    private MyActivity myActivity;
+    private HomeActivity myActivity;
 
     @Before
     public void setUp() throws Exception {
-        myActivity = new MyActivity();
+        myActivity = new HomeActivity();
         myActivity.onCreate(null);
         pressMeButton = (TextView) myActivity.findViewById(R.id.press_me_button_id);
         pivotalLogo = (ImageView) myActivity.findViewById(R.id.pivotal_logo);
