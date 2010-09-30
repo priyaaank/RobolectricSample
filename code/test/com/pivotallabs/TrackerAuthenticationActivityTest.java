@@ -3,7 +3,6 @@ package com.pivotallabs;
 import android.view.View;
 import android.widget.TextView;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,16 +26,12 @@ public class TrackerAuthenticationActivityTest {
         signInButton = activity.findViewById(R.id.sign_in_button);
     }
 
-    @Test @Ignore
+    @Test
     public void shouldNotEnableTheSignInButtonUntilUsernameAndPasswordFieldsHaveText() throws Exception {
         assertThat(signInButton.isEnabled(), equalTo(false));
-        
         usernameEditText.setText("Sponge Bob");
-
         assertThat(signInButton.isEnabled(), equalTo(false));
-
         passwordEditText.setText("squidward");
-
         assertThat(signInButton.isEnabled(), equalTo(true));
     }
 }
