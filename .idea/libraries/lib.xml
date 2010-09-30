@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/droid-sugar/lib/mockito-all-1.8.4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/droid-sugar/lib/javassist-3.12.GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/robolectric/lib/mockito-all-1.8.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/robolectric/lib/javassist-3.12.GA.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
