@@ -102,6 +102,7 @@
                verbose="${verbose}" classpath="${extensible.classpath}">
             <src path="${test.absolute.dir}"/>
             <src path="robolectric/src"/>
+            <src path="great-expectations/src/main/java" />
             <classpath>
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <path refid="android.target.classpath"/>
@@ -133,6 +134,7 @@
                 <fileset dir="${test.external.libs.absolute.dir}" includes="*.jar"/>
                 <fileset dir="${external.libs.absolute.dir}" includes="*.jar"/>
                 <fileset dir="robolectric/lib/main" includes="*.jar"/>
+
                 <path refid="android.target.classpath"/>
             </classpath>
         </junit>
