@@ -12,12 +12,12 @@ There are caveats:
     - Sometimes IntelliJ's module settings dialog re-adds the "code/gen" directory as a source in the main Android
       module, causing an error to appear; just manually remove it to fix.
 
-To run this sample app and run the tests:
+To install this sample app and run the tests:
 
     git clone git://github.com/pivotal/RobolectricSample.git
     cd RobolectricSample
-    android update project -p .
     git submodule update --init
+    android update project -p .
 
     ant clean test
 
@@ -34,6 +34,15 @@ The main Android module depends on the code module, and performs the dex build s
 
 The optional aidls module contains any service aidls for your project. The main module has a dependency to it, but code
 does not. Code generated from aidls is generated into the code module by the Android build task.
+
+
+ANT
+
+The project contains a build.xml configured for the layout of the project.  The file extends the standard Android
+build.xml to support the layout of the project files.  The build.xml file defines a test target.
+
+This sample project and build.xml file also has support for the aidls your application may define. Currently there are
+no samples demonstrating this, but we have successfully used this setup on projects that define aidls.
 
 
 WRITING TESTS
