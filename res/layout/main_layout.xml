@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/pivotal_logo"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/pivotallabs_logo"
         android:layout_marginBottom="10dip"
