@@ -1,4 +1,4 @@
-package com.pivotallabs;
+package com.pivotallabs.expects;
 
 import com.pivotallabs.greatexpectations.*;
 
@@ -34,4 +34,6 @@ public class GreatExpectations {
         return new DateExpectation(actual)
                 .setInvertedInstance(new DateExpectation(actual));
     }
+
+
 }

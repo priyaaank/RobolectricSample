@@ -18,14 +18,14 @@ import static org.junit.Assert.assertThat;
 public class HomeActivityTest {
     private TextView pressMeButton;
     private ImageView pivotalLogo;
-    private HomeActivity myActivity;
+    private HomeActivity activity;
 
     @Before
     public void setUp() throws Exception {
-        myActivity = new HomeActivity();
-        myActivity.onCreate(null);
-        pressMeButton = (TextView) myActivity.findViewById(R.id.press_me_button_id);
-        pivotalLogo = (ImageView) myActivity.findViewById(R.id.pivotal_logo);
+        activity = new HomeActivity();
+        activity.onCreate(null);
+        pressMeButton = (TextView) activity.findViewById(R.id.press_me_button_id);
+        pivotalLogo = (ImageView) activity.findViewById(R.id.pivotal_logo);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheListActivity() throws Exception {
         pressMeButton.performClick();
 
-        FakeActivity fakeActivity = proxyFor(myActivity);
+        FakeActivity fakeActivity = proxyFor(activity);
         Intent startedIntent = fakeActivity.startedIntent;
         FakeIntent fakeIntent = proxyFor(startedIntent);
         Class<NamesActivity> actualStartedActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
