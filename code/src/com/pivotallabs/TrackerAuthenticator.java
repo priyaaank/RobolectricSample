@@ -12,7 +12,7 @@ public class TrackerAuthenticator {
     }
 
     public void signIn(String username, String password, AuthenticationCallbacks responseCallbacks) {
-        apiGateway.makeRequest(new AuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks));
+        apiGateway.makeRequest(new TrackerAuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks));
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {

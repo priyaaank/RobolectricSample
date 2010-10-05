@@ -21,4 +21,12 @@ public class ApiResponse {
     public boolean isSuccess() {
         return httpResponseCode >= 200 && httpResponseCode < 300;
     }
+
+    @Override
+    public String toString() {
+        return "ApiResponse{" +
+                "httpResponseCode=" + httpResponseCode +
+                ", responseBody='" + responseBody + '\'' +
+                '}';
+    }
 }

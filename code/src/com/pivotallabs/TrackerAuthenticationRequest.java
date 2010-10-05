@@ -2,11 +2,11 @@ package com.pivotallabs;
 
 import com.pivotallabs.api.ApiRequest;
 
-class AuthenticationRequest extends ApiRequest {
+class TrackerAuthenticationRequest extends ApiRequest {
     private String username;
     private String password;
 
-    public AuthenticationRequest(String username, String password) {
+    public TrackerAuthenticationRequest(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -21,7 +21,7 @@ class AuthenticationRequest extends ApiRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AuthenticationRequest that = (AuthenticationRequest) o;
+        TrackerAuthenticationRequest that = (TrackerAuthenticationRequest) o;
 
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (username != null ? !username.equals(that.username) : that.username != null) return false;

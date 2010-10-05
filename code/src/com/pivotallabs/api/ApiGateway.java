@@ -1,9 +1,23 @@
 package com.pivotallabs.api;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class ApiGateway {
     public void makeRequest(ApiRequest apiRequest, ApiResponseCallbacks responseCallbacks) {
-        // make the http call off the main thread,
-        // create an Api response and call back into the callbacks on the main thread
+        // TODO: make the http call off the main thread,
+        //   create an Api response and call back into the callbacks on the main thread
+        try {
+            Http.Response response
+                    = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getPostBody());
+            ApiResponse apiResponse = new ApiResponse(response.getStatusCode(), response.getResponseBody());
+            dispatch(apiResponse, responseCallbacks);
+        } catch (IOException e) {
+            throw new RuntimeException("error making request", e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("error making request", e);
+        }
+
     }
 
     protected void dispatch(ApiResponse apiResponse, ApiResponseCallbacks responseCallbacks) {

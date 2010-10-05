@@ -17,6 +17,29 @@ public class ApiGatewayTest {
     }
 
     @Test
+    public void makeRequestTest() {
+        apiGateway.makeRequest(new ApiRequest() {
+            @Override
+            public String getUrlString() {
+                //return "https://www.pivotaltracker.com/services/v3/tokens/active";
+                return "https://google.com";
+            }
+        }, new ApiResponseCallbacks() {
+            @Override
+            public void onSuccess(ApiResponse response) {
+            }
+
+            @Override
+            public void onFailure(ApiResponse response) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
+    }
+
+    @Test
     public void dispatch_shouldCallOntoTheSuccessWhenApiResponseIsSuccess() throws Exception {
         TestResponseCallbacks responseCallbacks = new TestResponseCallbacks();
         ApiResponse apiResponse = new ApiResponse(200, "response body");

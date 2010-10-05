@@ -14,7 +14,6 @@ import static org.junit.Assert.assertThat;
 @RunWith(FastAndroidTestRunner.class)
 public class TrackerAuthenticationActivityTest {
 
-    private TrackerAuthenticationActivity activity;
     private View signInButton;
     private TextView usernameEditText;
     private TextView passwordEditText;
@@ -22,7 +21,7 @@ public class TrackerAuthenticationActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        activity = new TrackerAuthenticationActivity();
+        TrackerAuthenticationActivity activity = new TrackerAuthenticationActivity();
         activity.onCreate(null);
 
         apiGateway = new TestApiGateway();
@@ -47,7 +46,7 @@ public class TrackerAuthenticationActivityTest {
         usernameEditText.setText("Sponge Bob");
         passwordEditText.setText("squidward");
         signInButton.performClick();
-        assertRequestWasMade(apiGateway, new AuthenticationRequest("Sponge Bob", "squidward"));
+        assertRequestWasMade(apiGateway, new TrackerAuthenticationRequest("Sponge Bob", "squidward"));
     }
 
     @Test
