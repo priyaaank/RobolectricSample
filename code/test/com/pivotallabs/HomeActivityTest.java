@@ -38,7 +38,7 @@ public class HomeActivityTest {
         pressMeButton.performClick();
 
         FakeActivity fakeActivity = proxyFor(activity);
-        Intent startedIntent = fakeActivity.startedIntent;
+        Intent startedIntent = fakeActivity.getNextStartedIntent();
         FakeIntent fakeIntent = proxyFor(startedIntent);
         Class<NamesActivity> actualStartedActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
 
