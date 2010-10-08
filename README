@@ -1,4 +1,4 @@
-This is a sample project configured and setup to use Robolectric (aka droid-sugar).  This project shows how to configure
+This is a sample project configured and setup to use Robolectric.  This project shows how to configure
 your build file, how to layout your project, sample tests, etc.
 
 There are caveats:
