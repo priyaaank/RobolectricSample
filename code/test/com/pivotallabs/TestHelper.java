@@ -22,6 +22,7 @@ import com.xtremelabs.droidsugar.fakes.*;
 import com.xtremelabs.droidsugar.util.FakeHelper;
 import com.xtremelabs.droidsugar.util.Implements;
 import com.xtremelabs.droidsugar.util.ResourceLoader;
+import com.xtremelabs.droidsugar.util.TestHelperInterface;
 
 import java.io.File;
 import java.lang.reflect.Method;
