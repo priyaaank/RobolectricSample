@@ -1,38 +1,53 @@
 package com.pivotallabs;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;
 
-public class TrackerAuthenticator {
-    public ApiGateway apiGateway;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    public TrackerAuthenticator(ApiGateway apiGateway) {
+public class TrackerAuthenticator {
+    static final String TRACKER_AUTH_PREF_KEY = "tracker-auth";
+    public ApiGateway apiGateway;
+    private SharedPreferences sharedPreferences;
+
+    public TrackerAuthenticator(ApiGateway apiGateway, Context context) {
         this.apiGateway = apiGateway;
+        sharedPreferences = context.getSharedPreferences(TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
     }
 
-    public void signIn(String username, String password, AuthenticationCallbacks responseCallbacks) {
-        apiGateway.makeRequest(new TrackerAuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks));
+    public void signIn(String username, String password, Callbacks responseCallbacks) {
+        apiGateway.makeRequest(new TrackerAuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks, sharedPreferences));
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {
-        private AuthenticationCallbacks responseCallbacks;
+        private Callbacks responseCallbacks;
+        private SharedPreferences preferences;
 
-        public AuthenticationApiResponseCallbacks(AuthenticationCallbacks responseCallbacks) {
+        public AuthenticationApiResponseCallbacks(Callbacks responseCallbacks, SharedPreferences preferences) {
             this.responseCallbacks = responseCallbacks;
+            this.preferences = preferences;
         }
 
         @Override
         public void onSuccess(ApiResponse response) {
-
+            Matcher matcher = Pattern.compile("<guid>(.*?)</guid>").matcher(response.getResponseBody());
+            matcher.find();
+            preferences.edit().putString("guid", matcher.group(1)).commit();
+            responseCallbacks.onSuccess();
         }
 
         @Override
         public void onFailure(ApiResponse response) {
+            responseCallbacks.onFailure();
         }
 
         @Override
         public void onComplete() {
+            responseCallbacks.onComplete();
         }
     }
 }

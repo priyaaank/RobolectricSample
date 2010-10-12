@@ -15,7 +15,7 @@ public class TrackerAuthenticationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tracker_authentication_layout);
 
-        trackerAuthenticator = new TrackerAuthenticator(new ApiGateway());
+        trackerAuthenticator = new TrackerAuthenticator(new ApiGateway(), this);
 
         final EditText usernameEditText = (EditText) findViewById(R.id.username);
         final EditText passwordEditText = (EditText) findViewById(R.id.password);
@@ -35,13 +35,17 @@ public class TrackerAuthenticationActivity extends Activity {
         });
     }
 
-    private static class MyAuthenticationCallbacks implements AuthenticationCallbacks {
+    private static class MyAuthenticationCallbacks implements Callbacks {
         @Override
-        public void onSuccess(String apiToken) {
+        public void onSuccess() {
         }
 
         @Override
         public void onFailure() {
+        }
+
+        @Override
+        public void onComplete() {
         }
     }
 }

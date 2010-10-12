@@ -22,8 +22,7 @@ public class ApiGatewayTest {
         apiGateway.makeRequest(new ApiRequest() {
             @Override
             public String getUrlString() {
-                //return "https://www.pivotaltracker.com/services/v3/tokens/active";
-                return "https://google.com";
+                return "https://www.pivotaltracker.com/services/v3/tokens/active";
             }
         }, new ApiResponseCallbacks() {
             @Override
