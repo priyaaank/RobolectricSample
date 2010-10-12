@@ -17,10 +17,17 @@
         />
 
     <Button
-        android:id="@+id/press_me_button_id"
+        android:id="@+id/press_me_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tests_rock"
         />
 
+    <Button
+        android:id="@+id/tracker_recent_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_to_tracker"
+        />
+    
 </LinearLayout>

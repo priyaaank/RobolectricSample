@@ -2,8 +2,8 @@ package com.pivotallabs;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import com.xtremelabs.droidsugar.fakes.FakeActivity;
 import com.xtremelabs.droidsugar.fakes.FakeIntent;
 import org.junit.Before;
@@ -16,15 +16,17 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(FastAndroidTestRunner.class)
 public class HomeActivityTest {
-    private TextView pressMeButton;
-    private ImageView pivotalLogo;
     private HomeActivity activity;
+    private Button pressMeButton;
+    private Button trackerRecentActivityButton;
+    private ImageView pivotalLogo;
 
     @Before
     public void setUp() throws Exception {
         activity = new HomeActivity();
         activity.onCreate(null);
-        pressMeButton = (TextView) activity.findViewById(R.id.press_me_button_id);
+        pressMeButton = (Button) activity.findViewById(R.id.press_me_button);
+        trackerRecentActivityButton = (Button) activity.findViewById(R.id.tracker_recent_activity);
         pivotalLogo = (ImageView) activity.findViewById(R.id.pivotal_logo);
     }
 
@@ -43,6 +45,18 @@ public class HomeActivityTest {
         Class<NamesActivity> actualStartedActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
 
         assertThat(actualStartedActivityClass, equalTo(NamesActivity.class));
+    }
+
+    @Test
+    public void pressingTheButtonShouldStartTheSignInActivity() throws Exception {
+        trackerRecentActivityButton.performClick();
+
+        FakeActivity fakeActivity = proxyFor(activity);
+        Intent startedIntent = fakeActivity.getNextStartedIntent();
+        FakeIntent fakeIntent = proxyFor(startedIntent);
+        Class<TrackerAuthenticationActivity> actualStartedActivityClass = (Class<TrackerAuthenticationActivity>) fakeIntent.componentClass;
+
+        assertThat(actualStartedActivityClass, equalTo(TrackerAuthenticationActivity.class));
     }
 
     @Test

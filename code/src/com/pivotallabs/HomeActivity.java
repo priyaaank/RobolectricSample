@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.pivotallabs.api.ApiGateway;
 
 public class HomeActivity extends Activity {
 
@@ -16,13 +15,24 @@ public class HomeActivity extends Activity {
 
         setContentView(R.layout.home_layout);
 
-        findViewById(R.id.press_me_button_id).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.press_me_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClassName(PACKAGE_NAME, NamesActivity.class.getName());
-                startActivity(intent);
+                startActivity(NamesActivity.class);
             }
         });
+
+        findViewById(R.id.tracker_recent_activity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(TrackerAuthenticationActivity.class);
+            }
+        });
+    }
+
+    private void startActivity(Class<? extends Activity> activityClass) {
+        Intent intent = new Intent();
+        intent.setClassName(PACKAGE_NAME, activityClass.getName());
+        startActivity(intent);
     }
 }
