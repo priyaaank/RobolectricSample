@@ -1,6 +1,7 @@
 package com.pivotallabs;
 
 import com.pivotallabs.api.ApiGateway;
+import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -28,9 +29,10 @@ public class TrackerAuthenticatorTest {
         assertThat(apiGateway.getLatestRequest().getUrlString(), equalTo("https://www.pivotaltracker.com/services/v3/tokens/active"));
     }
 
-    @Test @Ignore
+    @Test
     public void shouldSendUsernameAndPassword() {
-
+        TrackerAuthenticationRequest request = (TrackerAuthenticationRequest) apiGateway.getLatestRequest();
+        assertThat(request, equalTo(new TrackerAuthenticationRequest("spongebob", "squidward")));
     }
 
     @Test @Ignore
