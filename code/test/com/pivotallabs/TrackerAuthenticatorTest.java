@@ -17,29 +17,40 @@ public class TrackerAuthenticatorTest {
     private TestApiGateway apiGateway;
     private TestCallbacks callbacks;
     private Activity context;
+    private TrackerAuthenticator trackerAuthenticator;
 
     @Before
     public void setUp() throws Exception {
         apiGateway = new TestApiGateway();
         context = new Activity();
-        TrackerAuthenticator trackerAuthenticator = new TrackerAuthenticator(apiGateway, context);
         callbacks = new TestCallbacks();
-        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
+        trackerAuthenticator = new TrackerAuthenticator(apiGateway, context);
     }
 
     @Test
     public void shouldMakeARemoteCallWhenSigningIn() throws Exception {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         assertThat(apiGateway.getLatestRequest().getUrlString(), equalTo("https://www.pivotaltracker.com/services/v3/tokens/active"));
     }
 
     @Test
     public void shouldSendUsernameAndPassword() {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         TrackerAuthenticationRequest request = (TrackerAuthenticationRequest) apiGateway.getLatestRequest();
         assertThat(request, equalTo(new TrackerAuthenticationRequest("spongebob", "squidward")));
     }
 
     @Test
+    public void authenticated_shouldReturnTrueOnceSignedIn() {
+        assertThat(trackerAuthenticator.authenticated(), equalTo(false));
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
+        simulateSuccessfulAuthentication();
+        assertThat(trackerAuthenticator.authenticated(), equalTo(true));
+    }
+
+    @Test
     public void shouldCallSuccessWhenAuthenticationSucceeds() {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         simulateSuccessfulAuthentication();
         assertThat(callbacks.succcessWasCalled, equalTo(true));
         assertThat(callbacks.failuireWasCalled, equalTo(false));
@@ -48,14 +59,20 @@ public class TrackerAuthenticatorTest {
 
     @Test
     public void shouldCallFailureWhenAuthenticationFails() {
-        apiGateway.simulateResponse(500, "ERROR");
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
+        simulateSignInFailure();
         assertThat(callbacks.failuireWasCalled, equalTo(true));
         assertThat(callbacks.succcessWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
     }
 
+    private void simulateSignInFailure() {
+        apiGateway.simulateResponse(500, "ERROR");
+    }
+
     @Test
     public void shouldStoreApiTokenInPrefs() {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         simulateSuccessfulAuthentication();
 
         SharedPreferences sharedPreferences =

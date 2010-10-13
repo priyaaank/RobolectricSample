@@ -14,11 +14,7 @@ public class ApiGatewayTest {
     @Before
     public void setUp() throws Exception {
         apiGateway = new ApiGateway();
-
-
     }
-
-   
 
     @Test
     public void dispatch_shouldCallOntoTheSuccessWhenApiResponseIsSuccess() throws Exception {

@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;
+import com.pivotallabs.util.Strings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TrackerAuthenticator {
     static final String TRACKER_AUTH_PREF_KEY = "tracker-auth";
+    private static final String GUID_KEY = "guid";
     public ApiGateway apiGateway;
     private SharedPreferences sharedPreferences;
 
@@ -21,6 +23,10 @@ public class TrackerAuthenticator {
 
     public void signIn(String username, String password, Callbacks responseCallbacks) {
         apiGateway.makeRequest(new TrackerAuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks, sharedPreferences));
+    }
+
+    public boolean authenticated() {
+        return !Strings.isEmptyOrWhitespace(sharedPreferences.getString(GUID_KEY, ""));
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {
@@ -36,7 +42,7 @@ public class TrackerAuthenticator {
         public void onSuccess(ApiResponse response) {
             Matcher matcher = Pattern.compile("<guid>(.*?)</guid>").matcher(response.getResponseBody());
             matcher.find();
-            preferences.edit().putString("guid", matcher.group(1)).commit();
+            preferences.edit().putString(GUID_KEY, matcher.group(1)).commit();
             responseCallbacks.onSuccess();
         }
 
