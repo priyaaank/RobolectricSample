@@ -1,6 +1,8 @@
 package com.pivotallabs.api;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -18,30 +20,38 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
+
+import static com.pivotallabs.util.Strings.isEmptyOrWhitespace;
 
 public class Http {
 
-    public Response get(String url, Map<String, String> headers, String postBody) throws IOException, URISyntaxException {
+    public Response get(String url, Map<String, String> headers, String username, String password)
+            throws IOException, URISyntaxException {
+        URI uri = new URI(url);
+        String host = uri.getHost();
+        return makeRequest(headers, username, password, new HttpGet(uri), host);
+    }
+
+    public Response post(String url, Map<String, String> headers, String postBody, String username, String password)
+            throws IOException, URISyntaxException {
+        URI uri = new URI(url);
+        HttpRequestBase method = new HttpPost(uri);
+        ((HttpPost) method).setEntity(new StringEntity(postBody, "UTF-8"));
+        return makeRequest(headers, username, password, method, uri.getHost());
+    }
+
+    private Response makeRequest(Map<String, String> headers, String username, String password, HttpRequestBase method, String host) {
         DefaultHttpClient client = null;
         try {
-            URI uri = new URI(url);
-            HttpRequestBase method;
-            if (postBody == null) {
-                method = new HttpGet(uri);
-            } else {
-                method = new HttpPost(uri);
-                ((HttpPost) method).setEntity(new StringEntity(postBody, "UTF-8"));
-            }
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 method.setHeader(entry.getKey(), entry.getValue());
             }
             client = getPromiscuousDefaultClient();
-            HttpResponse response = client.execute(method);
-            return new Response(response);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            addBasicAuthCredentials(client, host, username, password);
+            return new Response(client.execute(method));
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -51,6 +61,14 @@ public class Http {
                 } catch (Exception e) {
                 }
             }
+        }
+    }
+
+    private void addBasicAuthCredentials(DefaultHttpClient client, String domainName, String username, String password) {
+        if (!isEmptyOrWhitespace(username) || !isEmptyOrWhitespace(password)) {
+            AuthScope authScope = new AuthScope(domainName, 443);
+            UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
+            client.getCredentialsProvider().setCredentials(authScope, credentials);
         }
     }
 

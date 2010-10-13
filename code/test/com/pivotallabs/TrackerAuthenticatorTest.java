@@ -15,7 +15,6 @@ import static org.junit.Assert.assertThat;
 public class TrackerAuthenticatorTest {
 
     private TestApiGateway apiGateway;
-    private TrackerAuthenticator trackerAuthenticator;
     private TestCallbacks callbacks;
     private Activity context;
 
@@ -23,7 +22,7 @@ public class TrackerAuthenticatorTest {
     public void setUp() throws Exception {
         apiGateway = new TestApiGateway();
         context = new Activity();
-        trackerAuthenticator = new TrackerAuthenticator(apiGateway, context);
+        TrackerAuthenticator trackerAuthenticator = new TrackerAuthenticator(apiGateway, context);
         callbacks = new TestCallbacks();
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
     }

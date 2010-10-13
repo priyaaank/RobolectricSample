@@ -19,12 +19,14 @@
 
     <EditText
             android:id="@+id/username"
+            android:hint="@string/username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />
 
     <EditText
             android:id="@+id/password"
+            android:hint="@string/password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:password="true"
@@ -35,6 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
+            android:text="@string/sign_in_to_tracker"
             />
 
 </LinearLayout>

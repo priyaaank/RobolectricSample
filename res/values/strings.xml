@@ -3,4 +3,6 @@
     <string name="app_name">Robolectric Sample</string>
     <string name="tests_rock">Tests Rock!</string>
     <string name="sign_in_to_tracker">Sign in to Tracker</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

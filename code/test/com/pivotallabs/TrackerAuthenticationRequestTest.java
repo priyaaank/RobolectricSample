@@ -1,21 +1,30 @@
 package com.pivotallabs;
 
-import junit.framework.TestCase;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Map;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 @RunWith(FastAndroidTestRunner.class)
 public class TrackerAuthenticationRequestTest  {
+    private TrackerAuthenticationRequest request;
+
+    @Before
+    public void setUp() throws Exception {
+        request = new TrackerAuthenticationRequest("SpongeBob", "Patrick");
+    }
+
     @Test
-    public void shouldAddBase64EncodedBasicAuthHeaderToTheRequest() throws Exception {
-        TrackerAuthenticationRequest request = new TrackerAuthenticationRequest("spongebob", "squarepants");
-        String authorization = request.getHeaders().get("Authorization");
-        assertThat(authorization, equalTo("Basic spongebob:squarepants__fake_Base64_encode_string__0"));
+    public void shouldHaveUrl() throws Exception {
+        String urlString = request.getUrlString();
+        assertThat(urlString, equalTo("https://www.pivotaltracker.com/services/v3/tokens/active"));
+    }
+    
+    @Test
+    public void shouldReturnUsernameAndPassword() {
+        assertThat(request.getUsername(), equalTo("SpongeBob"));
+        assertThat(request.getPassword(), equalTo("Patrick"));
     }
 }

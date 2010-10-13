@@ -1,9 +1,7 @@
 package com.pivotallabs;
 
-import android.util.Base64;
 import com.pivotallabs.api.ApiRequest;
 
-import java.util.Map;
 
 class TrackerAuthenticationRequest extends ApiRequest {
     private String username;
@@ -20,11 +18,13 @@ class TrackerAuthenticationRequest extends ApiRequest {
     }
 
     @Override
-    public Map<String, String> getHeaders() {
-        Map<String, String> headers = super.getHeaders();
-        String encodedUserPass = Base64.encodeToString((username + ":" + password).getBytes(), Base64.DEFAULT);
-        headers.put("Authorization", "Basic " + encodedUserPass);
-        return headers;
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

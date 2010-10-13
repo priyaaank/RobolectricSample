@@ -1,7 +1,6 @@
 package com.pivotallabs.api;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class ApiRequest {
@@ -16,6 +15,14 @@ public abstract class ApiRequest {
     }
 
     public String getPostBody() {
+        return null;
+    }
+
+    public String getUsername() {
+        return null;
+    }
+
+    public String getPassword() {
         return null;
     }
 }
