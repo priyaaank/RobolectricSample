@@ -54,9 +54,9 @@ public class HomeActivityTest {
         FakeActivity fakeActivity = proxyFor(activity);
         Intent startedIntent = fakeActivity.getNextStartedIntent();
         FakeIntent fakeIntent = proxyFor(startedIntent);
-        Class<TrackerAuthenticationActivity> actualStartedActivityClass = (Class<TrackerAuthenticationActivity>) fakeIntent.componentClass;
+        Class<TrackerRecentActivity> actualStartedActivityClass = (Class<TrackerRecentActivity>) fakeIntent.componentClass;
 
-        assertThat(actualStartedActivityClass, equalTo(TrackerAuthenticationActivity.class));
+        assertThat(actualStartedActivityClass, equalTo(TrackerRecentActivity.class));
     }
 
     @Test

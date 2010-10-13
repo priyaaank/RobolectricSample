@@ -25,7 +25,7 @@ public class HomeActivity extends Activity {
         findViewById(R.id.tracker_recent_activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(TrackerAuthenticationActivity.class);
+                startActivity(TrackerRecentActivity.class);
             }
         });
     }

@@ -44,14 +44,14 @@ public class TrackerAuthenticatorTest {
     public void authenticated_shouldReturnTrueOnceSignedIn() {
         assertThat(trackerAuthenticator.authenticated(), equalTo(false));
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        simulateSuccessfulAuthentication();
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
         assertThat(trackerAuthenticator.authenticated(), equalTo(true));
     }
 
     @Test
     public void signOutShouldRemoveTheSharedPreferences() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        simulateSuccessfulAuthentication();
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
         trackerAuthenticator.signOut();
         assertThat(getStoredGuid(), equalTo(""));
     }
@@ -59,7 +59,7 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldCallSuccessWhenAuthenticationSucceeds() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        simulateSuccessfulAuthentication();
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
         assertThat(callbacks.succcessWasCalled, equalTo(true));
         assertThat(callbacks.failuireWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
@@ -81,26 +81,14 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldStoreApiTokenInPrefs() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        simulateSuccessfulAuthentication();
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
         assertThat(getStoredGuid(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
     }
 
     private String getStoredGuid() {
-        return getTrackerAuthenticationPrefs().getString("guid", "");
-    }
-
-    private SharedPreferences getTrackerAuthenticationPrefs() {
-        return context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
-    }
-
-    private void simulateSuccessfulAuthentication() {
-        apiGateway.simulateResponse(200,
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                        "<token>\n" +
-                        "  <guid>c93f12c71bec27843c1d84b3bdd547f3</guid>\n" +
-                        "  <id type=\"integer\">1</id>\n" +
-                        "</token>"
-        );
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
+        return sharedPreferences.getString("guid", "");
     }
 
     private static class TestCallbacks implements Callbacks {
