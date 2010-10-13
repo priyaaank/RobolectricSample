@@ -1,23 +1,13 @@
 package com.pivotallabs.api;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class ApiGateway {
-    public void makeRequest(ApiRequest apiRequest, ApiResponseCallbacks responseCallbacks) {
-        // TODO: make the http call off the main thread,
-        //   create an Api response and call back into the callbacks on the main thread
-        try {
-            Http.Response response
-                    = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getUsername(), apiRequest.getPassword());
-            ApiResponse apiResponse = new ApiResponse(response.getStatusCode(), response.getResponseBody());
-            System.out.println("apiResponse = " + apiResponse);
-            dispatch(apiResponse, responseCallbacks);
-        } catch (IOException e) {
-            throw new RuntimeException("error making request", e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("error making request", e);
-        }
+    public void makeRequest(ApiRequest apiRequest, final ApiResponseCallbacks responseCallbacks) {
+        new RemoteCallTask(responseCallbacks).execute(apiRequest);
     }
 
     protected void dispatch(ApiResponse apiResponse, ApiResponseCallbacks responseCallbacks) {
@@ -27,5 +17,34 @@ public class ApiGateway {
             responseCallbacks.onFailure(apiResponse);
         }
         responseCallbacks.onComplete();
+    }
+
+    private class RemoteCallTask extends AsyncTask<ApiRequest, Void, ApiResponse> {
+        private final ApiResponseCallbacks responseCallbacks;
+
+        public RemoteCallTask(ApiResponseCallbacks responseCallbacks) {
+            this.responseCallbacks = responseCallbacks;
+        }
+
+        @Override
+        protected ApiResponse doInBackground(ApiRequest... apiRequests) {
+            ApiRequest apiRequest = apiRequests[0];
+            try {
+                Http.Response response
+                        = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getUsername(), apiRequest.getPassword());
+                ApiResponse apiResponse = new ApiResponse(response.getStatusCode(), response.getResponseBody());
+                System.out.println("apiResponse = " + apiResponse);
+                return apiResponse;
+            } catch (IOException e) {
+                throw new RuntimeException("error making request", e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException("error making request", e);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ApiResponse apiResponse) {
+            dispatch(apiResponse, responseCallbacks);
+        }
     }
 }

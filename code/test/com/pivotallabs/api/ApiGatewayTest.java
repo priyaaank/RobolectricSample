@@ -1,7 +1,6 @@
 package com.pivotallabs.api;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -15,29 +14,11 @@ public class ApiGatewayTest {
     @Before
     public void setUp() throws Exception {
         apiGateway = new ApiGateway();
+
+
     }
 
-    @Test @Ignore
-    public void makeRequestTest() {
-        apiGateway.makeRequest(new ApiRequest() {
-            @Override
-            public String getUrlString() {
-                return "https://www.pivotaltracker.com/services/v3/tokens/active";
-            }
-        }, new ApiResponseCallbacks() {
-            @Override
-            public void onSuccess(ApiResponse response) {
-            }
-
-            @Override
-            public void onFailure(ApiResponse response) {
-            }
-
-            @Override
-            public void onComplete() {
-            }
-        });
-    }
+   
 
     @Test
     public void dispatch_shouldCallOntoTheSuccessWhenApiResponseIsSuccess() throws Exception {

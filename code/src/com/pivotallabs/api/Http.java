@@ -58,7 +58,7 @@ public class Http {
             if (client != null) {
                 try {
                     client.getConnectionManager().shutdown();
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
             }
         }
@@ -72,7 +72,7 @@ public class Http {
         }
     }
 
-    public DefaultHttpClient getPromiscuousDefaultClient() {
+    private DefaultHttpClient getPromiscuousDefaultClient() {
         HttpParams parameters = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("https", new CertificateIgnoringSSLSocketFactory(), 443));
