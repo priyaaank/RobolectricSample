@@ -22,11 +22,17 @@ public class TrackerAuthenticator {
     }
 
     public void signIn(String username, String password, Callbacks responseCallbacks) {
-        apiGateway.makeRequest(new TrackerAuthenticationRequest(username, password), new AuthenticationApiResponseCallbacks(responseCallbacks, sharedPreferences));
+        TrackerAuthenticationRequest apiRequest = new TrackerAuthenticationRequest(username, password);
+        ApiResponseCallbacks remoteCallbacks = new AuthenticationApiResponseCallbacks(responseCallbacks, sharedPreferences);
+        apiGateway.makeRequest(apiRequest, remoteCallbacks);
     }
 
     public boolean authenticated() {
         return !Strings.isEmptyOrWhitespace(sharedPreferences.getString(GUID_KEY, ""));
+    }
+
+    public void signOut() {
+        sharedPreferences.edit().clear().commit();
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {

@@ -49,6 +49,14 @@ public class TrackerAuthenticatorTest {
     }
 
     @Test
+    public void signOutShouldRemoveTheSharedPreferences() {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
+        simulateSuccessfulAuthentication();
+        trackerAuthenticator.signOut();
+        assertThat(getStoredGuid(), equalTo(""));
+    }
+
+    @Test
     public void shouldCallSuccessWhenAuthenticationSucceeds() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         simulateSuccessfulAuthentication();
@@ -74,10 +82,15 @@ public class TrackerAuthenticatorTest {
     public void shouldStoreApiTokenInPrefs() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         simulateSuccessfulAuthentication();
+        assertThat(getStoredGuid(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+    }
 
-        SharedPreferences sharedPreferences =
-                context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
-        assertThat(sharedPreferences.getString("guid", ""), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+    private String getStoredGuid() {
+        return getTrackerAuthenticationPrefs().getString("guid", "");
+    }
+
+    private SharedPreferences getTrackerAuthenticationPrefs() {
+        return context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
     }
 
     private void simulateSuccessfulAuthentication() {
