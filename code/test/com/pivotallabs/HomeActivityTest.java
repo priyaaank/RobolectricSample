@@ -40,11 +40,9 @@ public class HomeActivityTest {
         pressMeButton.performClick();
 
         FakeActivity fakeActivity = proxyFor(activity);
-        Intent startedIntent = fakeActivity.getNextStartedIntent();
+        Intent startedIntent = fakeActivity.getNextStartedActivity();
         FakeIntent fakeIntent = proxyFor(startedIntent);
-        Class<NamesActivity> actualStartedActivityClass = (Class<NamesActivity>) fakeIntent.componentClass;
-
-        assertThat(actualStartedActivityClass, equalTo(NamesActivity.class));
+        assertThat(fakeIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
     }
 
     @Test
@@ -52,11 +50,10 @@ public class HomeActivityTest {
         trackerRecentActivityButton.performClick();
 
         FakeActivity fakeActivity = proxyFor(activity);
-        Intent startedIntent = fakeActivity.getNextStartedIntent();
+        Intent startedIntent = fakeActivity.getNextStartedActivity();
         FakeIntent fakeIntent = proxyFor(startedIntent);
-        Class<TrackerRecentActivity> actualStartedActivityClass = (Class<TrackerRecentActivity>) fakeIntent.componentClass;
 
-        assertThat(actualStartedActivityClass, equalTo(TrackerRecentActivity.class));
+        assertThat(fakeIntent.componentName.getClassName(), equalTo(TrackerRecentActivity.class.getName()));
     }
 
     @Test

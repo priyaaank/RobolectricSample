@@ -1,6 +1,7 @@
 package com.pivotallabs;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,8 +20,7 @@ public class TrackerRecentActivity extends Activity {
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
         if (!trackerAuthenticator.authenticated()) {
-            signInDialog = new SignInDialog(this, trackerAuthenticator);
-            signInDialog.show();
+            showSignInDialog();
         }
     }
 
@@ -34,9 +34,23 @@ public class TrackerRecentActivity extends Activity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 trackerAuthenticator.signOut();
+                finish();
                 return true;
             }
         });
         return true;
+    }
+
+    private void showSignInDialog() {
+        signInDialog = new SignInDialog(this, trackerAuthenticator);
+        signInDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                if (!trackerAuthenticator.authenticated()) {
+                    finish();
+                }
+            }
+        });
+        signInDialog.show();
     }
 }

@@ -19,9 +19,9 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.xtremelabs.droidsugar.fakes.*;
+import com.xtremelabs.droidsugar.res.ResourceLoader;
 import com.xtremelabs.droidsugar.util.FakeHelper;
 import com.xtremelabs.droidsugar.util.Implements;
-import com.xtremelabs.droidsugar.util.ResourceLoader;
 import com.xtremelabs.droidsugar.util.TestHelperInterface;
 
 import java.io.File;

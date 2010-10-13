@@ -8,6 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.pivotallabs.TestHelper.proxyFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -35,22 +36,20 @@ public class TrackerRecentActivityTest {
 
     @Test
     public void shouldShowTheSignInDialogIfNotCurrentlySignedIn() throws Exception {
-        trackerAuthenticator.signOut();
-        activity = new TrackerRecentActivity();
-        activity.onCreate(null);
+        signOutAndRunOnCreate();
 
         assertThat(trackerAuthenticator.authenticated(), equalTo(false));
         assertThat(activity.signInDialog.isShowing(), equalTo(true));
     }
 
-    public void shouldNotShowTheSignInDialogIfSignedIn() {
-        assertThat(activity.signInDialog, nullValue());
+    private void signOutAndRunOnCreate() {
+        trackerAuthenticator.signOut();
+        activity = new TrackerRecentActivity();
+        activity.onCreate(null);
     }
 
-    @Test
-    @Ignore
-    public void shouldSignOutWhenSignOutMenuButtonIsPressed() {
-
+    public void shouldNotShowTheSignInDialogIfSignedIn() {
+        assertThat(activity.signInDialog, nullValue());
     }
 
     @Test
@@ -61,14 +60,17 @@ public class TrackerRecentActivityTest {
 
     @Test
     @Ignore
-    public void shouldFinishWhenSignInDialogIsCancelledWithoutSuccessfulSignIn() {
+    public void shouldRetrieveRecentActivity() {
 
     }
 
     @Test
-    @Ignore
-    public void shouldRetrieveRecentActivity() {
+    public void shouldFinishWhenSignInDialogIsCancelledWithoutSuccessfulSignIn() {
+        signOutAndRunOnCreate();
 
+        activity.signInDialog.cancel();
+
+        assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
@@ -84,6 +86,7 @@ public class TrackerRecentActivityTest {
 
         signOutMenuItem.simulateClick();
         assertThat(trackerAuthenticator.authenticated(), equalTo(false));
+        assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
