@@ -5,7 +5,7 @@
           android:versionName="1.0">
     <application
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Light"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             >
         <activity android:name=".HomeActivity">
             <intent-filter>
@@ -18,7 +18,8 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
-    <uses-sdk android:minSdkVersion="8"/>
-    <uses-sdk android:targetSdkVersion="8"/>
+    <uses-sdk android:minSdkVersion="3"/>
+    <!--  test and support sdk 3 (android 1.5) but build with sdk4 (android 1.6) to get support for alternate resources
+     (e.g. hi- vs. lo-res versions of the same drawable) -->
+    <uses-sdk android:targetSdkVersion="4"/>
 </manifest>
