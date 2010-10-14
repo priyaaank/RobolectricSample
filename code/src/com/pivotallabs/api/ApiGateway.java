@@ -30,8 +30,7 @@ public class ApiGateway {
         protected ApiResponse doInBackground(ApiRequest... apiRequests) {
             ApiRequest apiRequest = apiRequests[0];
             try {
-                Http.Response response
-                        = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getUsername(), apiRequest.getPassword());
+                Http.Response response = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getUsername(), apiRequest.getPassword());
                 ApiResponse apiResponse = new ApiResponse(response.getStatusCode(), response.getResponseBody());
                 System.out.println("apiResponse = " + apiResponse);
                 return apiResponse;

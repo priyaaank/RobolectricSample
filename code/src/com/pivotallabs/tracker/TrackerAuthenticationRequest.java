@@ -1,4 +1,4 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import com.pivotallabs.api.ApiRequest;
 

@@ -4,7 +4,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 
-class ViewEnablingTextWatcher {
+public class ViewEnablingTextWatcher {
     private View toEnable;
     private EditText[] toWatch;
 

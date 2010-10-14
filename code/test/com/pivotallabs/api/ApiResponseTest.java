@@ -17,5 +17,11 @@ public class ApiResponseTest {
     @Test
     public void isSuccess_shouldReturnFalseIfResponseCodeIsIn500Range() throws Exception {
         assertThat(new ApiResponse(500, "responseBody").isSuccess(), equalTo(false));
+        assertThat(new ApiResponse(501, "responseBody").isSuccess(), equalTo(false));
+    }
+
+    @Test
+    public void isUnauthorized_shouldReturnTrueIfResponseCodeIs401() {
+        assertThat(new ApiResponse(401, "Access Denied").isUnauthorized(), equalTo(true));
     }
 }

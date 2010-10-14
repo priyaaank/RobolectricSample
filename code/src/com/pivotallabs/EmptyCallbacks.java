@@ -1,6 +1,6 @@
 package com.pivotallabs;
 
-class EmptyCallbacks implements Callbacks {
+public class EmptyCallbacks implements Callbacks {
     @Override
     public void onSuccess() {
     }

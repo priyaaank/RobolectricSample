@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.pivotallabs.tracker.TrackerRecentActivity;
 import com.xtremelabs.droidsugar.fakes.FakeActivity;
 import com.xtremelabs.droidsugar.fakes.FakeIntent;
 import org.junit.Before;
@@ -13,6 +14,8 @@ import org.junit.runner.RunWith;
 import static com.pivotallabs.TestHelper.proxyFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+
+`
 
 @RunWith(FastAndroidTestRunner.class)
 public class HomeActivityTest {

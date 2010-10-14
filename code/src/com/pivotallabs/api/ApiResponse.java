@@ -22,6 +22,10 @@ public class ApiResponse {
         return httpResponseCode >= 200 && httpResponseCode < 300;
     }
 
+    public boolean isUnauthorized() {
+        return httpResponseCode == 401;
+    }
+
     @Override
     public String toString() {
         return "ApiResponse{" +

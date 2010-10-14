@@ -1,5 +1,8 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
+import com.pivotallabs.EmptyCallbacks;
+import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.TestApiGateway;
 import com.xtremelabs.droidsugar.fakes.TestMenu;
 import com.xtremelabs.droidsugar.fakes.TestMenuItem;

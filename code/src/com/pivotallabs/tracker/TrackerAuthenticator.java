@@ -1,7 +1,8 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.pivotallabs.Callbacks;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;

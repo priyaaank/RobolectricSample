@@ -1,10 +1,11 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.pivotallabs.R;
 import com.pivotallabs.api.ApiGateway;
 
 public class TrackerRecentActivity extends Activity {

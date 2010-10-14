@@ -6,6 +6,7 @@
         android:layout_height="fill_parent"
         android:gravity="center"
         android:orientation="vertical"
+        android:padding="10dip"
         >
 
     <ImageView
@@ -18,16 +19,16 @@
 
     <Button
         android:id="@+id/press_me_button"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/tests_rock"
         />
 
     <Button
         android:id="@+id/tracker_recent_activity"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_to_tracker"
+        android:text="@string/view_recent_tracker_activity"
         />
     
 </LinearLayout>

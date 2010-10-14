@@ -1,5 +1,6 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
+import com.pivotallabs.FastAndroidTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

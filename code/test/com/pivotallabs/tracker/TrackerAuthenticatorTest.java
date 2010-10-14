@@ -1,8 +1,11 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.pivotallabs.Callbacks;
+import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.TestApiGateway;
 import org.junit.Before;
 import org.junit.Test;

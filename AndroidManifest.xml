@@ -14,7 +14,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".NamesActivity"/>
-        <activity android:name=".TrackerRecentActivity"/>
+        <activity android:name=".tracker.TrackerRecentActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

@@ -1,9 +1,12 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
+import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.R;
+import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import com.xtremelabs.droidsugar.fakes.FakeAlertDialog;

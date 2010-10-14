@@ -1,4 +1,4 @@
-package com.pivotallabs;
+package com.pivotallabs.tracker;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,6 +7,10 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import com.pivotallabs.Callbacks;
+import com.pivotallabs.EmptyOnClickListener;
+import com.pivotallabs.R;
+import com.pivotallabs.ViewEnablingTextWatcher;
 
 public class SignInDialog extends Dialog {
 
