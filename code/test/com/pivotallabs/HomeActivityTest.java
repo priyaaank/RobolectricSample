@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.pivotallabs.tracker.TrackerRecentActivity;
+import com.pivotallabs.tracker.RecentActivityActivity;
 import com.xtremelabs.droidsugar.fakes.FakeActivity;
 import com.xtremelabs.droidsugar.fakes.FakeIntent;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class HomeActivityTest {
         Intent startedIntent = fakeActivity.getNextStartedActivity();
         FakeIntent fakeIntent = proxyFor(startedIntent);
 
-        assertThat(fakeIntent.componentName.getClassName(), equalTo(TrackerRecentActivity.class.getName()));
+        assertThat(fakeIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
     }
 
     @Test

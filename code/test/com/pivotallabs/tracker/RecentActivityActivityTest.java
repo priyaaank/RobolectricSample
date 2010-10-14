@@ -3,6 +3,7 @@ package com.pivotallabs.tracker;
 import com.pivotallabs.EmptyCallbacks;
 import com.pivotallabs.FastAndroidTestRunner;
 import com.pivotallabs.TestResponses;
+import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import com.xtremelabs.droidsugar.fakes.TestMenu;
 import com.xtremelabs.droidsugar.fakes.TestMenuItem;
@@ -17,23 +18,20 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 @RunWith(FastAndroidTestRunner.class)
-public class TrackerRecentActivityTest {
-    
-    private TrackerRecentActivity activity;
+public class RecentActivityActivityTest {
+
+    private RecentActivityActivity activity;
     private TrackerAuthenticator trackerAuthenticator;
+    private TestApiGateway apiGateway;
 
     @Before
     public void setUp() throws Exception {
-        activity = new TrackerRecentActivity();
-
-        TestApiGateway apiGateway = new TestApiGateway();
+        apiGateway = new TestApiGateway();
+        activity = new RecentActivityActivity();
         activity.apiGateway = apiGateway;
-
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, activity);
         trackerAuthenticator.signIn("spongebob", "squarepants", new EmptyCallbacks());
-
         TestResponses.simulateSuccessfulAuthentication(apiGateway);
-
         activity.onCreate(null);
     }
 
@@ -47,7 +45,7 @@ public class TrackerRecentActivityTest {
 
     private void signOutAndRunOnCreate() {
         trackerAuthenticator.signOut();
-        activity = new TrackerRecentActivity();
+        activity = new RecentActivityActivity();
         activity.onCreate(null);
     }
 
@@ -56,9 +54,9 @@ public class TrackerRecentActivityTest {
     }
 
     @Test
-    @Ignore
     public void shouldRetrieveRecentActivityUponSuccessfulSignIn() {
-
+        assertThat(apiGateway.getLatestRequest(),
+                equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
     }
 
     @Test

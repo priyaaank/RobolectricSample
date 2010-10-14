@@ -8,11 +8,12 @@ import android.view.MenuItem;
 import com.pivotallabs.R;
 import com.pivotallabs.api.ApiGateway;
 
-public class TrackerRecentActivity extends Activity {
+public class RecentActivityActivity extends Activity {
 
     ApiGateway apiGateway = new ApiGateway();
     SignInDialog signInDialog;
     private TrackerAuthenticator trackerAuthenticator;
+    private RecentActivity recentActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +21,17 @@ public class TrackerRecentActivity extends Activity {
         setContentView(R.layout.tracker_recent_activity_layout);
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
+
+        recentActivity = new RecentActivity(apiGateway, trackerAuthenticator);
         if (!trackerAuthenticator.isAuthenticated()) {
             showSignInDialog();
+        } else {
+            update();
         }
+    }
+
+    private void update() {
+        recentActivity.update();
     }
 
     @Override

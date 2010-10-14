@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.pivotallabs.tracker.TrackerRecentActivity;
+import com.pivotallabs.tracker.RecentActivityActivity;
 
 public class HomeActivity extends Activity {
 
@@ -26,7 +26,7 @@ public class HomeActivity extends Activity {
         findViewById(R.id.tracker_recent_activity).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(TrackerRecentActivity.class);
+                startActivity(RecentActivityActivity.class);
             }
         });
     }
