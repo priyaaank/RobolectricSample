@@ -56,6 +56,23 @@ public class SignInDialogTest {
     }
 
     @Test
+    public void shouldDisableTheSignInButtonWhileRequestIsOutstanding() {
+        usernameEditText.setText("Sponge Bob");
+        passwordEditText.setText("squidward");
+        signInButton.performClick();
+        assertThat(signInButton.isEnabled(), equalTo(false));
+    }
+
+    @Test
+    public void shouldReEnableTheSignInButtonIfSignInFails() {
+        usernameEditText.setText("Sponge Bob");
+        passwordEditText.setText("squidward");
+        signInButton.performClick();
+        TestResponses.simulateUnauthorizedResponse(apiGateway);
+        assertThat(signInButton.isEnabled(), equalTo(true));
+    }
+
+    @Test
     public void shouldDismissWhenSuccessfullySignedIn() throws Exception {
         usernameEditText.setText("Spongebob");
         passwordEditText.setText("squidward");

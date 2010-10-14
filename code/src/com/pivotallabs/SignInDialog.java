@@ -11,6 +11,7 @@ import android.widget.EditText;
 public class SignInDialog extends Dialog {
 
     TrackerAuthenticator trackerAuthenticator;
+    private View signInButton;
 
     public SignInDialog(Context context, TrackerAuthenticator trackerAuthenticator) {
         super(context, android.R.style.Theme_Light_NoTitleBar);
@@ -25,13 +26,14 @@ public class SignInDialog extends Dialog {
         final EditText usernameEditText = (EditText) findViewById(R.id.username);
         final EditText passwordEditText = (EditText) findViewById(R.id.password);
 
-        View signInButton = findViewById(R.id.sign_in_button);
+        signInButton = findViewById(R.id.sign_in_button);
 
         new ViewEnablingTextWatcher(signInButton, usernameEditText, passwordEditText);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                signInButton.setEnabled(false);
                 trackerAuthenticator.signIn(
                         usernameEditText.getText().toString(),
                         passwordEditText.getText().toString(),
@@ -58,6 +60,7 @@ public class SignInDialog extends Dialog {
 
         @Override
         public void onComplete() {
+            signInButton.setEnabled(true);
         }
     }
 }
