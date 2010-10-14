@@ -16,4 +16,8 @@ public class TestResponses {
     public static void simulateUnauthorizedResponse(TestApiGateway apiGateway) {
         apiGateway.simulateResponse(401, "Access Denied");
     }
+
+    public static void simulateServerError(TestApiGateway apiGateway) {
+        apiGateway.simulateResponse(500, "ERROR");
+    }
 }

@@ -3,8 +3,8 @@ package com.pivotallabs.tracker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.pivotallabs.Callbacks;
 import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.TestCallbacks;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.TestApiGateway;
 import org.junit.Before;
@@ -45,10 +45,10 @@ public class TrackerAuthenticatorTest {
 
     @Test
     public void authenticated_shouldReturnTrueOnceSignedIn() {
-        assertThat(trackerAuthenticator.authenticated(), equalTo(false));
+        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         TestResponses.simulateSuccessfulAuthentication(apiGateway);
-        assertThat(trackerAuthenticator.authenticated(), equalTo(true));
+        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(true));
     }
 
     @Test
@@ -71,14 +71,10 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldCallFailureWhenAuthenticationFails() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        simulateSignInFailure();
+        TestResponses.simulateServerError(apiGateway);
         assertThat(callbacks.failuireWasCalled, equalTo(true));
         assertThat(callbacks.succcessWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
-    }
-
-    private void simulateSignInFailure() {
-        apiGateway.simulateResponse(500, "ERROR");
     }
 
     @Test
@@ -88,30 +84,16 @@ public class TrackerAuthenticatorTest {
         assertThat(getStoredGuid(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
     }
 
+    @Test
+    public void getToken_shouldReturnGuidFromResponse() throws Exception {
+        trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        assertThat(trackerAuthenticator.getToken(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+    }
+
     private String getStoredGuid() {
         SharedPreferences sharedPreferences =
                 context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
         return sharedPreferences.getString("guid", "");
-    }
-
-    private static class TestCallbacks implements Callbacks {
-        public boolean succcessWasCalled;
-        public boolean failuireWasCalled;
-        public boolean completeWasCalled;
-
-        @Override
-        public void onSuccess() {
-            succcessWasCalled = true;
-        }
-
-        @Override
-        public void onFailure() {
-            failuireWasCalled = true;
-        }
-
-        @Override
-        public void onComplete() {
-            completeWasCalled = true;
-        }
     }
 }

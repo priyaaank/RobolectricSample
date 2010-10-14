@@ -28,12 +28,20 @@ public class TrackerAuthenticator {
         apiGateway.makeRequest(apiRequest, remoteCallbacks);
     }
 
-    public boolean authenticated() {
-        return !Strings.isEmptyOrWhitespace(sharedPreferences.getString(GUID_KEY, ""));
+    public boolean isAuthenticated() {
+        return !Strings.isEmptyOrWhitespace(getGuid());
     }
 
     public void signOut() {
         sharedPreferences.edit().clear().commit();
+    }
+
+    public String getToken() {
+        return getGuid();
+    }
+
+    private String getGuid() {
+        return sharedPreferences.getString(GUID_KEY, "");
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {

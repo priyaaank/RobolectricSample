@@ -41,7 +41,7 @@ public class TrackerRecentActivityTest {
     public void shouldShowTheSignInDialogIfNotCurrentlySignedIn() throws Exception {
         signOutAndRunOnCreate();
 
-        assertThat(trackerAuthenticator.authenticated(), equalTo(false));
+        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
         assertThat(activity.signInDialog.isShowing(), equalTo(true));
     }
 
@@ -88,7 +88,7 @@ public class TrackerRecentActivityTest {
         assertThat(signOutMenuItem.getTitle().toString(), equalTo("Sign Out"));
 
         signOutMenuItem.simulateClick();
-        assertThat(trackerAuthenticator.authenticated(), equalTo(false));
+        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
         assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
     }
 

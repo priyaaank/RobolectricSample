@@ -20,7 +20,7 @@ public class TrackerRecentActivity extends Activity {
         setContentView(R.layout.tracker_recent_activity_layout);
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
-        if (!trackerAuthenticator.authenticated()) {
+        if (!trackerAuthenticator.isAuthenticated()) {
             showSignInDialog();
         }
     }
@@ -30,7 +30,7 @@ public class TrackerRecentActivity extends Activity {
         menu.clear();
 
         MenuItem signOutMenuItem = menu.add("Sign Out");
-        signOutMenuItem.setEnabled(trackerAuthenticator.authenticated());
+        signOutMenuItem.setEnabled(trackerAuthenticator.isAuthenticated());
         signOutMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -47,7 +47,7 @@ public class TrackerRecentActivity extends Activity {
         signInDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
-                if (!trackerAuthenticator.authenticated()) {
+                if (!trackerAuthenticator.isAuthenticated()) {
                     finish();
                 }
             }
