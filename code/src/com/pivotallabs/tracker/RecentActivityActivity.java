@@ -13,7 +13,7 @@ public class RecentActivityActivity extends Activity {
     ApiGateway apiGateway = new ApiGateway();
     SignInDialog signInDialog;
     private TrackerAuthenticator trackerAuthenticator;
-    private RecentActivity recentActivity;
+    private RecentActivities recentActivities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class RecentActivityActivity extends Activity {
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
 
-        recentActivity = new RecentActivity(apiGateway, trackerAuthenticator);
+        recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
         if (!trackerAuthenticator.isAuthenticated()) {
             showSignInDialog();
         } else {
@@ -31,7 +31,7 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void update() {
-        recentActivity.update();
+        recentActivities.update();
     }
 
     @Override

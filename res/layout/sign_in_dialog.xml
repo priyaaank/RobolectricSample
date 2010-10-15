@@ -37,7 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
-            android:text="@string/view_recent_tracker_activity"
+            android:text="@string/sign_in"
             />
 
 </LinearLayout>
