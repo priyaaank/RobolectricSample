@@ -1,9 +1,9 @@
 package com.pivotallabs;
 
 import android.net.Uri;
-import com.xtremelabs.droidsugar.AbstractAndroidTestRunner;
-import com.xtremelabs.droidsugar.Loader;
-import com.xtremelabs.droidsugar.ProxyDelegatingHandler;
+import com.xtremelabs.robolectric.AbstractAndroidTestRunner;
+import com.xtremelabs.robolectric.Loader;
+import com.xtremelabs.robolectric.ProxyDelegatingHandler;
 import org.junit.runners.model.InitializationError;
 
 public class FastAndroidTestRunner extends AbstractAndroidTestRunner {

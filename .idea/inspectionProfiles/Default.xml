@@ -19,7 +19,7 @@
         <value>
           <list size="4">
             <item index="0" class="java.lang.String" itemvalue="com.google.inject.Inject" />
-            <item index="1" class="java.lang.String" itemvalue="com.xtremelabs.droidsugar.util.Implements" />
+            <item index="1" class="java.lang.String" itemvalue="com.xtremelabs.robolectric.util.Implements" />
             <item index="2" class="java.lang.String" itemvalue="org.hamcrest.Factory" />
             <item index="3" class="java.lang.String" itemvalue="org.junit.Test" />
           </list>

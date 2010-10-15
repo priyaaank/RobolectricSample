@@ -9,7 +9,7 @@ import com.pivotallabs.R;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
-import com.xtremelabs.droidsugar.fakes.FakeAlertDialog;
+import com.xtremelabs.robolectric.fakes.FakeAlertDialog;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

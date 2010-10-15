@@ -18,11 +18,11 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.xtremelabs.droidsugar.fakes.*;
-import com.xtremelabs.droidsugar.res.ResourceLoader;
-import com.xtremelabs.droidsugar.util.FakeHelper;
-import com.xtremelabs.droidsugar.util.Implements;
-import com.xtremelabs.droidsugar.util.TestHelperInterface;
+import com.xtremelabs.robolectric.fakes.*;
+import com.xtremelabs.robolectric.res.ResourceLoader;
+import com.xtremelabs.robolectric.util.FakeHelper;
+import com.xtremelabs.robolectric.util.Implements;
+import com.xtremelabs.robolectric.util.TestHelperInterface;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -36,7 +36,7 @@ public class TestHelper implements TestHelperInterface {
     @Override
     public void before(Method method) {
         prepare();
-        FakeHelper.resetDroidSugarTestState();
+        FakeHelper.resetRobolectricTestState();
         FakeHelper.application = new Application();
     }
 
@@ -66,15 +66,15 @@ public class TestHelper implements TestHelperInterface {
     }
 
 
-    public static void loadResources() {
-        if (FakeContextWrapper.resourceLoader == null) {
-            try {
-                FakeContextWrapper.resourceLoader = new ResourceLoader(R.class, new File("res"));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
+   public static void loadResources() {
+       if (FakeHelper.resourceLoader == null) {
+           try {
+               FakeHelper.resourceLoader = new ResourceLoader(R.class, new File("res"));
+           } catch (Exception e) {
+               throw new RuntimeException(e);
+           }
+       }
+   }
 
     public static FakeZoomButtonsController proxyFor(ZoomButtonsController instance) {
         return (FakeZoomButtonsController) FastAndroidTestRunner.proxyFor(instance);
