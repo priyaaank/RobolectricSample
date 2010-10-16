@@ -9,4 +9,5 @@
     <string name="unknown_user_pass">Username/Password combination is not recognized.</string>
     <string name="ok">Ok</string>
     <string name="sign_in">Sign In</string>
+    <string name="recent_activity">Recent Activity</string>
 </resources>

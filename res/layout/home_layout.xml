@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -9,26 +8,41 @@
         android:padding="10dip"
         >
 
-    <ImageView
-        android:id="@+id/pivotal_logo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/pivotallabs_logo"
-        android:layout_marginBottom="10dip"
-        />
-
-    <Button
-        android:id="@+id/press_me_button"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tests_rock"
-        />
-
-    <Button
-        android:id="@+id/tracker_recent_activity"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/view_recent_tracker_activity"
-        />
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/robolectric"
+                />
+    </LinearLayout>
     
+    <Button
+            android:id="@+id/press_me_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tests_rock"
+            android:layout_marginBottom="10dip"
+            />
+
+    <Button
+            android:id="@+id/tracker_recent_activity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_recent_tracker_activity"
+            android:layout_marginBottom="10dip"
+            />
+
+    <ImageView
+            android:id="@+id/pivotal_logo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pivotallabs_logo"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
+            />
 </LinearLayout>

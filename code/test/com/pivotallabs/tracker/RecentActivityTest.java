@@ -7,11 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-
-
 import static org.junit.Assert.assertThat;
 
 public class RecentActivityTest {
@@ -21,15 +18,13 @@ public class RecentActivityTest {
     @Before
     public void setUp() throws Exception {
         Document document = Xmls.getDocument(TestResponses.RECENT_ACTIVITY);
-        NodeList activityNodeList = document.getElementsByTagName("activity");
-        Element activityNode = (Element) activityNodeList.item(0);
+        Element activityElement = Xmls.getElement(document, "activity", 0);
         recentActivity = new RecentActivity();
-        recentActivity.applyXmlElement(activityNode);
-
+        recentActivity.applyXmlElement(activityElement);
     }
 
     @Test
     public void shouldParseResponseXML() throws Exception {
-        assertThat(recentActivity.getDescription(), equalTo("I changed the 'request' for squidward."));
+        assertThat(recentActivity.getDescription(), equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
 }

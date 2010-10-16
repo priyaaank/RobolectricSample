@@ -5,9 +5,28 @@
               android:layout_height="fill_parent"
         >
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pivotal_tracker_small"
+            android:layout_marginTop="10dip"
+            android:layout_marginBottom="10dip"
+            android:layout_gravity="center"
+            />
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_activity"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
     <ListView android:id="@+id/recent_activity_list"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:drawSelectorOnTop="false"/>
+              android:drawSelectorOnTop="false"
+            />
 
 </LinearLayout>

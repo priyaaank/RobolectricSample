@@ -1,14 +1,15 @@
 package com.pivotallabs.tracker;
 
-import com.pivotallabs.api.Xmls;
 import org.w3c.dom.Element;
+
+import static com.pivotallabs.api.Xmls.getTextContentOfChild;
 
 public class RecentActivity {
 
     private String description;
 
-    public RecentActivity applyXmlElement(Element item) {
-        this.description = Xmls.getChildElementBody(item, "description");
+    public RecentActivity applyXmlElement(Element recentActivityElement) {
+        this.description = getTextContentOfChild(recentActivityElement, "description");
         return this;
     }
 

@@ -45,7 +45,7 @@ public class RecentActivitiesTest {
         assertThat(recentActivities.size(), equalTo(2));
 
         RecentActivity recentActivity0 = recentActivities.get(0);
-        assertThat(recentActivity0.getDescription(), equalTo("I changed the 'request' for squidward."));
+        assertThat(recentActivity0.getDescription(), equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
 
         RecentActivity recentActivity1 = recentActivities.get(1);
         assertThat(recentActivity1.getDescription(),

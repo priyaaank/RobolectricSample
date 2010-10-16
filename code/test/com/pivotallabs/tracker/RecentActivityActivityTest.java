@@ -74,7 +74,7 @@ public class RecentActivityActivityTest {
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         yieldToUiThread();
         assertThat(((TextView) activityList.getChildAt(0)).getText().toString(),
-                equalTo("I changed the 'request' for squidward."));
+                equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
 
     @Test

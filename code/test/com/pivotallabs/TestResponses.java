@@ -12,7 +12,7 @@ public class TestResponses {
     "        <occurred_at type=\"datetime\">2010/10/14 20:08:41 UTC</occurred_at>\n" +
     "        <author>Patrick</author>\n" +
     "        <project_id type=\"integer\">123</project_id>\n" +
-    "        <description>I changed the 'request' for squidward.</description>\n" +
+    "        <description>I changed the 'request' for squidward. &quot;Add 'Buyout'&quot;</description>\n" +
     "        <stories>\n" +
     "            <story>\n" +
     "                <id type=\"integer\">4270226</id>\n" +
@@ -20,7 +20,7 @@ public class TestResponses {
     "                <notes>\n" +
     "                    <note>\n" +
     "                        <id type=\"integer\">2719505</id>\n" +
-    "                        <text>I changed the 'request' for squidward.</text>\n" +
+    "                        <text>I changed the 'request' for squidward. </text>\n" +
     "                    </note>\n" +
     "                </notes>\n" +
     "            </story>\n" +

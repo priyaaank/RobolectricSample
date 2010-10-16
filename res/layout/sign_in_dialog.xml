@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
+        android:gravity="center|top"
         android:orientation="vertical"
         android:padding="10dip"
         >
@@ -11,7 +11,7 @@
 
     <ImageView
         android:id="@+id/pivotal_logo"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pivotal_tracker_small"
         android:layout_marginBottom="10dip"
@@ -22,6 +22,7 @@
             android:hint="@string/username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             />
 
     <EditText
@@ -30,6 +31,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:password="true"
+            android:singleLine="true"
             />
 
     <Button
