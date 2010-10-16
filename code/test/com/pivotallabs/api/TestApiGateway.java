@@ -26,9 +26,8 @@ public class TestApiGateway extends ApiGateway {
         if (pendingRequests.isEmpty()) {
             throw new RuntimeException("No pending requests to simulate response for");
         }
-        return pendingRequests.get(pendingRequests.size() -1).a;
+        return pendingRequests.get(pendingRequests.size() - 1).a;
     }
-
 
     private Pair<ApiRequest, ApiResponseCallbacks> unshiftEarliestRequest() {
         return pendingRequests.remove(0);

@@ -18,7 +18,7 @@ public class RecentActivityActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tracker_recent_activity_layout);
+        setContentView(R.layout.recent_activity_layout);
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
 
@@ -28,10 +28,6 @@ public class RecentActivityActivity extends Activity {
         } else {
             update();
         }
-    }
-
-    private void update() {
-        recentActivities.update();
     }
 
     @Override
@@ -51,12 +47,18 @@ public class RecentActivityActivity extends Activity {
         return true;
     }
 
+    private void update() {
+        recentActivities.update();
+    }
+
     private void showSignInDialog() {
         signInDialog = new SignInDialog(this, trackerAuthenticator);
-        signInDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        signInDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
-            public void onCancel(DialogInterface dialogInterface) {
-                if (!trackerAuthenticator.isAuthenticated()) {
+            public void onDismiss(DialogInterface dialogInterface) {
+                if (trackerAuthenticator.isAuthenticated()) {
+                    update();
+                } else {
                     finish();
                 }
             }

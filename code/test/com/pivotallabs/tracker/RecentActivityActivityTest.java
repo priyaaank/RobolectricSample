@@ -1,14 +1,15 @@
 package com.pivotallabs.tracker;
 
+import android.widget.EditText;
 import com.pivotallabs.EmptyCallbacks;
 import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.R;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import com.xtremelabs.robolectric.fakes.TestMenu;
 import com.xtremelabs.robolectric.fakes.TestMenuItem;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -37,37 +38,36 @@ public class RecentActivityActivityTest {
 
     @Test
     public void shouldShowTheSignInDialogIfNotCurrentlySignedIn() throws Exception {
-        signOutAndRunOnCreate();
+        signOutAndReCreateActivity();
 
         assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
         assertThat(activity.signInDialog.isShowing(), equalTo(true));
     }
 
-    private void signOutAndRunOnCreate() {
-        trackerAuthenticator.signOut();
-        activity = new RecentActivityActivity();
-        activity.onCreate(null);
-    }
-
+    @Test
     public void shouldNotShowTheSignInDialogIfSignedIn() {
         assertThat(activity.signInDialog, nullValue());
     }
 
     @Test
     public void shouldRetrieveRecentActivityUponSuccessfulSignIn() {
+        signOutAndReCreateActivity();
+
+        signInThroughDialog();
+
         assertThat(apiGateway.getLatestRequest(),
                 equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
     }
 
     @Test
-    @Ignore
-    public void shouldRetrieveRecentActivity() {
-
+    public void onCreate_shouldRetrieveRecentActivityWhenSignedIn() {
+        assertThat(apiGateway.getLatestRequest(),
+                   equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
     }
 
     @Test
     public void shouldFinishWhenSignInDialogIsCancelledWithoutSuccessfulSignIn() {
-        signOutAndRunOnCreate();
+        signOutAndReCreateActivity();
 
         activity.signInDialog.cancel();
 
@@ -100,5 +100,23 @@ public class RecentActivityActivityTest {
         TestMenuItem signOutMenuItem = (TestMenuItem) menu.getItem(0);
         assertThat(signOutMenuItem.isEnabled(), equalTo(false));
         assertThat(signOutMenuItem.getTitle().toString(), equalTo("Sign Out"));
+    }
+
+    private void signOutAndReCreateActivity() {
+        trackerAuthenticator.signOut();
+        apiGateway = new TestApiGateway();
+        activity = new RecentActivityActivity();
+        activity.apiGateway = apiGateway;
+        activity.onCreate(null);
+    }
+
+    private void signInThroughDialog() {
+        assertThat(activity.signInDialog.isShowing(), equalTo(true));
+        ((EditText) activity.signInDialog.findViewById(R.id.username)).setText("user");
+        ((EditText) activity.signInDialog.findViewById(R.id.password)).setText("pass");
+        activity.signInDialog.findViewById(R.id.sign_in_button).performClick();
+
+        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        assertThat(activity.signInDialog.isShowing(), equalTo(false));
     }
 }
