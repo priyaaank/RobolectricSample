@@ -1,10 +1,7 @@
 package com.pivotallabs.tracker;
 
 import android.app.Activity;
-import com.pivotallabs.EmptyCallbacks;
-import com.pivotallabs.RobolectricSampleTestRunner;
-import com.pivotallabs.TestChangeListener;
-import com.pivotallabs.TestResponses;
+import com.pivotallabs.*;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import org.junit.Before;
@@ -32,14 +29,14 @@ public class RecentActivitiesTest {
 
     @Test
     public void update_shouldMakeRequest() throws Exception {
-        recentActivities.update();
+        recentActivities.update(new TestCallbacks());
         assertThat(apiGateway.getLatestRequest(),
                 equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
     }
 
     @Test
     public void update_shouldCreateRecentActivityObjectsFromResponse() throws Exception {
-        recentActivities.update();
+        recentActivities.update(new TestCallbacks());
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
 
         assertThat(recentActivities.size(), equalTo(2));
@@ -53,19 +50,45 @@ public class RecentActivitiesTest {
     }
 
     @Test
+    public void update_shouldFireCallbacks_success() throws Exception {
+        TestCallbacks callbacks = new TestCallbacks();
+        recentActivities.update(callbacks);
+
+        assertThat(callbacks.startWasCalled, equalTo(true));
+
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+        assertThat(callbacks.succcessWasCalled, equalTo(true));
+        assertThat(callbacks.failureWasCalled, equalTo(false));
+        assertThat(callbacks.completeWasCalled, equalTo(true));
+    }
+
+    @Test
+    public void update_shouldFireCallbacks_failure() throws Exception {
+        TestCallbacks callbacks = new TestCallbacks();
+        recentActivities.update(callbacks);
+
+        assertThat(callbacks.startWasCalled, equalTo(true));
+
+        apiGateway.simulateResponse(500, "ERROR");
+        assertThat(callbacks.succcessWasCalled, equalTo(false));
+        assertThat(callbacks.failureWasCalled, equalTo(true));
+        assertThat(callbacks.completeWasCalled, equalTo(true));
+    }
+
+    @Test
     public void update_shouldClearExitingItems() throws Exception {
-        recentActivities.update();
+        recentActivities.update(new TestCallbacks());
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         assertThat(recentActivities.size(), equalTo(2));
 
-        recentActivities.update();
+        recentActivities.update(new TestCallbacks());
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         assertThat(recentActivities.size(), equalTo(2));
     }
 
     @Test
     public void shouldFireChangeListenerWhenModified() throws Exception {
-        recentActivities.update();
+        recentActivities.update(new TestCallbacks());
 
         TestChangeListener listener = new TestChangeListener();
         recentActivities.setOnChangeListener(listener);

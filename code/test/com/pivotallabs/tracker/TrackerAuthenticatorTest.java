@@ -64,7 +64,7 @@ public class TrackerAuthenticatorTest {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(callbacks.succcessWasCalled, equalTo(true));
-        assertThat(callbacks.failuireWasCalled, equalTo(false));
+        assertThat(callbacks.failureWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
     }
 
@@ -72,7 +72,7 @@ public class TrackerAuthenticatorTest {
     public void shouldCallFailureWhenAuthenticationFails() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         apiGateway.simulateResponse(500, "ERROR");
-        assertThat(callbacks.failuireWasCalled, equalTo(true));
+        assertThat(callbacks.failureWasCalled, equalTo(true));
         assertThat(callbacks.succcessWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
     }

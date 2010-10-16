@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import com.pivotallabs.Callbacks;
 import com.pivotallabs.R;
 import com.pivotallabs.api.ApiGateway;
 
@@ -53,7 +54,23 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void update() {
-        recentActivities.update();
+        recentActivities.update(new Callbacks() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onFailure() {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
     }
 
     private void showSignInDialog() {

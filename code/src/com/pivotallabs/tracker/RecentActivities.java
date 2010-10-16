@@ -1,5 +1,6 @@
 package com.pivotallabs.tracker;
 
+import com.pivotallabs.Callbacks;
 import com.pivotallabs.OnChangeListener;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
@@ -22,8 +23,10 @@ public class RecentActivities extends ArrayList<RecentActivity> {
         this.trackerAuthenticator = trackerAuthenticator;
     }
 
-    public void update() {
-        apiGateway.makeRequest(new RecentActivityRequest(trackerAuthenticator.getToken()), new RecentActivityApiResponseCallbacks());
+    public void update(Callbacks callbacks) {
+        callbacks.onStart();
+        apiGateway.makeRequest(new RecentActivityRequest(trackerAuthenticator.getToken()),
+                new RecentActivityApiResponseCallbacks(callbacks));
     }
 
     public void setOnChangeListener(OnChangeListener onChangeListener) {
@@ -37,6 +40,12 @@ public class RecentActivities extends ArrayList<RecentActivity> {
     }
 
     private class RecentActivityApiResponseCallbacks implements ApiResponseCallbacks {
+        private Callbacks callbacks;
+
+        public RecentActivityApiResponseCallbacks(Callbacks callbacks) {
+            this.callbacks = callbacks;
+        }
+
         @Override
         public void onSuccess(ApiResponse response) {
             try {
@@ -46,6 +55,7 @@ public class RecentActivities extends ArrayList<RecentActivity> {
                     add(new RecentActivity().apply((Element) activityNodeList.item(i)));
                 }
                 changed();
+                callbacks.onSuccess();
             } catch (ParserConfigurationException pce) {
                 throw new RuntimeException(pce);
             } catch (SAXException se) {
@@ -57,11 +67,12 @@ public class RecentActivities extends ArrayList<RecentActivity> {
 
         @Override
         public void onFailure(ApiResponse response) {
-            System.out.println("Failure retrieving recent activity: " + response.getResponseCode() + ":" + response.getResponseBody());
+            callbacks.onFailure();
         }
 
         @Override
         public void onComplete() {
+            callbacks.onComplete();
         }
     }
 }
