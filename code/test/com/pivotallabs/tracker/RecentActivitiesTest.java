@@ -25,7 +25,7 @@ public class RecentActivitiesTest {
 
         TrackerAuthenticator trackerAuthenticator = new TrackerAuthenticator(apiGateway, new Activity());
         trackerAuthenticator.signIn("user", "pass", new EmptyCallbacks());
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
 
         recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
     }
@@ -50,6 +50,17 @@ public class RecentActivitiesTest {
         RecentActivity recentActivity1 = recentActivities.get(1);
         assertThat(recentActivity1.getDescription(),
                 equalTo("Spongebob Square edited \"Application tracks listing clicks\""));
+    }
+
+    @Test
+    public void update_shouldClearExitingItems() throws Exception {
+        recentActivities.update();
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+        assertThat(recentActivities.size(), equalTo(2));
+
+        recentActivities.update();
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+        assertThat(recentActivities.size(), equalTo(2));
     }
 
     @Test

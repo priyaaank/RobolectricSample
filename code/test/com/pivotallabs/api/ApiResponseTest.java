@@ -1,6 +1,8 @@
 package com.pivotallabs.api;
 
+import com.pivotallabs.TestResponses;
 import org.junit.Test;
+import org.w3c.dom.Document;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -23,5 +25,11 @@ public class ApiResponseTest {
     @Test
     public void isUnauthorized_shouldReturnTrueIfResponseCodeIs401() {
         assertThat(new ApiResponse(401, "Access Denied").isUnauthorized(), equalTo(true));
+    }
+
+    @Test
+    public void getResponseDocument_shouldCreateAnXmlDocumentFromTheResponseBody() throws Exception {
+        Document responseDocument = new ApiResponse(666, TestResponses.AUTH_SUCCESS).getResponseDocument();
+        assertThat(Xmls.getTextContentOfChild(responseDocument, "guid"), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
     }
 }

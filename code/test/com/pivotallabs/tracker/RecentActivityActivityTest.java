@@ -35,7 +35,7 @@ public class RecentActivityActivityTest {
         activity.apiGateway = apiGateway;
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, activity);
         trackerAuthenticator.signIn("spongebob", "squarepants", new EmptyCallbacks());
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         activity.onCreate(null);
     }
 
@@ -128,7 +128,7 @@ public class RecentActivityActivityTest {
         ((EditText) activity.signInDialog.findViewById(R.id.password)).setText("pass");
         activity.signInDialog.findViewById(R.id.sign_in_button).performClick();
 
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(activity.signInDialog.isShowing(), equalTo(false));
     }
 }

@@ -24,7 +24,8 @@ public class RecentActivityActivity extends Activity {
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
         recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
         RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
-        ((ListView) findViewById(R.id.recent_activity_list)).setAdapter(recentActivityAdapter);
+        ListView recentActivityListView = (ListView) findViewById(R.id.recent_activity_list);
+        recentActivityListView.setAdapter(recentActivityAdapter);
         recentActivities.setOnChangeListener(new NotifyDataSetChangedListener(recentActivityAdapter));
 
         if (!trackerAuthenticator.isAuthenticated()) {

@@ -1,5 +1,11 @@
 package com.pivotallabs.api;
 
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+
 public class ApiResponse {
     private int httpResponseCode;
     private String responseBody;
@@ -17,6 +23,9 @@ public class ApiResponse {
         return responseBody;
     }
 
+    public Document getResponseDocument() throws IOException, SAXException, ParserConfigurationException {
+        return Xmls.getDocument(getResponseBody());
+    }
 
     public boolean isSuccess() {
         return httpResponseCode >= 200 && httpResponseCode < 300;

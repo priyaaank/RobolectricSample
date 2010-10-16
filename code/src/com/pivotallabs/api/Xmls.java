@@ -26,4 +26,8 @@ public class Xmls {
     public static String getTextContentOfChild(Element item, String childTagName) {
         return item.getElementsByTagName(childTagName).item(0).getTextContent();
     }
+
+    public static String getTextContentOfChild(Document item, String childTagName) {
+        return item.getElementsByTagName(childTagName).item(0).getTextContent();
+    }
 }

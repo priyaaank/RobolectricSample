@@ -20,7 +20,7 @@ public class RecentActivityTest {
         Document document = Xmls.getDocument(TestResponses.RECENT_ACTIVITY);
         Element activityElement = Xmls.getElement(document, "activity", 0);
         recentActivity = new RecentActivity();
-        recentActivity.applyXmlElement(activityElement);
+        recentActivity.apply(activityElement);
     }
 
     @Test

@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestResponses.simulateUnauthorizedResponse;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
@@ -71,7 +70,7 @@ public class SignInDialogTest {
         usernameEditText.setText("Sponge Bob");
         passwordEditText.setText("squidward");
         signInButton.performClick();
-        TestResponses.simulateUnauthorizedResponse(apiGateway);
+        apiGateway.simulateResponse(401, "Access Denied");
         assertThat(signInButton.isEnabled(), equalTo(true));
     }
 
@@ -83,7 +82,7 @@ public class SignInDialogTest {
 
         assertThat(signInDialog.isShowing(), equalTo(true));
 
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
 
         assertThat(signInDialog.isShowing(), equalTo(false));
     }
@@ -96,7 +95,7 @@ public class SignInDialogTest {
 
         assertThat(signInDialog.isShowing(), equalTo(true));
 
-        simulateUnauthorizedResponse(apiGateway);
+        apiGateway.simulateResponse(401, "Access Denied");
 
         assertThat(signInDialog.isShowing(), equalTo(true));
     }
@@ -107,7 +106,7 @@ public class SignInDialogTest {
         passwordEditText.setText("squidward");
         signInButton.performClick();
 
-        simulateUnauthorizedResponse(apiGateway);
+        apiGateway.simulateResponse(401, "Access Denied");
 
         FakeAlertDialog alertDialog = FakeAlertDialog.latestAlertDialog;
         assertThat(alertDialog.isShowing(), equalTo(true));

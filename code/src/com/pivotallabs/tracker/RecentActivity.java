@@ -8,7 +8,7 @@ public class RecentActivity {
 
     private String description;
 
-    public RecentActivity applyXmlElement(Element recentActivityElement) {
+    public RecentActivity apply(Element recentActivityElement) {
         this.description = getTextContentOfChild(recentActivityElement, "description");
         return this;
     }

@@ -47,14 +47,14 @@ public class TrackerAuthenticatorTest {
     public void authenticated_shouldReturnTrueOnceSignedIn() {
         assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(trackerAuthenticator.isAuthenticated(), equalTo(true));
     }
 
     @Test
     public void signOutShouldRemoveTheSharedPreferences() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         trackerAuthenticator.signOut();
         assertThat(getStoredGuid(), equalTo(""));
     }
@@ -62,7 +62,7 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldCallSuccessWhenAuthenticationSucceeds() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(callbacks.succcessWasCalled, equalTo(true));
         assertThat(callbacks.failuireWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
@@ -71,7 +71,7 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldCallFailureWhenAuthenticationFails() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateServerError(apiGateway);
+        apiGateway.simulateResponse(500, "ERROR");
         assertThat(callbacks.failuireWasCalled, equalTo(true));
         assertThat(callbacks.succcessWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
@@ -80,14 +80,14 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldStoreApiTokenInPrefs() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(getStoredGuid(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
     }
 
     @Test
     public void getToken_shouldReturnGuidFromResponse() throws Exception {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        TestResponses.simulateSuccessfulAuthentication(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(trackerAuthenticator.getToken(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
     }
 

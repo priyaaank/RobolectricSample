@@ -4,8 +4,6 @@ import com.pivotallabs.OnChangeListener;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;
-import com.pivotallabs.api.Xmls;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -41,14 +39,11 @@ public class RecentActivities extends ArrayList<RecentActivity> {
     private class RecentActivityApiResponseCallbacks implements ApiResponseCallbacks {
         @Override
         public void onSuccess(ApiResponse response) {
-
             try {
-                String responseBody = response.getResponseBody();
-
-                Document document = Xmls.getDocument(responseBody);
-                NodeList activityNodeList = document.getElementsByTagName("activity");
+                clear();
+                NodeList activityNodeList = response.getResponseDocument().getElementsByTagName("activity");
                 for (int i = 0; i < activityNodeList.getLength(); i++) {
-                    add(new RecentActivity().applyXmlElement((Element) activityNodeList.item(i)));
+                    add(new RecentActivity().apply((Element) activityNodeList.item(i)));
                 }
                 changed();
             } catch (ParserConfigurationException pce) {
@@ -68,6 +63,5 @@ public class RecentActivities extends ArrayList<RecentActivity> {
         @Override
         public void onComplete() {
         }
-
     }
 }
