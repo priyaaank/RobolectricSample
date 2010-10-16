@@ -30,6 +30,8 @@ import java.util.List;
 
 public class TestHelper implements TestHelperInterface {
 
+    private static ResourceLoader resourceLoader;
+
     /**
      * This method is run before each test.  This is intended to be used as a global before each.
      */
@@ -37,7 +39,7 @@ public class TestHelper implements TestHelperInterface {
     public void before(Method method) {
         prepare();
         FakeHelper.resetRobolectricTestState();
-        FakeHelper.application = new Application();
+        FakeHelper.application = FakeApplication.bind(new Application(), resourceLoader);
     }
 
     /**
@@ -66,10 +68,10 @@ public class TestHelper implements TestHelperInterface {
     }
 
 
-   public static void loadResources() {
-       if (FakeHelper.resourceLoader == null) {
+  public static void loadResources() {
+       if (resourceLoader == null) {
            try {
-               FakeHelper.resourceLoader = new ResourceLoader(R.class, new File("res"));
+               resourceLoader = new ResourceLoader(R.class, new File("res"));
            } catch (Exception e) {
                throw new RuntimeException(e);
            }
