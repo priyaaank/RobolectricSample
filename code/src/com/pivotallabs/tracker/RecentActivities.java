@@ -1,5 +1,6 @@
 package com.pivotallabs.tracker;
 
+import com.pivotallabs.OnChangeListener;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class RecentActivities extends ArrayList<RecentActivity> {
     private ApiGateway apiGateway;
     private TrackerAuthenticator trackerAuthenticator;
+    private OnChangeListener onChangeListener;
 
     public RecentActivities(ApiGateway apiGateway, TrackerAuthenticator trackerAuthenticator) {
         this.apiGateway = apiGateway;
@@ -24,6 +26,16 @@ public class RecentActivities extends ArrayList<RecentActivity> {
 
     public void update() {
         apiGateway.makeRequest(new RecentActivityRequest(trackerAuthenticator.getToken()), new RecentActivityApiResponseCallbacks());
+    }
+
+    public void setOnChangeListener(OnChangeListener onChangeListener) {
+        this.onChangeListener = onChangeListener;
+    }
+
+    public void changed() {
+        if (onChangeListener != null) {
+            onChangeListener.onChange();
+        }
     }
 
     private class RecentActivityApiResponseCallbacks implements ApiResponseCallbacks {
@@ -36,8 +48,9 @@ public class RecentActivities extends ArrayList<RecentActivity> {
                 Document document = Xmls.getDocument(responseBody);
                 NodeList activityNodeList = document.getElementsByTagName("activity");
                 for (int i = 0; i < activityNodeList.getLength(); i++) {
-                      add(new RecentActivity().applyXmlElement((Element)activityNodeList.item(i)));
+                    add(new RecentActivity().applyXmlElement((Element) activityNodeList.item(i)));
                 }
+                changed();
             } catch (ParserConfigurationException pce) {
                 throw new RuntimeException(pce);
             } catch (SAXException se) {

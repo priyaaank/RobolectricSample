@@ -15,7 +15,7 @@ import static com.pivotallabs.TestHelper.proxyFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(FastAndroidTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class HomeActivityTest {
     private HomeActivity activity;
     private Button pressMeButton;

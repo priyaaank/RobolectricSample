@@ -61,9 +61,4 @@ public class TestResponses {
     public static void simulateServerError(TestApiGateway apiGateway) {
         apiGateway.simulateResponse(500, "ERROR");
     }
-
-    public static void simulateRecentActivityResponse(TestApiGateway apiGateway) {
-        apiGateway.simulateResponse(200, RECENT_ACTIVITY);
-    }
-
 }

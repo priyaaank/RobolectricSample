@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
-import com.pivotallabs.FastAndroidTestRunner;
 import com.pivotallabs.R;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 
-@RunWith(FastAndroidTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class SignInDialogTest {
  private View signInButton;
     private TextView usernameEditText;

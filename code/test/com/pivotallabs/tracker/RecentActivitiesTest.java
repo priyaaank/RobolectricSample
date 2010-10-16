@@ -2,7 +2,8 @@ package com.pivotallabs.tracker;
 
 import android.app.Activity;
 import com.pivotallabs.EmptyCallbacks;
-import com.pivotallabs.FastAndroidTestRunner;
+import com.pivotallabs.RobolectricSampleTestRunner;
+import com.pivotallabs.TestChangeListener;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
@@ -10,11 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestResponses.simulateRecentActivityResponse;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(FastAndroidTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class RecentActivitiesTest {
     private TestApiGateway apiGateway;
     private RecentActivities recentActivities;
@@ -40,7 +40,7 @@ public class RecentActivitiesTest {
     @Test
     public void update_shouldCreateRecentActivityObjectsFromResponse() throws Exception {
         recentActivities.update();
-        simulateRecentActivityResponse(apiGateway);
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
 
         assertThat(recentActivities.size(), equalTo(2));
 
@@ -50,5 +50,16 @@ public class RecentActivitiesTest {
         RecentActivity recentActivity1 = recentActivities.get(1);
         assertThat(recentActivity1.getDescription(),
                 equalTo("Spongebob Square edited \"Application tracks listing clicks\""));
+    }
+
+    @Test
+    public void shouldFireChangeListenerWhenModified() throws Exception {
+        recentActivities.update();
+
+        TestChangeListener listener = new TestChangeListener();
+        recentActivities.setOnChangeListener(listener);
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+
+        assertThat(listener.changed, equalTo(true));
     }
 }

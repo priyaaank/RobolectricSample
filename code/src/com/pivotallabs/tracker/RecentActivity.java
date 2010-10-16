@@ -12,6 +12,11 @@ public class RecentActivity {
         return this;
     }
 
+    public RecentActivity setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     public String getDescription() {
         return description;
     }

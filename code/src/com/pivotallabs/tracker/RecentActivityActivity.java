@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import com.pivotallabs.R;
 import com.pivotallabs.api.ApiGateway;
 
@@ -21,8 +22,11 @@ public class RecentActivityActivity extends Activity {
         setContentView(R.layout.recent_activity_layout);
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
-
         recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
+        RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
+        ((ListView) findViewById(R.id.recent_activity_list)).setAdapter(recentActivityAdapter);
+        recentActivities.setOnChangeListener(new NotifyDataSetChangedListener(recentActivityAdapter));
+
         if (!trackerAuthenticator.isAuthenticated()) {
             showSignInDialog();
         } else {

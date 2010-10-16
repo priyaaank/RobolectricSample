@@ -1,9 +1,11 @@
 package com.pivotallabs.tracker;
 
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import com.pivotallabs.EmptyCallbacks;
-import com.pivotallabs.FastAndroidTestRunner;
 import com.pivotallabs.R;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
@@ -14,11 +16,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.pivotallabs.TestHelper.proxyFor;
+import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-@RunWith(FastAndroidTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class RecentActivityActivityTest {
 
     private RecentActivityActivity activity;
@@ -66,7 +69,16 @@ public class RecentActivityActivityTest {
     }
 
     @Test
-    public void shouldFinishWhenSignInDialogIsCancelledWithoutSuccessfulSignIn() {
+    public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
+        ListView activityList = (ListView) activity.findViewById(R.id.recent_activity_list);
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+        yieldToUiThread();
+        assertThat(((TextView) activityList.getChildAt(0)).getText().toString(),
+                equalTo("I changed the 'request' for squidward."));
+    }
+
+    @Test
+    public void shouldFinishWhenSignInDialogIsDismissedWithoutSuccessfulSignIn() {
         signOutAndReCreateActivity();
 
         activity.signInDialog.cancel();

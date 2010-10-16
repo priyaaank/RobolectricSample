@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
-@RunWith(FastAndroidTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class NamesAdapterTest {
 
     private ArrayList<String> names;

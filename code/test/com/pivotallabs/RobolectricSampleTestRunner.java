@@ -6,11 +6,11 @@ import com.xtremelabs.robolectric.Loader;
 import com.xtremelabs.robolectric.ProxyDelegatingHandler;
 import org.junit.runners.model.InitializationError;
 
-public class FastAndroidTestRunner extends AbstractAndroidTestRunner {
+public class RobolectricSampleTestRunner extends AbstractAndroidTestRunner {
     private static final ProxyDelegatingHandler PROXY_DELEGATING_HANDLER = ProxyDelegatingHandler.getInstance();
     private static final Loader LOADER = new Loader(PROXY_DELEGATING_HANDLER);
 
-    public FastAndroidTestRunner(Class testClass) throws InitializationError {
+    public RobolectricSampleTestRunner(Class testClass) throws InitializationError {
         super(testClass, LOADER);
         setClassHandler(PROXY_DELEGATING_HANDLER);
         setTestHelperClass(TestHelper.class);
