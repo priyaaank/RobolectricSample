@@ -1,7 +1,10 @@
 package com.pivotallabs.tracker;
 
 import android.app.Activity;
-import com.pivotallabs.*;
+import com.pivotallabs.Callbacks;
+import com.pivotallabs.RobolectricSampleTestRunner;
+import com.pivotallabs.TestCallbacks;
+import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import org.junit.Before;
@@ -21,7 +24,7 @@ public class RecentActivitiesTest {
         apiGateway = new TestApiGateway();
 
         TrackerAuthenticator trackerAuthenticator = new TrackerAuthenticator(apiGateway, new Activity());
-        trackerAuthenticator.signIn("user", "pass", new EmptyCallbacks());
+        trackerAuthenticator.signIn("user", "pass", new Callbacks());
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
 
         recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
@@ -57,7 +60,7 @@ public class RecentActivitiesTest {
         assertThat(callbacks.startWasCalled, equalTo(true));
 
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
-        assertThat(callbacks.succcessWasCalled, equalTo(true));
+        assertThat(callbacks.successWasCalled, equalTo(true));
         assertThat(callbacks.failureWasCalled, equalTo(false));
         assertThat(callbacks.completeWasCalled, equalTo(true));
     }
@@ -70,7 +73,7 @@ public class RecentActivitiesTest {
         assertThat(callbacks.startWasCalled, equalTo(true));
 
         apiGateway.simulateResponse(500, "ERROR");
-        assertThat(callbacks.succcessWasCalled, equalTo(false));
+        assertThat(callbacks.successWasCalled, equalTo(false));
         assertThat(callbacks.failureWasCalled, equalTo(true));
         assertThat(callbacks.completeWasCalled, equalTo(true));
     }
@@ -84,16 +87,5 @@ public class RecentActivitiesTest {
         recentActivities.update(new TestCallbacks());
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         assertThat(recentActivities.size(), equalTo(2));
-    }
-
-    @Test
-    public void shouldFireChangeListenerWhenModified() throws Exception {
-        recentActivities.update(new TestCallbacks());
-
-        TestChangeListener listener = new TestChangeListener();
-        recentActivities.setOnChangeListener(listener);
-        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
-
-        assertThat(listener.changed, equalTo(true));
     }
 }

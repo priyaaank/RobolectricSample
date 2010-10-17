@@ -45,30 +45,30 @@ public class TrackerAuthenticator {
     }
 
     private static class AuthenticationApiResponseCallbacks implements ApiResponseCallbacks {
-        private Callbacks responseCallbacks;
-        private SharedPreferences preferences;
+        private Callbacks callbacks;
+        private SharedPreferences sharedPreferences;
 
-        public AuthenticationApiResponseCallbacks(Callbacks responseCallbacks, SharedPreferences preferences) {
-            this.responseCallbacks = responseCallbacks;
-            this.preferences = preferences;
+        public AuthenticationApiResponseCallbacks(Callbacks callbacks, SharedPreferences sharedPreferences) {
+            this.callbacks = callbacks;
+            this.sharedPreferences = sharedPreferences;
         }
 
         @Override
         public void onSuccess(ApiResponse response) {
             Matcher matcher = Pattern.compile("<guid>(.*?)</guid>").matcher(response.getResponseBody());
             matcher.find();
-            preferences.edit().putString(GUID_KEY, matcher.group(1)).commit();
-            responseCallbacks.onSuccess();
+            sharedPreferences.edit().putString(GUID_KEY, matcher.group(1)).commit();
+            callbacks.onSuccess();
         }
 
         @Override
         public void onFailure(ApiResponse response) {
-            responseCallbacks.onFailure();
+            callbacks.onFailure();
         }
 
         @Override
         public void onComplete() {
-            responseCallbacks.onComplete();
+            callbacks.onComplete();
         }
     }
 }

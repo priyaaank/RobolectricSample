@@ -1,8 +1,8 @@
 package com.pivotallabs;
 
-public class TestCallbacks implements Callbacks {
+public class TestCallbacks extends Callbacks{
     public boolean startWasCalled;
-    public boolean succcessWasCalled;
+    public boolean successWasCalled;
     public boolean failureWasCalled;
     public boolean completeWasCalled;
 
@@ -13,7 +13,7 @@ public class TestCallbacks implements Callbacks {
 
     @Override
     public void onSuccess() {
-        succcessWasCalled = true;
+        successWasCalled = true;
     }
 
     @Override

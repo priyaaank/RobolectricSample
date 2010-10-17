@@ -7,8 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import com.pivotallabs.ViewVisibleWhileOutstandingCallbacks;
+import com.pivotallabs.NotifyDataSetChangedCallbacks;
 import com.pivotallabs.R;
+import com.pivotallabs.ViewVisibleWhileOutstandingCallbacks;
 import com.pivotallabs.api.ApiGateway;
 
 public class RecentActivityActivity extends Activity {
@@ -19,6 +20,8 @@ public class RecentActivityActivity extends Activity {
     private View loadingView;
     private TrackerAuthenticator trackerAuthenticator;
     private RecentActivities recentActivities;
+    private ViewVisibleWhileOutstandingCallbacks showLoadingWhileOutstanding;
+    private NotifyDataSetChangedCallbacks notifyDataSetChangedCallbacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,9 @@ public class RecentActivityActivity extends Activity {
 
         RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
         recentActivityListView.setAdapter(recentActivityAdapter);
-        recentActivities.setOnChangeListener(new NotifyDataSetChangedListener(recentActivityAdapter));
+
+        showLoadingWhileOutstanding = new ViewVisibleWhileOutstandingCallbacks(loadingView);
+        notifyDataSetChangedCallbacks = new NotifyDataSetChangedCallbacks(recentActivityAdapter);
 
         if (!trackerAuthenticator.isAuthenticated()) {
             showSignInDialog();
@@ -63,7 +68,10 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void update() {
-        recentActivities.update(new ViewVisibleWhileOutstandingCallbacks(loadingView));
+        recentActivities.update(
+                showLoadingWhileOutstanding,
+                notifyDataSetChangedCallbacks
+        );
     }
 
     private void showSignInDialog() {

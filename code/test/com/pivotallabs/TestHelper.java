@@ -37,7 +37,7 @@ public class TestHelper implements TestHelperInterface {
     public static void signIn() {
         TestApiGateway apiGateway = new TestApiGateway();
         new TrackerAuthenticator(apiGateway, new Activity())
-                .signIn("spongebob", "squarepants", new EmptyCallbacks());
+                .signIn("spongebob", "squarepants", new Callbacks());
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
     }
 

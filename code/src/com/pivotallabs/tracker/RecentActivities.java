@@ -1,6 +1,7 @@
 package com.pivotallabs.tracker;
 
 import com.pivotallabs.Callbacks;
+import com.pivotallabs.MultiCallbacks;
 import com.pivotallabs.OnChangeListener;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
@@ -23,20 +24,11 @@ public class RecentActivities extends ArrayList<RecentActivity> {
         this.trackerAuthenticator = trackerAuthenticator;
     }
 
-    public void update(Callbacks callbacks) {
-        callbacks.onStart();
+    public void update(Callbacks... callbacks) {
+        MultiCallbacks multiCallbacks = new MultiCallbacks(callbacks);
+        multiCallbacks.onStart();
         apiGateway.makeRequest(new RecentActivityRequest(trackerAuthenticator.getToken()),
-                new RecentActivityApiResponseCallbacks(callbacks));
-    }
-
-    public void setOnChangeListener(OnChangeListener onChangeListener) {
-        this.onChangeListener = onChangeListener;
-    }
-
-    public void changed() {
-        if (onChangeListener != null) {
-            onChangeListener.onChange();
-        }
+                new RecentActivityApiResponseCallbacks(multiCallbacks));
     }
 
     private class RecentActivityApiResponseCallbacks implements ApiResponseCallbacks {
@@ -54,7 +46,6 @@ public class RecentActivities extends ArrayList<RecentActivity> {
                 for (int i = 0; i < activityNodeList.getLength(); i++) {
                     add(new RecentActivity().apply((Element) activityNodeList.item(i)));
                 }
-                changed();
                 callbacks.onSuccess();
             } catch (ParserConfigurationException pce) {
                 throw new RuntimeException(pce);

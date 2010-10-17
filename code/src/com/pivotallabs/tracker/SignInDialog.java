@@ -46,11 +46,7 @@ public class SignInDialog extends Dialog {
         });
     }
 
-    private class SignInCallbacks implements Callbacks {
-        @Override
-        public void onStart() {
-        }
-
+    private class SignInCallbacks extends Callbacks{
         @Override
         public void onSuccess() {
             dismiss();
