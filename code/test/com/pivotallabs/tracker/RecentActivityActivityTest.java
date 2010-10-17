@@ -1,12 +1,10 @@
 package com.pivotallabs.tracker;
 
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.pivotallabs.EmptyCallbacks;
-import com.pivotallabs.R;
-import com.pivotallabs.RobolectricSampleTestRunner;
-import com.pivotallabs.TestResponses;
+import com.pivotallabs.*;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
 import com.xtremelabs.robolectric.fakes.TestMenu;
@@ -16,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.pivotallabs.TestHelper.proxyFor;
+import static com.pivotallabs.TestHelper.signIn;
 import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -27,16 +26,18 @@ public class RecentActivityActivityTest {
     private RecentActivityActivity activity;
     private TrackerAuthenticator trackerAuthenticator;
     private TestApiGateway apiGateway;
+    private ListView activityListView;
 
     @Before
     public void setUp() throws Exception {
+        signIn();
+       
         apiGateway = new TestApiGateway();
         activity = new RecentActivityActivity();
         activity.apiGateway = apiGateway;
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, activity);
-        trackerAuthenticator.signIn("spongebob", "squarepants", new EmptyCallbacks());
-        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         activity.onCreate(null);
+        activityListView = (ListView) activity.findViewById(R.id.recent_activity_list);
     }
 
     @Test
@@ -65,16 +66,27 @@ public class RecentActivityActivityTest {
     @Test
     public void onCreate_shouldRetrieveRecentActivityWhenSignedIn() {
         assertThat(apiGateway.getLatestRequest(),
-                   equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
+                equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
     }
 
     @Test
     public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
-        ListView activityList = (ListView) activity.findViewById(R.id.recent_activity_list);
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         yieldToUiThread();
-        assertThat(((TextView) activityList.getChildAt(0)).getText().toString(),
+        assertThat(((TextView) activityListView.getChildAt(0)).getText().toString(),
                 equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
+    }
+
+    @Test
+    public void shouldShowProgressBarWhileRequestIsOutstanding() throws Exception {
+        View footerView = proxyFor(activityListView).footerViews.get(0);
+
+        assertThat(footerView.getVisibility(), equalTo(View.VISIBLE));
+
+        apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
+        yieldToUiThread();
+
+        assertThat(footerView.getVisibility(), equalTo(View.GONE));
     }
 
     @Test

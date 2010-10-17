@@ -15,18 +15,19 @@ public class TestApiGateway extends ApiGateway {
     }
 
     public void simulateResponse(int httpCode, String responseBody) {
-        if (pendingRequests.isEmpty()) {
-            throw new RuntimeException("No pending requests to simulate response for");
-        }
-        Pair<ApiRequest, ApiResponseCallbacks> earliestRequestAndCallbacks = unshiftEarliestRequest();
-        dispatch(new ApiResponse(httpCode, responseBody), earliestRequestAndCallbacks.b);
+        ensurePendingRequests();
+        dispatch(new ApiResponse(httpCode, responseBody), unshiftEarliestRequest().b);
     }
 
     public ApiRequest getLatestRequest() {
+        ensurePendingRequests();
+        return pendingRequests.get(pendingRequests.size() - 1).a;
+    }
+
+    private void ensurePendingRequests() {
         if (pendingRequests.isEmpty()) {
             throw new RuntimeException("No pending requests to simulate response for");
         }
-        return pendingRequests.get(pendingRequests.size() - 1).a;
     }
 
     private Pair<ApiRequest, ApiResponseCallbacks> unshiftEarliestRequest() {

@@ -18,6 +18,8 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.pivotallabs.api.TestApiGateway;
+import com.pivotallabs.tracker.TrackerAuthenticator;
 import com.xtremelabs.robolectric.fakes.*;
 import com.xtremelabs.robolectric.res.ResourceLoader;
 import com.xtremelabs.robolectric.util.FakeHelper;
@@ -31,6 +33,13 @@ import java.util.List;
 public class TestHelper implements TestHelperInterface {
 
     private static ResourceLoader resourceLoader;
+
+    public static void signIn() {
+        TestApiGateway apiGateway = new TestApiGateway();
+        new TrackerAuthenticator(apiGateway, new Activity())
+                .signIn("spongebob", "squarepants", new EmptyCallbacks());
+        apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
+    }
 
     /**
      * This method is run before each test.  This is intended to be used as a global before each.

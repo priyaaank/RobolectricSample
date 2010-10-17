@@ -5,8 +5,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
-import com.pivotallabs.Callbacks;
+import com.pivotallabs.ViewVisibleWhileOutstandingCallbacks;
 import com.pivotallabs.R;
 import com.pivotallabs.api.ApiGateway;
 
@@ -14,6 +15,8 @@ public class RecentActivityActivity extends Activity {
 
     ApiGateway apiGateway = new ApiGateway();
     SignInDialog signInDialog;
+
+    private View loadingView;
     private TrackerAuthenticator trackerAuthenticator;
     private RecentActivities recentActivities;
 
@@ -24,8 +27,14 @@ public class RecentActivityActivity extends Activity {
 
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
         recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
-        RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
+
         ListView recentActivityListView = (ListView) findViewById(R.id.recent_activity_list);
+
+        loadingView = getLayoutInflater().inflate(R.layout.loading_view, recentActivityListView, false);
+        recentActivityListView.addFooterView(loadingView);
+        recentActivityListView.setFooterDividersEnabled(false);
+
+        RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
         recentActivityListView.setAdapter(recentActivityAdapter);
         recentActivities.setOnChangeListener(new NotifyDataSetChangedListener(recentActivityAdapter));
 
@@ -54,23 +63,7 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void update() {
-        recentActivities.update(new Callbacks() {
-            @Override
-            public void onStart() {
-            }
-
-            @Override
-            public void onSuccess() {
-            }
-
-            @Override
-            public void onFailure() {
-            }
-
-            @Override
-            public void onComplete() {
-            }
-        });
+        recentActivities.update(new ViewVisibleWhileOutstandingCallbacks(loadingView));
     }
 
     private void showSignInDialog() {
