@@ -17,7 +17,7 @@ public class RecentActivityRequestTest {
 
     @Test
     public void shouldHaveUrl() throws Exception {
-        assertThat(request.getUrlString(), equalTo("http://www.pivotaltracker.com/services/v3/activities"));
+        assertThat(request.getUrlString(), equalTo("http://www.pivotaltracker.com/services/v3/activities?limit=25"));
     }
 
     @Test

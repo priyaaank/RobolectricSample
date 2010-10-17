@@ -17,7 +17,6 @@ public class RecentActivityActivity extends Activity {
     ApiGateway apiGateway = new ApiGateway();
     SignInDialog signInDialog;
 
-    private View loadingView;
     private TrackerAuthenticator trackerAuthenticator;
     private RecentActivities recentActivities;
     private ViewVisibleWhileOutstandingCallbacks showLoadingWhileOutstanding;
@@ -33,8 +32,8 @@ public class RecentActivityActivity extends Activity {
 
         ListView recentActivityListView = (ListView) findViewById(R.id.recent_activity_list);
 
-        loadingView = getLayoutInflater().inflate(R.layout.loading_view, recentActivityListView, false);
-        recentActivityListView.addFooterView(loadingView);
+        View loadingView = getLayoutInflater().inflate(R.layout.loading_view, recentActivityListView, false);
+        recentActivityListView.addFooterView(loadingView, null, false);
         recentActivityListView.setFooterDividersEnabled(false);
 
         RecentActivityAdapter recentActivityAdapter = new RecentActivityAdapter(recentActivities, getLayoutInflater());
@@ -53,7 +52,18 @@ public class RecentActivityActivity extends Activity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
+        addSignOutMenuItem(menu);
+        return true;
+    }
 
+    private void update() {
+        recentActivities.update(
+                showLoadingWhileOutstanding,
+                notifyDataSetChangedCallbacks
+        );
+    }
+
+    private void addSignOutMenuItem(Menu menu) {
         MenuItem signOutMenuItem = menu.add("Sign Out");
         signOutMenuItem.setEnabled(trackerAuthenticator.isAuthenticated());
         signOutMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -64,14 +74,6 @@ public class RecentActivityActivity extends Activity {
                 return true;
             }
         });
-        return true;
-    }
-
-    private void update() {
-        recentActivities.update(
-                showLoadingWhileOutstanding,
-                notifyDataSetChangedCallbacks
-        );
     }
 
     private void showSignInDialog() {

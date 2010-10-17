@@ -14,7 +14,7 @@ public class RecentActivityRequest extends ApiRequest {
 
     @Override
     public String getUrlString() {
-        return "http://www.pivotaltracker.com/services/v3/activities";
+        return "http://www.pivotaltracker.com/services/v3/activities?limit=25";
     }
 
     @Override
