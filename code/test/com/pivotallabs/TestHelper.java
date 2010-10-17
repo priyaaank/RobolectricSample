@@ -20,9 +20,9 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.pivotallabs.api.TestApiGateway;
 import com.pivotallabs.tracker.TrackerAuthenticator;
+import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.fakes.*;
 import com.xtremelabs.robolectric.res.ResourceLoader;
-import com.xtremelabs.robolectric.util.FakeHelper;
 import com.xtremelabs.robolectric.util.Implements;
 import com.xtremelabs.robolectric.util.TestHelperInterface;
 
@@ -47,8 +47,8 @@ public class TestHelper implements TestHelperInterface {
     @Override
     public void before(Method method) {
         prepare();
-        FakeHelper.resetRobolectricTestState();
-        FakeHelper.application = FakeApplication.bind(new Application(), resourceLoader);
+        Robolectric.resetStaticState();
+        Robolectric.application = FakeApplication.bind(new Application(), resourceLoader);
     }
 
     /**
@@ -69,7 +69,7 @@ public class TestHelper implements TestHelperInterface {
     }
 
     public static void setProxies() {
-        List<Class<?>> genericProxies = FakeHelper.getGenericProxies();
+        List<Class<?>> genericProxies = Robolectric.getGenericProxies();
         for (Class<?> genericProxy : genericProxies) {
             Implements implementsClass = genericProxy.getAnnotation(Implements.class);
             RobolectricSampleTestRunner.addProxy(implementsClass.value(), genericProxy);
