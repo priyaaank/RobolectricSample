@@ -53,10 +53,10 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void updateOrSignIn() {
-        if (!trackerAuthenticator.isAuthenticated()) {
-            showSignInDialog();
-        } else {
+        if (trackerAuthenticator.isAuthenticated()) {
             update();
+        } else {
+            showSignInDialog();
         }
     }
 
@@ -85,7 +85,11 @@ public class RecentActivityActivity extends Activity {
         signInDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-               updateOrSignIn();
+                if (trackerAuthenticator.isAuthenticated()) {
+                    update();
+                } else {
+                    finish();
+                }
             }
         });
         signInDialog.show();
