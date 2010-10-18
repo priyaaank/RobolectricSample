@@ -2,7 +2,6 @@ package com.pivotallabs.tracker;
 
 import com.pivotallabs.Callbacks;
 import com.pivotallabs.MultiCallbacks;
-import com.pivotallabs.OnChangeListener;
 import com.pivotallabs.api.ApiGateway;
 import com.pivotallabs.api.ApiResponse;
 import com.pivotallabs.api.ApiResponseCallbacks;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 public class RecentActivities extends ArrayList<RecentActivity> {
     private ApiGateway apiGateway;
     private TrackerAuthenticator trackerAuthenticator;
-    private OnChangeListener onChangeListener;
 
     public RecentActivities(ApiGateway apiGateway, TrackerAuthenticator trackerAuthenticator) {
         this.apiGateway = apiGateway;

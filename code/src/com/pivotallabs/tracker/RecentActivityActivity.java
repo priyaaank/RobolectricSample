@@ -42,11 +42,7 @@ public class RecentActivityActivity extends Activity {
         showLoadingWhileOutstanding = new ViewVisibleWhileOutstandingCallbacks(loadingView);
         notifyDataSetChangedCallbacks = new NotifyDataSetChangedCallbacks(recentActivityAdapter);
 
-        if (!trackerAuthenticator.isAuthenticated()) {
-            showSignInDialog();
-        } else {
-            update();
-        }
+        updateOrSignIn();
     }
 
     @Override
@@ -54,6 +50,14 @@ public class RecentActivityActivity extends Activity {
         menu.clear();
         addSignOutMenuItem(menu);
         return true;
+    }
+
+    private void updateOrSignIn() {
+        if (!trackerAuthenticator.isAuthenticated()) {
+            showSignInDialog();
+        } else {
+            update();
+        }
     }
 
     private void update() {
@@ -81,11 +85,7 @@ public class RecentActivityActivity extends Activity {
         signInDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                if (trackerAuthenticator.isAuthenticated()) {
-                    update();
-                } else {
-                    finish();
-                }
+               updateOrSignIn();
             }
         });
         signInDialog.show();
