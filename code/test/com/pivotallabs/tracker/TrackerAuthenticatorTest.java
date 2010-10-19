@@ -1,7 +1,6 @@
 package com.pivotallabs.tracker;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import com.pivotallabs.RobolectricTestRunner;
 import com.pivotallabs.TestCallbacks;
@@ -11,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.pivotallabs.tracker.TrackerAuthenticator.TRACKER_AUTH_PREF_KEY;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -33,7 +34,8 @@ public class TrackerAuthenticatorTest {
     @Test
     public void shouldMakeARemoteCallWhenSigningIn() throws Exception {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
-        assertThat(apiGateway.getLatestRequest().getUrlString(), equalTo("https://www.pivotaltracker.com/services/v3/tokens/active"));
+        String urlString = apiGateway.getLatestRequest().getUrlString();
+        assertThat(urlString, equalTo("https://www.pivotaltracker.com/services/v3/tokens/active"));
     }
 
     @Test
@@ -81,19 +83,18 @@ public class TrackerAuthenticatorTest {
     public void shouldStoreApiTokenInPrefs() {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
-        assertThat(getStoredGuid(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+        assertThat(getStoredGuid(), equalTo("c93f12c"));
     }
 
     @Test
     public void getToken_shouldReturnGuidFromResponse() throws Exception {
         trackerAuthenticator.signIn("spongebob", "squidward", callbacks);
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
-        assertThat(trackerAuthenticator.getToken(), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+        assertThat(trackerAuthenticator.getToken(), equalTo("c93f12c"));
     }
 
     private String getStoredGuid() {
-        SharedPreferences sharedPreferences =
-                context.getSharedPreferences(TrackerAuthenticator.TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
-        return sharedPreferences.getString("guid", "");
+        SharedPreferences preferences = context.getSharedPreferences(TRACKER_AUTH_PREF_KEY, MODE_PRIVATE);
+        return preferences.getString("guid", "");
     }
 }

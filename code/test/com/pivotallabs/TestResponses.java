@@ -44,7 +44,7 @@ public class TestResponses {
 
     public static final String AUTH_SUCCESS = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<token>\n" +
-            "  <guid>c93f12c71bec27843c1d84b3bdd547f3</guid>\n" +
+            "  <guid>c93f12c</guid>\n" +
             "  <id type=\"integer\">1</id>\n" +
             "</token>";
 

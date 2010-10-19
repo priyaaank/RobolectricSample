@@ -30,6 +30,6 @@ public class ApiResponseTest {
     @Test
     public void getResponseDocument_shouldCreateAnXmlDocumentFromTheResponseBody() throws Exception {
         Document responseDocument = new ApiResponse(666, TestResponses.AUTH_SUCCESS).getResponseDocument();
-        assertThat(Xmls.getTextContentOfChild(responseDocument, "guid"), equalTo("c93f12c71bec27843c1d84b3bdd547f3"));
+        assertThat(Xmls.getTextContentOfChild(responseDocument, "guid"), equalTo("c93f12c"));
     }
 }

@@ -85,13 +85,17 @@ public class RecentActivityActivity extends Activity {
         signInDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
-                if (trackerAuthenticator.isAuthenticated()) {
-                    update();
-                } else {
-                    finish();
-                }
+                updateOrFinish();
             }
         });
         signInDialog.show();
+    }
+
+    private void updateOrFinish() {
+        if (trackerAuthenticator.isAuthenticated()) {
+            update();
+        } else {
+            finish();
+        }
     }
 }

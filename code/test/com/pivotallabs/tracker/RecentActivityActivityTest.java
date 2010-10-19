@@ -31,12 +31,9 @@ public class RecentActivityActivityTest {
     @Before
     public void setUp() throws Exception {
         signIn();
-       
-        apiGateway = new TestApiGateway();
-        activity = new RecentActivityActivity();
-        activity.apiGateway = apiGateway;
+        createActivity();
+
         trackerAuthenticator = new TrackerAuthenticator(apiGateway, activity);
-        activity.onCreate(null);
         activityListView = (ListView) activity.findViewById(R.id.recent_activity_list);
     }
 
@@ -56,17 +53,16 @@ public class RecentActivityActivityTest {
     @Test
     public void shouldRetrieveRecentActivityUponSuccessfulSignIn() {
         signOutAndReCreateActivity();
-
         signInThroughDialog();
 
-        assertThat(apiGateway.getLatestRequest(),
-                equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
+        ApiRequest expectedRequest = new RecentActivityRequest("c93f12c");
+        assertThat(apiGateway.getLatestRequest(), equalTo(expectedRequest));
     }
 
     @Test
     public void onCreate_shouldRetrieveRecentActivityWhenSignedIn() {
         assertThat(apiGateway.getLatestRequest(),
-                equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
+                equalTo((ApiRequest) new RecentActivityRequest("c93f12c")));
     }
 
     @Test
@@ -128,10 +124,7 @@ public class RecentActivityActivityTest {
 
     private void signOutAndReCreateActivity() {
         trackerAuthenticator.signOut();
-        apiGateway = new TestApiGateway();
-        activity = new RecentActivityActivity();
-        activity.apiGateway = apiGateway;
-        activity.onCreate(null);
+        createActivity();
     }
 
     private void signInThroughDialog() {
@@ -142,5 +135,12 @@ public class RecentActivityActivityTest {
 
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
         assertThat(activity.signInDialog.isShowing(), equalTo(false));
+    }
+
+    private void createActivity() {
+        apiGateway = new TestApiGateway();
+        activity = new RecentActivityActivity();
+        activity.apiGateway = apiGateway;
+        activity.onCreate(null);
     }
 }

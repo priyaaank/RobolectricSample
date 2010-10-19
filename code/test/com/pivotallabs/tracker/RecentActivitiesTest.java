@@ -34,7 +34,7 @@ public class RecentActivitiesTest {
     public void update_shouldMakeRequest() throws Exception {
         recentActivities.update(new TestCallbacks());
         assertThat(apiGateway.getLatestRequest(),
-                equalTo((ApiRequest) new RecentActivityRequest("c93f12c71bec27843c1d84b3bdd547f3")));
+                equalTo((ApiRequest) new RecentActivityRequest("c93f12c")));
     }
 
     @Test
