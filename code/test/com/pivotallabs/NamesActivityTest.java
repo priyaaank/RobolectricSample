@@ -10,7 +10,7 @@ import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NamesActivityTest {
 
     private NamesActivity activity;

@@ -15,7 +15,7 @@ import static com.pivotallabs.TestHelper.proxyFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class HomeActivityTest {
     private HomeActivity activity;
     private Button pressMeButton;

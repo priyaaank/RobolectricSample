@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ViewVisibleWhileOutstandingCallbacksTest {
 
     private ViewVisibleWhileOutstandingCallbacks callbacks;

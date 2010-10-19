@@ -30,6 +30,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.List;
 
+@SuppressWarnings({"UnusedDeclaration"})
 public class TestHelper implements TestHelperInterface {
 
     private static ResourceLoader resourceLoader;
@@ -72,7 +73,7 @@ public class TestHelper implements TestHelperInterface {
         List<Class<?>> genericProxies = Robolectric.getGenericProxies();
         for (Class<?> genericProxy : genericProxies) {
             Implements implementsClass = genericProxy.getAnnotation(Implements.class);
-            RobolectricSampleTestRunner.addProxy(implementsClass.value(), genericProxy);
+            RobolectricTestRunner.addProxy(implementsClass.value(), genericProxy);
         }
     }
 
@@ -88,87 +89,87 @@ public class TestHelper implements TestHelperInterface {
    }
 
     public static FakeZoomButtonsController proxyFor(ZoomButtonsController instance) {
-        return (FakeZoomButtonsController) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeZoomButtonsController) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeGeoPoint proxyFor(GeoPoint instance) {
-        return (FakeGeoPoint) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeGeoPoint) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeMapView proxyFor(MapView instance) {
-        return (FakeMapView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeMapView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeMapController proxyFor(MapController instance) {
-        return (FakeMapController) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeMapController) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeItemizedOverlay proxyFor(ItemizedOverlay instance) {
-        return (FakeItemizedOverlay) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeItemizedOverlay) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeListView proxyFor(ListView instance) {
-        return (FakeListView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeListView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeActivity proxyFor(Activity instance) {
-        return (FakeActivity) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeActivity) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakePaint proxyFor(Paint instance) {
-        return (FakePaint) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakePaint) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakePath proxyFor(Path instance) {
-        return (FakePath) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakePath) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeHandler proxyFor(Handler instance) {
-        return (FakeHandler) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeHandler) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeIntent proxyFor(Intent instance) {
-        return (FakeIntent) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeIntent) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeView proxyFor(View instance) {
-        return (FakeView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeViewGroup proxyFor(ViewGroup instance) {
-        return (FakeViewGroup) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeViewGroup) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeAdapterView proxyFor(AdapterView instance) {
-        return (FakeAdapterView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeAdapterView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeTextView proxyFor(TextView instance) {
-        return (FakeTextView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeTextView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeImageView proxyFor(ImageView instance) {
-        return (FakeImageView) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeImageView) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeDialog proxyFor(Dialog instance) {
-        return (FakeDialog) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeDialog) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeAlertDialog proxyFor(AlertDialog instance) {
-        return (FakeAlertDialog) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeAlertDialog) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeLooper proxyFor(Looper instance) {
-        return (FakeLooper) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeLooper) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeCanvas proxyFor(Canvas instance) {
-        return (FakeCanvas) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeCanvas) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static FakeLocationManager proxyFor(LocationManager instance) {
-        return (FakeLocationManager) RobolectricSampleTestRunner.proxyFor(instance);
+        return (FakeLocationManager) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static void yieldToUiThread() {

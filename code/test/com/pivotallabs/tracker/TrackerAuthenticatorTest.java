@@ -3,7 +3,7 @@ package com.pivotallabs.tracker;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.pivotallabs.RobolectricSampleTestRunner;
+import com.pivotallabs.RobolectricTestRunner;
 import com.pivotallabs.TestCallbacks;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.TestApiGateway;
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TrackerAuthenticatorTest {
 
     private TestApiGateway apiGateway;
