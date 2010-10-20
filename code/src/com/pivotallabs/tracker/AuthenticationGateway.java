@@ -11,13 +11,13 @@ import com.pivotallabs.util.Strings;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TrackerAuthenticator {
+public class AuthenticationGateway {
     static final String TRACKER_AUTH_PREF_KEY = "tracker-auth";
     private static final String GUID_KEY = "guid";
     public ApiGateway apiGateway;
     private SharedPreferences sharedPreferences;
 
-    public TrackerAuthenticator(ApiGateway apiGateway, Context context) {
+    public AuthenticationGateway(ApiGateway apiGateway, Context context) {
         this.apiGateway = apiGateway;
         sharedPreferences = context.getSharedPreferences(TRACKER_AUTH_PREF_KEY, Context.MODE_PRIVATE);
     }
@@ -29,7 +29,7 @@ public class TrackerAuthenticator {
     }
 
     public boolean isAuthenticated() {
-        return !Strings.isEmptyOrWhitespace(getGuid());
+        return !Strings.isEmptyOrWhitespace(getToken());
     }
 
     public void signOut() {
@@ -37,10 +37,6 @@ public class TrackerAuthenticator {
     }
 
     public String getToken() {
-        return getGuid();
-    }
-
-    private String getGuid() {
         return sharedPreferences.getString(GUID_KEY, "");
     }
 

@@ -14,12 +14,12 @@ import com.pivotallabs.ViewEnablingTextWatcher;
 
 public class SignInDialog extends Dialog {
 
-    TrackerAuthenticator trackerAuthenticator;
+    AuthenticationGateway authenticationGateway;
     private View signInButton;
 
-    public SignInDialog(Context context, TrackerAuthenticator trackerAuthenticator) {
+    public SignInDialog(Context context, AuthenticationGateway authenticationGateway) {
         super(context, android.R.style.Theme_Light_NoTitleBar);
-        this.trackerAuthenticator = trackerAuthenticator;
+        this.authenticationGateway = authenticationGateway;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SignInDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 signInButton.setEnabled(false);
-                trackerAuthenticator.signIn(
+                authenticationGateway.signIn(
                         usernameEditText.getText().toString(),
                         passwordEditText.getText().toString(),
                         new SignInCallbacks());

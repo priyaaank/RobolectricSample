@@ -17,7 +17,7 @@ public class RecentActivityActivity extends Activity {
     ApiGateway apiGateway = new ApiGateway();
     SignInDialog signInDialog;
 
-    private TrackerAuthenticator trackerAuthenticator;
+    private AuthenticationGateway authenticationGateway;
     private RecentActivities recentActivities;
     private ViewVisibleWhileOutstandingCallbacks showLoadingWhileOutstanding;
     private NotifyDataSetChangedCallbacks notifyDataSetChangedCallbacks;
@@ -27,8 +27,8 @@ public class RecentActivityActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recent_activity_layout);
 
-        trackerAuthenticator = new TrackerAuthenticator(apiGateway, this);
-        recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
+        authenticationGateway = new AuthenticationGateway(apiGateway, this);
+        recentActivities = new RecentActivities(apiGateway, authenticationGateway);
 
         ListView recentActivityListView = (ListView) findViewById(R.id.recent_activity_list);
 
@@ -53,7 +53,7 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void updateOrSignIn() {
-        if (trackerAuthenticator.isAuthenticated()) {
+        if (authenticationGateway.isAuthenticated()) {
             update();
         } else {
             showSignInDialog();
@@ -69,11 +69,11 @@ public class RecentActivityActivity extends Activity {
 
     private void addSignOutMenuItem(Menu menu) {
         MenuItem signOutMenuItem = menu.add("Sign Out");
-        signOutMenuItem.setEnabled(trackerAuthenticator.isAuthenticated());
+        signOutMenuItem.setEnabled(authenticationGateway.isAuthenticated());
         signOutMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                trackerAuthenticator.signOut();
+                authenticationGateway.signOut();
                 finish();
                 return true;
             }
@@ -81,7 +81,7 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void showSignInDialog() {
-        signInDialog = new SignInDialog(this, trackerAuthenticator);
+        signInDialog = new SignInDialog(this, authenticationGateway);
         signInDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -92,7 +92,7 @@ public class RecentActivityActivity extends Activity {
     }
 
     private void updateOrFinish() {
-        if (trackerAuthenticator.isAuthenticated()) {
+        if (authenticationGateway.isAuthenticated()) {
             update();
         } else {
             finish();

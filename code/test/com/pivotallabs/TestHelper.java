@@ -19,7 +19,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.pivotallabs.api.TestApiGateway;
-import com.pivotallabs.tracker.TrackerAuthenticator;
+import com.pivotallabs.tracker.AuthenticationGateway;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.fakes.*;
 import com.xtremelabs.robolectric.res.ResourceLoader;
@@ -37,7 +37,7 @@ public class TestHelper implements TestHelperInterface {
 
     public static void signIn() {
         TestApiGateway apiGateway = new TestApiGateway();
-        new TrackerAuthenticator(apiGateway, new Activity())
+        new AuthenticationGateway(apiGateway, new Activity())
                 .signIn("spongebob", "squarepants", new Callbacks());
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
     }

@@ -15,17 +15,18 @@ import java.util.ArrayList;
 
 public class RecentActivities extends ArrayList<RecentActivity> {
     private ApiGateway apiGateway;
-    private TrackerAuthenticator trackerAuthenticator;
+    private AuthenticationGateway authenticationGateway;
 
-    public RecentActivities(ApiGateway apiGateway, TrackerAuthenticator trackerAuthenticator) {
+    public RecentActivities(ApiGateway apiGateway, AuthenticationGateway authenticationGateway) {
         this.apiGateway = apiGateway;
-        this.trackerAuthenticator = trackerAuthenticator;
+        this.authenticationGateway = authenticationGateway;
     }
 
     public void update(Callbacks... callbacks) {
         MultiCallbacks multiCallbacks = new MultiCallbacks(callbacks);
         multiCallbacks.onStart();
-        apiGateway.makeRequest(new RecentActivityRequest(trackerAuthenticator.getToken()),
+        apiGateway.makeRequest(
+                new RecentActivityRequest(authenticationGateway.getToken()),
                 new RecentActivityApiResponseCallbacks(multiCallbacks));
     }
 

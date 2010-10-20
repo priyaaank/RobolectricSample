@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 public class RecentActivityActivityTest {
 
     private RecentActivityActivity activity;
-    private TrackerAuthenticator trackerAuthenticator;
+    private AuthenticationGateway authenticationGateway;
     private TestApiGateway apiGateway;
     private ListView activityListView;
 
@@ -33,7 +33,7 @@ public class RecentActivityActivityTest {
         signIn();
         createActivity();
 
-        trackerAuthenticator = new TrackerAuthenticator(apiGateway, activity);
+        authenticationGateway = new AuthenticationGateway(apiGateway, activity);
         activityListView = (ListView) activity.findViewById(R.id.recent_activity_list);
     }
 
@@ -41,7 +41,7 @@ public class RecentActivityActivityTest {
     public void shouldShowTheSignInDialogIfNotCurrentlySignedIn() throws Exception {
         signOutAndReCreateActivity();
 
-        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
+        assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
         assertThat(activity.signInDialog.isShowing(), equalTo(true));
     }
 
@@ -106,13 +106,13 @@ public class RecentActivityActivityTest {
         assertThat(signOutMenuItem.getTitle().toString(), equalTo("Sign Out"));
 
         signOutMenuItem.simulateClick();
-        assertThat(trackerAuthenticator.isAuthenticated(), equalTo(false));
+        assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
         assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
     public void signOutButtonShouldBeDisabledWhenNotSignedIn() throws Exception {
-        trackerAuthenticator.signOut();
+        authenticationGateway.signOut();
         TestMenu menu = new TestMenu();
 
         activity.onPrepareOptionsMenu(menu);
@@ -123,7 +123,7 @@ public class RecentActivityActivityTest {
     }
 
     private void signOutAndReCreateActivity() {
-        trackerAuthenticator.signOut();
+        authenticationGateway.signOut();
         createActivity();
     }
 

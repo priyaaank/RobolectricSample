@@ -23,11 +23,11 @@ public class RecentActivitiesTest {
     public void setUp() throws Exception {
         apiGateway = new TestApiGateway();
 
-        TrackerAuthenticator trackerAuthenticator = new TrackerAuthenticator(apiGateway, new Activity());
-        trackerAuthenticator.signIn("user", "pass", new Callbacks());
+        AuthenticationGateway authenticationGateway = new AuthenticationGateway(apiGateway, new Activity());
+        authenticationGateway.signIn("user", "pass", new Callbacks());
         apiGateway.simulateResponse(200, TestResponses.AUTH_SUCCESS);
 
-        recentActivities = new RecentActivities(apiGateway, trackerAuthenticator);
+        recentActivities = new RecentActivities(apiGateway, authenticationGateway);
     }
 
     @Test

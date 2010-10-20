@@ -31,7 +31,7 @@ public class SignInDialogTest {
     @Before
     public void setUp() throws Exception {
         apiGateway = new TestApiGateway();
-        signInDialog = new SignInDialog(new Activity(), new TrackerAuthenticator(apiGateway, new Activity()));
+        signInDialog = new SignInDialog(new Activity(), new AuthenticationGateway(apiGateway, new Activity()));
         
         signInDialog.show();
 
