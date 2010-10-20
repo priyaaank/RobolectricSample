@@ -21,7 +21,7 @@ public class ApiGatewayTest {
         TestResponseCallbacks responseCallbacks = new TestResponseCallbacks();
         ApiResponse apiResponse = new ApiResponse(200, "response body");
         apiGateway.dispatch(apiResponse, responseCallbacks);
-        
+
         assertThat(responseCallbacks.successResponse, sameInstance(apiResponse));
         assertThat(responseCallbacks.failureResponse, nullValue());
         assertThat(responseCallbacks.onCompleteWasCalled, equalTo(true));

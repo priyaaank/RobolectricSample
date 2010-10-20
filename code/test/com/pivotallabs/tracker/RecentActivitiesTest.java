@@ -33,8 +33,8 @@ public class RecentActivitiesTest {
     @Test
     public void update_shouldMakeRequest() throws Exception {
         recentActivities.update(new TestCallbacks());
-        assertThat(apiGateway.getLatestRequest(),
-                equalTo((ApiRequest) new RecentActivityRequest("c93f12c")));
+        ApiRequest expectedRequest = new RecentActivityRequest("c93f12c");
+        assertThat(apiGateway.getLatestRequest(), equalTo(expectedRequest));
     }
 
     @Test
@@ -45,7 +45,8 @@ public class RecentActivitiesTest {
         assertThat(recentActivities.size(), equalTo(2));
 
         RecentActivity recentActivity0 = recentActivities.get(0);
-        assertThat(recentActivity0.getDescription(), equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
+        assertThat(recentActivity0.getDescription(),
+                equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
 
         RecentActivity recentActivity1 = recentActivities.get(1);
         assertThat(recentActivity1.getDescription(),

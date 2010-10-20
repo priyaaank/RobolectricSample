@@ -69,8 +69,8 @@ public class RecentActivityActivityTest {
     public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         yieldToUiThread();
-        assertThat(((TextView) activityListView.getChildAt(0)).getText().toString(),
-                equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
+        String firstRowText = proxyFor((TextView) activityListView.getChildAt(0)).innerText();
+        assertThat(firstRowText, equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
 
     @Test
