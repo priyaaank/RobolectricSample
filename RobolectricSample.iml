@@ -18,6 +18,7 @@
         <option name="LIBRARY_PROJECT" value="false" />
         <option name="COPY_RESOURCES_FROM_ARTIFACTS" value="true" />
         <option name="ENABLE_AAPT_COMPILER" value="true" />
+        <option name="GENERATE_UNSIGNED_APK" value="false" />
       </configuration>
     </facet>
   </component>

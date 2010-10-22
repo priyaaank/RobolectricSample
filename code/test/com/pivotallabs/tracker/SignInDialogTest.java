@@ -9,7 +9,7 @@ import com.pivotallabs.RobolectricTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
-import com.xtremelabs.robolectric.fakes.FakeAlertDialog;
+import com.xtremelabs.robolectric.fakes.ShadowAlertDialog;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -108,7 +108,7 @@ public class SignInDialogTest {
 
         apiGateway.simulateResponse(401, "Access Denied");
 
-        FakeAlertDialog alertDialog = FakeAlertDialog.latestAlertDialog;
+        ShadowAlertDialog alertDialog = ShadowAlertDialog.latestAlertDialog;
         assertThat(alertDialog.isShowing(), equalTo(true));
         assertThat(alertDialog.title, equalTo("Error"));
         assertThat(alertDialog.message, equalTo("Username/Password combination is not recognized."));

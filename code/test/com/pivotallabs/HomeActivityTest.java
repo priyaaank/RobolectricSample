@@ -5,8 +5,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import com.pivotallabs.tracker.RecentActivityActivity;
-import com.xtremelabs.robolectric.fakes.FakeActivity;
-import com.xtremelabs.robolectric.fakes.FakeIntent;
+import com.xtremelabs.robolectric.fakes.ShadowActivity;
+import com.xtremelabs.robolectric.fakes.ShadowIntent;
+import com.xtremelabs.robolectric.fakes.ShadowActivity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,21 +41,21 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheListActivity() throws Exception {
         pressMeButton.performClick();
 
-        FakeActivity fakeActivity = proxyFor(activity);
-        Intent startedIntent = fakeActivity.getNextStartedActivity();
-        FakeIntent fakeIntent = proxyFor(startedIntent);
-        assertThat(fakeIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
+        ShadowActivity shadowActivity = proxyFor(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        ShadowIntent shadowIntent = proxyFor(startedIntent);
+        assertThat(shadowIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
     }
 
     @Test
     public void pressingTheButtonShouldStartTheSignInActivity() throws Exception {
         trackerRecentActivityButton.performClick();
 
-        FakeActivity fakeActivity = proxyFor(activity);
-        Intent startedIntent = fakeActivity.getNextStartedActivity();
-        FakeIntent fakeIntent = proxyFor(startedIntent);
+        ShadowActivity shadowActivity = proxyFor(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        ShadowIntent shadowIntent = proxyFor(startedIntent);
 
-        assertThat(fakeIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
+        assertThat(shadowIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
     }
 
     @Test

@@ -49,7 +49,7 @@ public class TestHelper implements TestHelperInterface {
     public void before(Method method) {
         prepare();
         Robolectric.resetStaticState();
-        Robolectric.application = FakeApplication.bind(new Application(), resourceLoader);
+        Robolectric.application = ShadowApplication.bind(new Application(), resourceLoader);
     }
 
     /**
@@ -88,91 +88,91 @@ public class TestHelper implements TestHelperInterface {
        }
    }
 
-    public static FakeZoomButtonsController proxyFor(ZoomButtonsController instance) {
-        return (FakeZoomButtonsController) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowZoomButtonsController proxyFor(ZoomButtonsController instance) {
+        return (ShadowZoomButtonsController) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeGeoPoint proxyFor(GeoPoint instance) {
-        return (FakeGeoPoint) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowGeoPoint proxyFor(GeoPoint instance) {
+        return (ShadowGeoPoint) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeMapView proxyFor(MapView instance) {
-        return (FakeMapView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowMapView proxyFor(MapView instance) {
+        return (ShadowMapView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeMapController proxyFor(MapController instance) {
-        return (FakeMapController) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowMapController proxyFor(MapController instance) {
+        return (ShadowMapController) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeItemizedOverlay proxyFor(ItemizedOverlay instance) {
-        return (FakeItemizedOverlay) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowItemizedOverlay proxyFor(ItemizedOverlay instance) {
+        return (ShadowItemizedOverlay) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeListView proxyFor(ListView instance) {
-        return (FakeListView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowListView proxyFor(ListView instance) {
+        return (ShadowListView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeActivity proxyFor(Activity instance) {
-        return (FakeActivity) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowActivity proxyFor(Activity instance) {
+        return (ShadowActivity) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakePaint proxyFor(Paint instance) {
-        return (FakePaint) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowPaint proxyFor(Paint instance) {
+        return (ShadowPaint) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakePath proxyFor(Path instance) {
-        return (FakePath) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowPath proxyFor(Path instance) {
+        return (ShadowPath) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeHandler proxyFor(Handler instance) {
-        return (FakeHandler) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowHandler proxyFor(Handler instance) {
+        return (ShadowHandler) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeIntent proxyFor(Intent instance) {
-        return (FakeIntent) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowIntent proxyFor(Intent instance) {
+        return (ShadowIntent) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeView proxyFor(View instance) {
-        return (FakeView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowView proxyFor(View instance) {
+        return (ShadowView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeViewGroup proxyFor(ViewGroup instance) {
-        return (FakeViewGroup) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowViewGroup proxyFor(ViewGroup instance) {
+        return (ShadowViewGroup) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeAdapterView proxyFor(AdapterView instance) {
-        return (FakeAdapterView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowAdapterView proxyFor(AdapterView instance) {
+        return (ShadowAdapterView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeTextView proxyFor(TextView instance) {
-        return (FakeTextView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowTextView proxyFor(TextView instance) {
+        return (ShadowTextView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeImageView proxyFor(ImageView instance) {
-        return (FakeImageView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowImageView proxyFor(ImageView instance) {
+        return (ShadowImageView) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeDialog proxyFor(Dialog instance) {
-        return (FakeDialog) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowDialog proxyFor(Dialog instance) {
+        return (ShadowDialog) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeAlertDialog proxyFor(AlertDialog instance) {
-        return (FakeAlertDialog) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowAlertDialog proxyFor(AlertDialog instance) {
+        return (ShadowAlertDialog) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeLooper proxyFor(Looper instance) {
-        return (FakeLooper) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowLooper proxyFor(Looper instance) {
+        return (ShadowLooper) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeCanvas proxyFor(Canvas instance) {
-        return (FakeCanvas) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowCanvas proxyFor(Canvas instance) {
+        return (ShadowCanvas) RobolectricTestRunner.proxyFor(instance);
     }
 
-    public static FakeLocationManager proxyFor(LocationManager instance) {
-        return (FakeLocationManager) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowLocationManager proxyFor(LocationManager instance) {
+        return (ShadowLocationManager) RobolectricTestRunner.proxyFor(instance);
     }
 
     public static void yieldToUiThread() {
-        FakeHandler.flush();
+        ShadowHandler.flush();
     }
 }
