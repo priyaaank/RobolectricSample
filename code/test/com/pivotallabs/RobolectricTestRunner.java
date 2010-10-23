@@ -23,7 +23,7 @@ public class RobolectricTestRunner extends AbstractRobolectricTestRunner {
     }
 
     @SuppressWarnings({"unchecked"})
-    public static <P, R> P proxyFor(R instance) {
-        return (P) PROXY_DELEGATING_HANDLER.proxyFor(instance);
+    public static <P, R> P shadowFor(R instance) {
+        return (P) PROXY_DELEGATING_HANDLER.shadowFor(instance);
     }
  }

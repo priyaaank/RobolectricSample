@@ -50,13 +50,13 @@ WRITING TESTS
 If you're reading this, you probably know that the Android SDK jar is basically unusable outside of the Emulator or a
 device.  All sdk methods throw RuntimeExceptions("STUB!"). Robolectric de-fangs the sdk jar by rewriting the contents of
 all the methods in the sdk at runtime. By default, the methods are rewritten to do nothing and return null.
-You may provide a fake class to handle specific method calls.  Robolectric provides many simplified fakes, but it
+You may provide a shadow class to handle specific method calls.  Robolectric provides many shadow objects, but it
 is not complete, or necessarily completely realistic.  Most of what you'll need is there, but don't be surprised if you
-have to write a fake for the functionality you're testing.
+have to write a shadow for the functionality you're testing.
 
 Robolectric requires that tests classes are loaded with a custom test runner so that it has a chance to prepare for
 calls into the sdk.  Tests can then be written as you normally would write them.  Helper methods exist to provide
-access to the fakes backing the android objects (proxyFor()).
+access to the shadow objects backing the real Android objects (shadowFor()).
 
 Robolectric handles inflation of views, string resource lookups, etc. Only some view attributes (id, visibility,
 enabled, text, checked, and src) are currently parsed and applied to inflated views.

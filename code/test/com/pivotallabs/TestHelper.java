@@ -88,88 +88,88 @@ public class TestHelper implements TestHelperInterface {
        }
    }
 
-    public static ShadowZoomButtonsController proxyFor(ZoomButtonsController instance) {
-        return (ShadowZoomButtonsController) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowZoomButtonsController shadowFor(ZoomButtonsController instance) {
+        return (ShadowZoomButtonsController) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowGeoPoint proxyFor(GeoPoint instance) {
-        return (ShadowGeoPoint) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowGeoPoint shadowFor(GeoPoint instance) {
+        return (ShadowGeoPoint) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowMapView proxyFor(MapView instance) {
-        return (ShadowMapView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowMapView shadowFor(MapView instance) {
+        return (ShadowMapView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowMapController proxyFor(MapController instance) {
-        return (ShadowMapController) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowMapController shadowFor(MapController instance) {
+        return (ShadowMapController) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowItemizedOverlay proxyFor(ItemizedOverlay instance) {
-        return (ShadowItemizedOverlay) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowItemizedOverlay shadowFor(ItemizedOverlay instance) {
+        return (ShadowItemizedOverlay) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowListView proxyFor(ListView instance) {
-        return (ShadowListView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowListView shadowFor(ListView instance) {
+        return (ShadowListView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowActivity proxyFor(Activity instance) {
-        return (ShadowActivity) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowActivity shadowFor(Activity instance) {
+        return (ShadowActivity) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowPaint proxyFor(Paint instance) {
-        return (ShadowPaint) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowPaint shadowFor(Paint instance) {
+        return (ShadowPaint) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowPath proxyFor(Path instance) {
-        return (ShadowPath) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowPath shadowFor(Path instance) {
+        return (ShadowPath) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowHandler proxyFor(Handler instance) {
-        return (ShadowHandler) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowHandler shadowFor(Handler instance) {
+        return (ShadowHandler) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowIntent proxyFor(Intent instance) {
-        return (ShadowIntent) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowIntent shadowFor(Intent instance) {
+        return (ShadowIntent) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowView proxyFor(View instance) {
-        return (ShadowView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowView shadowFor(View instance) {
+        return (ShadowView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowViewGroup proxyFor(ViewGroup instance) {
-        return (ShadowViewGroup) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowViewGroup shadowFor(ViewGroup instance) {
+        return (ShadowViewGroup) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowAdapterView proxyFor(AdapterView instance) {
-        return (ShadowAdapterView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowAdapterView shadowFor(AdapterView instance) {
+        return (ShadowAdapterView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowTextView proxyFor(TextView instance) {
-        return (ShadowTextView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowTextView shadowFor(TextView instance) {
+        return (ShadowTextView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowImageView proxyFor(ImageView instance) {
-        return (ShadowImageView) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowImageView shadowFor(ImageView instance) {
+        return (ShadowImageView) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowDialog proxyFor(Dialog instance) {
-        return (ShadowDialog) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowDialog shadowFor(Dialog instance) {
+        return (ShadowDialog) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowAlertDialog proxyFor(AlertDialog instance) {
-        return (ShadowAlertDialog) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowAlertDialog shadowFor(AlertDialog instance) {
+        return (ShadowAlertDialog) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowLooper proxyFor(Looper instance) {
-        return (ShadowLooper) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowLooper shadowFor(Looper instance) {
+        return (ShadowLooper) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowCanvas proxyFor(Canvas instance) {
-        return (ShadowCanvas) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowCanvas shadowFor(Canvas instance) {
+        return (ShadowCanvas) RobolectricTestRunner.shadowFor(instance);
     }
 
-    public static ShadowLocationManager proxyFor(LocationManager instance) {
-        return (ShadowLocationManager) RobolectricTestRunner.proxyFor(instance);
+    public static ShadowLocationManager shadowFor(LocationManager instance) {
+        return (ShadowLocationManager) RobolectricTestRunner.shadowFor(instance);
     }
 
     public static void yieldToUiThread() {

@@ -7,12 +7,11 @@ import android.widget.ImageView;
 import com.pivotallabs.tracker.RecentActivityActivity;
 import com.xtremelabs.robolectric.fakes.ShadowActivity;
 import com.xtremelabs.robolectric.fakes.ShadowIntent;
-import com.xtremelabs.robolectric.fakes.ShadowActivity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestHelper.proxyFor;
+import static com.pivotallabs.TestHelper.shadowFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -41,9 +40,9 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheListActivity() throws Exception {
         pressMeButton.performClick();
 
-        ShadowActivity shadowActivity = proxyFor(activity);
+        ShadowActivity shadowActivity = shadowFor(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = proxyFor(startedIntent);
+        ShadowIntent shadowIntent = shadowFor(startedIntent);
         assertThat(shadowIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
     }
 
@@ -51,9 +50,9 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheSignInActivity() throws Exception {
         trackerRecentActivityButton.performClick();
 
-        ShadowActivity shadowActivity = proxyFor(activity);
+        ShadowActivity shadowActivity = shadowFor(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = proxyFor(startedIntent);
+        ShadowIntent shadowIntent = shadowFor(startedIntent);
 
         assertThat(shadowIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
     }
@@ -61,6 +60,6 @@ public class HomeActivityTest {
     @Test
     public void shouldHaveALogo() throws Exception {
         assertThat(pivotalLogo.getVisibility(), equalTo(View.VISIBLE));
-        assertThat(proxyFor(pivotalLogo).resourceId, equalTo(R.drawable.pivotallabs_logo));
+        assertThat(shadowFor(pivotalLogo).resourceId, equalTo(R.drawable.pivotallabs_logo));
     }
 }

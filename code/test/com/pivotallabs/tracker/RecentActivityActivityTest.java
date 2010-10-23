@@ -69,13 +69,13 @@ public class RecentActivityActivityTest {
     public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         yieldToUiThread();
-        String firstRowText = proxyFor((TextView) activityListView.getChildAt(0)).innerText();
+        String firstRowText = shadowFor((TextView) activityListView.getChildAt(0)).innerText();
         assertThat(firstRowText, equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
 
     @Test
     public void shouldShowProgressBarWhileRequestIsOutstanding() throws Exception {
-        View footerView = proxyFor(activityListView).footerViews.get(0);
+        View footerView = shadowFor(activityListView).footerViews.get(0);
 
         assertThat(footerView.getVisibility(), equalTo(View.VISIBLE));
 
@@ -91,7 +91,7 @@ public class RecentActivityActivityTest {
 
         activity.signInDialog.cancel();
 
-        assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowFor(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class RecentActivityActivityTest {
 
         signOutMenuItem.simulateClick();
         assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
-        assertThat(proxyFor(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowFor(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
