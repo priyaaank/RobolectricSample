@@ -9,7 +9,7 @@ import com.pivotallabs.RobolectricTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
-import com.xtremelabs.robolectric.fakes.ShadowAlertDialog;
+import com.xtremelabs.robolectric.shadows.ShadowAlertDialog;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

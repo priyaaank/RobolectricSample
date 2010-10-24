@@ -21,7 +21,7 @@ import com.google.android.maps.MapView;
 import com.pivotallabs.api.TestApiGateway;
 import com.pivotallabs.tracker.AuthenticationGateway;
 import com.xtremelabs.robolectric.Robolectric;
-import com.xtremelabs.robolectric.fakes.*;
+import com.xtremelabs.robolectric.shadows.*;
 import com.xtremelabs.robolectric.res.ResourceLoader;
 import com.xtremelabs.robolectric.util.Implements;
 import com.xtremelabs.robolectric.util.TestHelperInterface;
