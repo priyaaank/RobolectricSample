@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.xtremelabs.robolectric.Robolectric.shadowFor;
+import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -40,9 +40,9 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheListActivity() throws Exception {
         pressMeButton.performClick();
 
-        ShadowActivity shadowActivity = shadowFor(activity);
+        ShadowActivity shadowActivity = shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = shadowFor(startedIntent);
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
     }
 
@@ -50,9 +50,9 @@ public class HomeActivityTest {
     public void pressingTheButtonShouldStartTheSignInActivity() throws Exception {
         trackerRecentActivityButton.performClick();
 
-        ShadowActivity shadowActivity = shadowFor(activity);
+        ShadowActivity shadowActivity = shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
-        ShadowIntent shadowIntent = shadowFor(startedIntent);
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
 
         assertThat(shadowIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
     }
@@ -60,6 +60,6 @@ public class HomeActivityTest {
     @Test
     public void shouldHaveALogo() throws Exception {
         assertThat(pivotalLogo.getVisibility(), equalTo(View.VISIBLE));
-        assertThat(shadowFor(pivotalLogo).resourceId, equalTo(R.drawable.pivotallabs_logo));
+        assertThat(shadowOf(pivotalLogo).resourceId, equalTo(R.drawable.pivotallabs_logo));
     }
 }

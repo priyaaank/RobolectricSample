@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.pivotallabs.TestHelper.*;
-import static com.xtremelabs.robolectric.Robolectric.shadowFor;
+import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -70,13 +70,13 @@ public class RecentActivityActivityTest {
     public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
         yieldToUiThread();
-        String firstRowText = shadowFor((TextView) activityListView.getChildAt(0)).innerText();
+        String firstRowText = shadowOf((TextView) activityListView.getChildAt(0)).innerText();
         assertThat(firstRowText, equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
 
     @Test
     public void shouldShowProgressBarWhileRequestIsOutstanding() throws Exception {
-        View footerView = shadowFor(activityListView).footerViews.get(0);
+        View footerView = shadowOf(activityListView).footerViews.get(0);
 
         assertThat(footerView.getVisibility(), equalTo(View.VISIBLE));
 
@@ -92,7 +92,7 @@ public class RecentActivityActivityTest {
 
         activity.signInDialog.cancel();
 
-        assertThat(shadowFor(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowOf(activity).finishWasCalled, equalTo(true));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class RecentActivityActivityTest {
 
         signOutMenuItem.simulateClick();
         assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
-        assertThat(shadowFor(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowOf(activity).finishWasCalled, equalTo(true));
     }
 
     @Test

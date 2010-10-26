@@ -56,7 +56,7 @@ have to write a shadow for the functionality you're testing.
 
 Robolectric requires that tests classes are loaded with a custom test runner so that it has a chance to prepare for
 calls into the sdk.  Tests can then be written as you normally would write them.  Helper methods exist to provide
-access to the shadow objects backing the real Android objects (shadowFor()).
+access to the shadow objects backing the real Android objects (shadowOf()).
 
 Robolectric handles inflation of views, string resource lookups, etc. Only some view attributes (id, visibility,
 enabled, text, checked, and src) are currently parsed and applied to inflated views.
