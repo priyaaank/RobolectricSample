@@ -17,13 +17,4 @@ public class RobolectricTestRunner extends AbstractRobolectricTestRunner {
         
         LOADER.delegateLoadingOf(Uri.class.getName());
     }
-
-    public static void addProxy(Class<?> realClass, Class<?> handlerClass) {
-        PROXY_DELEGATING_HANDLER.addProxyClass(realClass, handlerClass);
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public static <P, R> P shadowFor(R instance) {
-        return (P) PROXY_DELEGATING_HANDLER.shadowFor(instance);
-    }
  }

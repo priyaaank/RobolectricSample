@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestHelper.shadowFor;
+import static com.xtremelabs.robolectric.Robolectric.shadowFor;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
