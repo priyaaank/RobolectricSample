@@ -8,12 +8,10 @@ import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.res.ResourceLoader;
 import com.xtremelabs.robolectric.shadows.ShadowApplication;
 import com.xtremelabs.robolectric.shadows.ShadowHandler;
-import com.xtremelabs.robolectric.util.Implements;
 import com.xtremelabs.robolectric.util.TestHelperInterface;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.List;
 
 @SuppressWarnings({"UnusedDeclaration"})
 public class TestHelper implements TestHelperInterface {
@@ -51,19 +49,12 @@ public class TestHelper implements TestHelperInterface {
 
     public static void prepare() {
         loadResources();
-        setProxies();
-    }
 
-    public static void setProxies() {
-        List<Class<?>> genericProxies = Robolectric.getGenericProxies();
-        for (Class<?> genericProxy : genericProxies) {
-            Implements implementsClass = genericProxy.getAnnotation(Implements.class);
-            Robolectric.addProxy(implementsClass.value(), genericProxy);
-        }
+        Robolectric.bindDefaultShadowClasses();
     }
 
 
-  public static void loadResources() {
+    public static void loadResources() {
        if (resourceLoader == null) {
            try {
                resourceLoader = new ResourceLoader(R.class, new File("res"));
