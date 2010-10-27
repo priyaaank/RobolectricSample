@@ -92,7 +92,7 @@ public class RecentActivityActivityTest {
 
         activity.signInDialog.cancel();
 
-        assertThat(shadowOf(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowOf(activity).isFinishing(), equalTo(true));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class RecentActivityActivityTest {
 
         signOutMenuItem.simulateClick();
         assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
-        assertThat(shadowOf(activity).finishWasCalled, equalTo(true));
+        assertThat(shadowOf(activity).isFinishing(), equalTo(true));
     }
 
     @Test
