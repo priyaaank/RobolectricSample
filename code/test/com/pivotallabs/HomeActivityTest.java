@@ -43,7 +43,7 @@ public class HomeActivityTest {
         ShadowActivity shadowActivity = shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
-        assertThat(shadowIntent.componentName.getClassName(), equalTo(NamesActivity.class.getName()));
+        assertThat(shadowIntent.getComponent().getClassName(), equalTo(NamesActivity.class.getName()));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class HomeActivityTest {
         Intent startedIntent = shadowActivity.getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
 
-        assertThat(shadowIntent.componentName.getClassName(), equalTo(RecentActivityActivity.class.getName()));
+        assertThat(shadowIntent.getComponent().getClassName(), equalTo(RecentActivityActivity.class.getName()));
     }
 
     @Test

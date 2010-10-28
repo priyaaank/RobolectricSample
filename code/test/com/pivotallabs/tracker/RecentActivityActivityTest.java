@@ -9,13 +9,14 @@ import com.pivotallabs.RobolectricTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
-import com.xtremelabs.robolectric.shadows.TestMenu;
-import com.xtremelabs.robolectric.shadows.TestMenuItem;
+import com.xtremelabs.robolectric.view.TestMenu;
+import com.xtremelabs.robolectric.view.TestMenuItem;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestHelper.*;
+import static com.pivotallabs.TestHelper.signIn;
+import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -106,7 +107,7 @@ public class RecentActivityActivityTest {
         assertThat(signOutMenuItem.isEnabled(), equalTo(true));
         assertThat(signOutMenuItem.getTitle().toString(), equalTo("Sign Out"));
 
-        signOutMenuItem.simulateClick();
+        signOutMenuItem.click();
         assertThat(authenticationGateway.isAuthenticated(), equalTo(false));
         assertThat(shadowOf(activity).isFinishing(), equalTo(true));
     }
