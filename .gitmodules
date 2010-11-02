@@ -1,6 +1,3 @@
 [submodule "robolectric"]
 	path = robolectric
 	url = git://github.com/pivotal/robolectric.git
-[submodule "great-expectations"]
-	path = great-expectations
-	url = git://github.com/Xian/great-expectations.git
