@@ -102,7 +102,6 @@
                verbose="${verbose}" classpath="${extensible.classpath}">
             <src path="${test.absolute.dir}"/>
             <src path="robolectric/src"/>
-            <src path="great-expectations/src/main/java" />
             <classpath>
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <path refid="android.target.classpath"/>
