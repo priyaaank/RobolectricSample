@@ -15,8 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 
@@ -112,7 +111,7 @@ public class SignInDialogTest {
         assertThat(alertDialog.isShowing(), equalTo(true));
         assertThat(alertDialog.title, equalTo("Error"));
         assertThat(alertDialog.message, equalTo("Username/Password combination is not recognized."));
-        assertThat(alertDialog.getButton(AlertDialog.BUTTON_POSITIVE), not(nullValue()));
+        assertNotNull(alertDialog.getButton(AlertDialog.BUTTON_POSITIVE));
     }
 
     private void assertRequestWasMade(TestApiGateway apiGateway, ApiRequest request) {
