@@ -21,6 +21,9 @@ To install this sample app and run the tests:
 
     ant clean test
 
+To install the sample app on the emulator:
+    ant debug
+    adb -e install [-r] <your-project-name>-debug.apk
 
 PROJECT LAYOUT
 
