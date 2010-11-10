@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RecentActivities extends ArrayList<RecentActivity> {
+    private static final long serialVersionUID = 2810203342716301892L;
+	
     private ApiGateway apiGateway;
     private AuthenticationGateway authenticationGateway;
 
