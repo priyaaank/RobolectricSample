@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 import com.pivotallabs.R;
-import com.pivotallabs.RobolectricTestRunner;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class SignInDialogTest {
  private View signInButton;
     private TextView usernameEditText;

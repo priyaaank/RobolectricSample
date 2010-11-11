@@ -1,6 +1,6 @@
 package com.pivotallabs.tracker;
 
-import com.pivotallabs.RobolectricTestRunner;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class TrackerAuthenticationRequestTest  {
     private TrackerAuthenticationRequest request;
 

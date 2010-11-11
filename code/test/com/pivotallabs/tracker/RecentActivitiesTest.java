@@ -2,7 +2,7 @@ package com.pivotallabs.tracker;
 
 import android.app.Activity;
 import com.pivotallabs.Callbacks;
-import com.pivotallabs.RobolectricTestRunner;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestCallbacks;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class RecentActivitiesTest {
     private TestApiGateway apiGateway;
     private RecentActivities recentActivities;

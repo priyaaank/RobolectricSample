@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.pivotallabs.R;
-import com.pivotallabs.RobolectricTestRunner;
+import com.pivotallabs.RobolectricSampleTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class RecentActivityAdapterTest {
     private RecentActivityAdapter adapter;
     private LinearLayout parent;

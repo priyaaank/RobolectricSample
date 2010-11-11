@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricSampleTestRunner.class)
 public class NotifyDataSetChangedCallbacksTest {
     private TestListAdapter testListAdapter;
     private NotifyDataSetChangedCallbacks notifyDataSetChangedCallbacks;
