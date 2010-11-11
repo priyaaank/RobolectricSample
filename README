@@ -3,9 +3,8 @@ your build file, how to layout your project, sample tests, etc.
 
 There are caveats:
 
-    - This project is setup to use IntelliJ (Pivotal's Java IDE of choice).  There currently is no support for Eclipse
-    (Eclipse makes assumptions about the project layout).  If you're interested in getting this running on Eclipse,
-    we need your help!
+    - This project was initially setup to use IntelliJ (Pivotal's Java IDE of choice), however Eclipse support is now
+    included, so please let us know if you have any problems running under Eclipse.
 
     - Currently the library has some requirements on using the Google API's versions of the SDK.
 
@@ -29,7 +28,10 @@ PROJECT LAYOUT
 
 The project moves the source (and test) directory into a plain old Java module (named the code module) so IntelliJ
 won't run the really slow dex step every time the project is built (every time you run tests).  The code module has a
-compile dependency on android the sdk library, allowing you to write your classes as you normally would.
+compile dependency on android the sdk library, allowing you to write your classes as you normally would. If you are
+running in Eclipse you should not include the code/test folder as a source folder and follow the instructions in the
+Robolectric Quick Start guide instead of creating an Android test project. This document can be found at:
+http://pivotal.github.com/robolectric/quick-start.html
 
 The Android resources generated classes (R.class) is generated into the code module, so your code can refer to it.
 
