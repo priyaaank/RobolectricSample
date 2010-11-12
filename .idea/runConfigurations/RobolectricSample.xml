@@ -3,6 +3,7 @@
     <module name="RobolectricSample" />
     <option name="ACTIVITY_CLASS" value="" />
     <option name="MODE" value="default_activity" />
+    <option name="DEPLOY" value="true" />
     <option name="CHOOSE_DEVICE_MANUALLY" value="true" />
     <option name="PREFERRED_AVD" value="" />
     <option name="COMMAND_LINE" value="" />
