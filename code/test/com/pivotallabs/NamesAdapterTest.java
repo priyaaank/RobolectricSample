@@ -3,6 +3,7 @@ package com.pivotallabs;
 import android.app.Activity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NamesAdapterTest {
 
     private ArrayList<String> names;

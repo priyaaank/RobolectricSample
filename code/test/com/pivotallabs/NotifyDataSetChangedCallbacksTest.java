@@ -3,6 +3,7 @@ package com.pivotallabs;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class NotifyDataSetChangedCallbacksTest {
     private TestListAdapter testListAdapter;
     private NotifyDataSetChangedCallbacks notifyDataSetChangedCallbacks;

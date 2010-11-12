@@ -5,10 +5,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.pivotallabs.R;
-import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.view.TestMenu;
 import com.xtremelabs.robolectric.view.TestMenuItem;
 import org.junit.Before;
@@ -22,7 +22,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class RecentActivityActivityTest {
 
     private RecentActivityActivity activity;

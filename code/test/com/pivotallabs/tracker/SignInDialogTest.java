@@ -5,10 +5,10 @@ import android.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 import com.pivotallabs.R;
-import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.ApiRequest;
 import com.pivotallabs.api.TestApiGateway;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowAlertDialog;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class SignInDialogTest {
  private View signInButton;
     private TextView usernameEditText;

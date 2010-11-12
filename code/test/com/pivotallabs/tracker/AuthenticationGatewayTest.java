@@ -1,10 +1,10 @@
 package com.pivotallabs.tracker;
 
 import android.app.Activity;
-import com.pivotallabs.RobolectricSampleTestRunner;
 import com.pivotallabs.TestCallbacks;
 import com.pivotallabs.TestResponses;
 import com.pivotallabs.api.TestApiGateway;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import static com.pivotallabs.tracker.AuthenticationGateway.TRACKER_AUTH_PREF_KE
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class AuthenticationGatewayTest {
 
     private TestApiGateway apiGateway;

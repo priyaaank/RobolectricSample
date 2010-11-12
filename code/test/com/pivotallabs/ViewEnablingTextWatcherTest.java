@@ -2,6 +2,7 @@ package com.pivotallabs;
 
 import android.view.View;
 import android.widget.EditText;
+import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricSampleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class ViewEnablingTextWatcherTest {
     private View toEnable;
     private EditText editText1;
