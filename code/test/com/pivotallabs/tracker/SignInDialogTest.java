@@ -107,10 +107,10 @@ public class SignInDialogTest {
 
         apiGateway.simulateResponse(401, "Access Denied");
 
-        ShadowAlertDialog alertDialog = ShadowAlertDialog.latestAlertDialog;
+        ShadowAlertDialog alertDialog = ShadowAlertDialog.getLatestAlertDialog();
         assertThat(alertDialog.isShowing(), equalTo(true));
-        assertThat(alertDialog.title, equalTo("Error"));
-        assertThat(alertDialog.message, equalTo("Username/Password combination is not recognized."));
+        assertThat(alertDialog.getTitle(), equalTo("Error"));
+        assertThat(alertDialog.getMessage(), equalTo("Username/Password combination is not recognized."));
         assertNotNull(alertDialog.getButton(AlertDialog.BUTTON_POSITIVE));
     }
 

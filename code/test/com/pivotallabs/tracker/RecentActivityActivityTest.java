@@ -77,7 +77,7 @@ public class RecentActivityActivityTest {
 
     @Test
     public void shouldShowProgressBarWhileRequestIsOutstanding() throws Exception {
-        View footerView = shadowOf(activityListView).footerViews.get(0);
+        View footerView = shadowOf(activityListView).getFooterViews().get(0);
 
         assertThat(footerView.getVisibility(), equalTo(View.VISIBLE));
 
