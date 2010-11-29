@@ -4,6 +4,9 @@
     <scope name="droid-sugar" pattern="test[droid-sugar]:*..*||src[droid-sugar]:*..*" />
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
   <component name="IdProvider" IDEtalkID="AE24A4CA10E5901DDEFC78AED92F3E0C" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
