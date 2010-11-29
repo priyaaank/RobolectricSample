@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -48,11 +49,23 @@ public class SignInDialogTest {
         assertThat(signInButton.isEnabled(), equalTo(true));
     }
 
+    @Test(expected = RuntimeException.class)
+    public void shouldNotBeAbleToSignInIfUserNameHasNotBeenSet() throws Exception {
+        passwordEditText.setText("squidward");
+        shadowOf(signInButton).checkedPerformClick();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void shouldNotBeAbleToSignInIfPasswordHasNotBeenSet() throws Exception {
+        usernameEditText.setText("Sponge Bob");        
+        shadowOf(signInButton).checkedPerformClick();
+    }
+
     @Test
     public void shouldCallTheTrackerApiUponClickingSignIn() throws Exception {
         usernameEditText.setText("Sponge Bob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
         assertRequestWasMade(apiGateway, new TrackerAuthenticationRequest("Sponge Bob", "squidward"));
     }
 
@@ -60,7 +73,7 @@ public class SignInDialogTest {
     public void shouldDisableTheSignInButtonWhileRequestIsOutstanding() {
         usernameEditText.setText("Sponge Bob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
         assertThat(signInButton.isEnabled(), equalTo(false));
     }
 
@@ -68,7 +81,7 @@ public class SignInDialogTest {
     public void shouldReEnableTheSignInButtonIfSignInFails() {
         usernameEditText.setText("Sponge Bob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
         apiGateway.simulateResponse(401, "Access Denied");
         assertThat(signInButton.isEnabled(), equalTo(true));
     }
@@ -77,7 +90,7 @@ public class SignInDialogTest {
     public void shouldDismissWhenSuccessfullySignedIn() throws Exception {
         usernameEditText.setText("Spongebob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
 
         assertThat(signInDialog.isShowing(), equalTo(true));
 
@@ -90,7 +103,7 @@ public class SignInDialogTest {
     public void shouldNotDismissWhenUnSuccessfullySignedIn() throws Exception {
         usernameEditText.setText("Spongebob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
 
         assertThat(signInDialog.isShowing(), equalTo(true));
 
@@ -103,7 +116,7 @@ public class SignInDialogTest {
     public void shouldShowAlertDialogWhenUnSuccessfullySignedIn() throws Exception {
         usernameEditText.setText("Spongebob");
         passwordEditText.setText("squidward");
-        signInButton.performClick();
+        shadowOf(signInButton).checkedPerformClick();
 
         apiGateway.simulateResponse(401, "Access Denied");
 
