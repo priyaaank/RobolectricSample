@@ -21,14 +21,8 @@
                 />
     </LinearLayout>
     
-    <include android:id="@+id/home_buttons" layout="@layout/home_buttons" />
+    <include android:id="@+id/home_buttons" layout="@layout/home_buttons_merge" />
+    
+    <include layout="@layout/home_pivotal_logo_non_merge" />
 
-    <ImageView
-            android:id="@+id/pivotal_logo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pivotallabs_logo"
-            android:layout_marginTop="10dip"
-            android:layout_marginBottom="10dip"
-            />
 </LinearLayout>
