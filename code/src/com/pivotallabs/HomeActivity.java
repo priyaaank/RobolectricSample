@@ -8,8 +8,6 @@ import com.pivotallabs.tracker.RecentActivityActivity;
 
 public class HomeActivity extends Activity {
 
-    public static final String PACKAGE_NAME = "com.pivotallabs";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class HomeActivity extends Activity {
 
     private void startActivity(Class<? extends Activity> activityClass) {
         Intent intent = new Intent();
-        intent.setClassName(PACKAGE_NAME, activityClass.getName());
+        intent.setClassName(getPackageName(), activityClass.getName());
         startActivity(intent);
     }
 }
