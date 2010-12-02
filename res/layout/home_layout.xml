@@ -22,7 +22,7 @@
     </LinearLayout>
     
     <include android:id="@+id/home_buttons" layout="@layout/home_buttons_merge" />
-    
+
     <include layout="@layout/home_pivotal_logo_non_merge" />
 
 </LinearLayout>
