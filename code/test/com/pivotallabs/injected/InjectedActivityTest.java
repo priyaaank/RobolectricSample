@@ -1,16 +1,17 @@
 package com.pivotallabs.injected;
 
+import android.content.Context;
 import android.widget.TextView;
 import com.google.inject.Inject;
 import com.pivotallabs.R;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 @RunWith(InjectedTestRunner.class)
 public class InjectedActivityTest {
+    @Inject Context context;
 
     @Inject InjectedActivity injectedActivity;
     @Inject Counter fieldCounter;
@@ -32,7 +33,12 @@ public class InjectedActivityTest {
 
         Counter instanceAgain = injectedActivity.getInjector().getInstance(Counter.class);
         assertEquals(1, instanceAgain.count);
-        
+
         assertSame(fieldCounter, instance);
+    }
+
+    @Test
+    public void shouldBeAbleToInjectAContext() throws Exception {
+        assertNotNull(context);
     }
 }
