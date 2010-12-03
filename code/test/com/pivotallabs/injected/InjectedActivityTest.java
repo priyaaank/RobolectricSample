@@ -20,7 +20,7 @@ public class InjectedActivityTest {
         injectedActivity.onCreate(null);
 
         TextView injectedTextView = (TextView) injectedActivity.findViewById(R.id.injected_text_view);
-        assertEquals(injectedTextView.getText(), "Robolectric Sample");
+        assertEquals(injectedTextView.getText(), "Roboguice Activity tested with Robolectric");
     }
 
     @Test
