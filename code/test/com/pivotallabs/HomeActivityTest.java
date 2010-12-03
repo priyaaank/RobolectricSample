@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.pivotallabs.injected.InjectedActivity;
 import com.pivotallabs.tracker.RecentActivityActivity;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowActivity;
@@ -12,8 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.xtremelabs.robolectric.Robolectric.clickOn;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
@@ -21,6 +24,7 @@ public class HomeActivityTest {
     private HomeActivity activity;
     private Button pressMeButton;
     private Button trackerRecentActivityButton;
+    private Button injectedActivityButton;
     private ImageView pivotalLogo;
 
     @Before
@@ -29,6 +33,7 @@ public class HomeActivityTest {
         activity.onCreate(null);
         pressMeButton = (Button) activity.findViewById(R.id.press_me_button);
         trackerRecentActivityButton = (Button) activity.findViewById(R.id.tracker_recent_activity);
+        injectedActivityButton = (Button) activity.findViewById(R.id.injected_activity_button);
         pivotalLogo = (ImageView) activity.findViewById(R.id.pivotal_logo);
     }
 
@@ -62,5 +67,16 @@ public class HomeActivityTest {
     public void shouldHaveALogo() throws Exception {
         assertThat(pivotalLogo.getVisibility(), equalTo(View.VISIBLE));
         assertThat(shadowOf(pivotalLogo).getResourceId(), equalTo(R.drawable.pivotallabs_logo));
+    }
+
+    @Test
+    public void shouldLaunchInjectedActivity() throws Exception {
+        clickOn(injectedActivityButton);
+
+        ShadowActivity shadowActivity = shadowOf(activity);
+        Intent startedIntent = shadowActivity.getNextStartedActivity();
+        assertNotNull(startedIntent);
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getComponent().getClassName(), equalTo(InjectedActivity.class.getName()));
     }
 }

@@ -16,4 +16,14 @@
             android:text="@string/view_recent_tracker_activity"
             android:layout_marginBottom="10dip"
             />
+
+    <Button
+            android:id="@+id/injected_activity_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/injected_activity"
+            android:layout_marginBottom="10dip"
+            />
+
+
 </merge>

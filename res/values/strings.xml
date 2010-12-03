@@ -10,4 +10,6 @@
     <string name="ok">Ok</string>
     <string name="sign_in">Sign In</string>
     <string name="recent_activity">Recent Activity</string>
+    <string name="injected_activity">Roboguice Injected Activity</string>
+    <string name="injected_activity_caption">Roboguice Activity tested with Robolectric</string>
 </resources>

@@ -9,14 +9,13 @@ import roboguice.inject.InjectView;
 
 public class InjectedActivity extends GuiceActivity {
 
-    @InjectResource(R.string.app_name) String appName;
+    @InjectResource(R.string.injected_activity_caption) String caption;
     @InjectView(R.id.injected_text_view) TextView injectedTextView;
-
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.injected);
 
-        injectedTextView.setText(appName);
+        injectedTextView.setText(caption);
     }
 }
