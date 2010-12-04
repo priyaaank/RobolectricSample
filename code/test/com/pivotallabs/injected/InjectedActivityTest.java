@@ -25,7 +25,7 @@ public class InjectedActivityTest {
     }
 
     @Test
-    public void shouldGetNewCounterEveryTestEvenThoughItsBoundSingletonAlso() throws Exception {
+    public void shouldInjectSingletons() throws Exception {
         Counter instance = injectedActivity.getInjector().getInstance(Counter.class);
         assertEquals(0, instance.count);
 
