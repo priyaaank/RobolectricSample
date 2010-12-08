@@ -31,15 +31,14 @@ public class Http {
     public Response get(String url, Map<String, String> headers, String username, String password)
             throws IOException, URISyntaxException {
         URI uri = new URI(url);
-        String host = uri.getHost();
-        return makeRequest(headers, username, password, new HttpGet(uri), host);
+        return makeRequest(headers, username, password, new HttpGet(uri), uri.getHost());
     }
 
     public Response post(String url, Map<String, String> headers, String postBody, String username, String password)
             throws IOException, URISyntaxException {
         URI uri = new URI(url);
-        HttpRequestBase method = new HttpPost(uri);
-        ((HttpPost) method).setEntity(new StringEntity(postBody, "UTF-8"));
+        HttpPost method = new HttpPost(uri);
+        method.setEntity(new StringEntity(postBody, "UTF-8"));
         return makeRequest(headers, username, password, method, uri.getHost());
     }
 
