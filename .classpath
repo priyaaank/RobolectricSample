@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path="code/src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="code/lib/main/guice-2.0-no_aop.jar"/>
+	<classpathentry kind="lib" path="code/lib/main/roboguice-1.0.jar"/>
 	<classpathentry kind="output" path="robolectric/bin/mainClasses"/>
 </classpath>
