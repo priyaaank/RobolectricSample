@@ -14,6 +14,6 @@ public class TestHelper {
     }
 
     public static void yieldToUiThread() {
-        ShadowHandler.flush();
+        ShadowHandler.idleMainLooper();
     }
 }
