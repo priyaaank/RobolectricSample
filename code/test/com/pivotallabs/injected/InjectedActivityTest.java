@@ -4,9 +4,11 @@ import android.content.Context;
 import android.widget.TextView;
 import com.google.inject.Inject;
 import com.pivotallabs.R;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
 @RunWith(InjectedTestRunner.class)
@@ -15,13 +17,19 @@ public class InjectedActivityTest {
 
     @Inject InjectedActivity injectedActivity;
     @Inject Counter fieldCounter;
+    @Inject FakeDateProvider fakeDateProvider;
+
+    @Before
+    public void setUp() {
+        fakeDateProvider.setDate("8 décembre 2010");
+    }
 
     @Test
     public void shouldAssignStringToTextView() throws Exception {
         injectedActivity.onCreate(null);
-
         TextView injectedTextView = (TextView) injectedActivity.findViewById(R.id.injected_text_view);
-        assertEquals(injectedTextView.getText(), "Roboguice Activity tested with Robolectric");
+        assertThat(injectedTextView.getText().toString(),
+                equalTo("Roboguice Activity tested with Robolectric - 8 décembre 2010"));
     }
 
     @Test
@@ -41,4 +49,5 @@ public class InjectedActivityTest {
     public void shouldBeAbleToInjectAContext() throws Exception {
         assertNotNull(context);
     }
+
 }
