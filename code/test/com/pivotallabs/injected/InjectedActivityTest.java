@@ -21,7 +21,7 @@ public class InjectedActivityTest {
 
     @Before
     public void setUp() {
-        fakeDateProvider.setDate("8 décembre 2010");
+        fakeDateProvider.setDate("December 8, 2010");
     }
 
     @Test
@@ -29,7 +29,7 @@ public class InjectedActivityTest {
         injectedActivity.onCreate(null);
         TextView injectedTextView = (TextView) injectedActivity.findViewById(R.id.injected_text_view);
         assertThat(injectedTextView.getText().toString(),
-                equalTo("Roboguice Activity tested with Robolectric - 8 décembre 2010"));
+                equalTo("Roboguice Activity tested with Robolectric - December 8, 2010"));
     }
 
     @Test

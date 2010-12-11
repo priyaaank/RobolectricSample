@@ -22,7 +22,7 @@ public class InjectedActivity extends GuiceActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.injected);
 
-        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE);
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, Locale.US);
         String formattedDate = dateFormat.format(date);
         injectedTextView.setText(caption + " - " + formattedDate);
     }

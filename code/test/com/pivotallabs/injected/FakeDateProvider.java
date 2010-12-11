@@ -18,7 +18,7 @@ public class FakeDateProvider implements Provider<Date> {
 
     public void setDate(String dateString) {
         try {
-            date = DateFormat.getDateInstance(DateFormat.LONG, Locale.FRANCE).parse(dateString);
+            date = DateFormat.getDateInstance(DateFormat.LONG, Locale.US).parse(dateString);
         } catch (ParseException e) {
             throw new RuntimeException("bad date!!");
         }
