@@ -28,6 +28,10 @@
          -->
     <property file="build.properties"/>
 
+    <property name="external.libs.dir" value="${robolectric.sample.external.libs.dir}" />
+    <property name="jar.libs.dir" value="${robolectric.sample.external.libs.dir}" />
+
+
     <!-- The default.properties file is created and updated by the 'android' tool, as well
          as ADT.
          This file is an integral part of the build system for your application and
@@ -99,14 +103,14 @@
 
         <javac encoding="ascii" source="1.6" target="1.6" debug="true" extdirs=""
                destdir="${out.test-classes.absolute.dir}"
-               verbose="${verbose}" classpath="${extensible.classpath}">
+               verbose="${verbose}" classpath="${robolectric.sample.external.libs.dir}">
             <src path="${test.absolute.dir}"/>
             <src path="robolectric/src"/>
             <classpath>
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <path refid="android.target.classpath"/>
                 <fileset dir="${test.external.libs.absolute.dir}" includes="*.jar"/>
-                <fileset dir="${external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="${robolectric.sample.external.libs.dir}" includes="*.jar"/>
                 <fileset dir="robolectric/lib/main" includes="*.jar"/>
             </classpath>
         </javac>
@@ -131,7 +135,7 @@
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <pathelement path="${out.test-classes.absolute.dir}"/>
                 <fileset dir="${test.external.libs.absolute.dir}" includes="*.jar"/>
-                <fileset dir="${external.libs.absolute.dir}" includes="*.jar"/>
+                <fileset dir="${robolectric.sample.external.libs.dir}" includes="*.jar"/>
                 <fileset dir="robolectric/lib/main" includes="*.jar"/>
 
                 <path refid="android.target.classpath"/>
