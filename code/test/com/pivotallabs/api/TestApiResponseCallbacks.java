@@ -1,6 +1,6 @@
 package com.pivotallabs.api;
 
-public class TestResponseCallbacks implements ApiResponseCallbacks {
+public class TestApiResponseCallbacks implements ApiResponseCallbacks {
 
     public boolean onCompleteWasCalled;
     public ApiResponse successResponse;
