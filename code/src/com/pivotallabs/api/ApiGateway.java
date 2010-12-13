@@ -31,9 +31,7 @@ public class ApiGateway {
             ApiRequest apiRequest = apiRequests[0];
             try {
                 Http.Response response = new Http().get(apiRequest.getUrlString(), apiRequest.getHeaders(), apiRequest.getUsername(), apiRequest.getPassword());
-                ApiResponse apiResponse = new ApiResponse(response.getStatusCode(), response.getResponseBody());
-                System.out.println("apiResponse = " + apiResponse);
-                return apiResponse;
+                return new ApiResponse(response.getStatusCode(), response.getResponseBody());
             } catch (IOException e) {
                 throw new RuntimeException("error making request", e);
             } catch (URISyntaxException e) {
