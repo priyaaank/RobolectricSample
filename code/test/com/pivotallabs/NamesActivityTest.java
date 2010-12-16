@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -26,8 +25,6 @@ public class NamesActivityTest {
         activity.onCreate(null);
                         
         ListView namesListView = (ListView) activity.findViewById(R.id.names_list);
-
-        yieldToUiThread();
 
         TextView nameRow = (TextView) namesListView.getChildAt(1);
 

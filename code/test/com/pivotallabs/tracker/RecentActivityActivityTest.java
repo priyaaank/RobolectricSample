@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static com.pivotallabs.TestHelper.signIn;
-import static com.pivotallabs.TestHelper.yieldToUiThread;
 import static com.xtremelabs.robolectric.Robolectric.shadowOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -70,7 +69,6 @@ public class RecentActivityActivityTest {
     @Test
     public void shouldPopulateViewWithRetrievedRecentActivity() throws Exception {
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
-        yieldToUiThread();
         String firstRowText = shadowOf((TextView) activityListView.getChildAt(0)).innerText();
         assertThat(firstRowText, equalTo("I changed the 'request' for squidward. \"Add 'Buyout'\""));
     }
@@ -82,7 +80,6 @@ public class RecentActivityActivityTest {
         assertThat(footerView.getVisibility(), equalTo(View.VISIBLE));
 
         apiGateway.simulateResponse(200, TestResponses.RECENT_ACTIVITY);
-        yieldToUiThread();
 
         assertThat(footerView.getVisibility(), equalTo(View.GONE));
     }
