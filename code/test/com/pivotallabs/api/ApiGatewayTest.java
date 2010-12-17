@@ -2,6 +2,7 @@ package com.pivotallabs.api;
 
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
+import com.xtremelabs.robolectric.shadows.ShadowAsyncTask;
 import com.xtremelabs.robolectric.util.HttpRequestData;
 import org.apache.http.HttpRequest;
 import org.apache.http.auth.AuthScope;
@@ -53,12 +54,14 @@ public class ApiGatewayTest {
 
     @Test
     public void shouldMakeRemoteCalls() {
+        ShadowAsyncTask.getAsyncTaskScheduler().pause();
+
         ApiRequest apiRequest = new TestApiRequest();
         apiGateway.makeRequest(apiRequest, responseCallbacks);
 
         Robolectric.addPendingHttpResponse(200, "response body");
 
-        Robolectric.backgroundScheduler.runOneTask();
+        ShadowAsyncTask.getAsyncTaskScheduler().runOneTask();
 
         HttpRequestData sentHttpRequestData = Robolectric.getSentHttpRequestData(0);
         HttpRequest sentHttpRequest = sentHttpRequestData.getHttpRequest();
@@ -75,14 +78,17 @@ public class ApiGatewayTest {
 
     @Test
     public void shouldDispatchUponReceivingResponse() throws Exception {
+        ShadowAsyncTask.getAsyncTaskScheduler().pause();
+        Robolectric.getUiThreadScheduler().pause();
+
         Robolectric.addPendingHttpResponse(200, "response body");
 
         apiGateway.makeRequest(new TestApiRequest(), responseCallbacks);
-        Robolectric.backgroundScheduler.runOneTask();
+        ShadowAsyncTask.getAsyncTaskScheduler().runOneTask();
 
         assertThat(responseCallbacks.successResponse, nullValue());
 
-        Robolectric.uiThreadScheduler.runOneTask();
+        Robolectric.getUiThreadScheduler().runOneTask();
 
         assertThat(responseCallbacks.successResponse.getResponseBody(), equalTo("response body\n"));
     }
