@@ -35,7 +35,6 @@ public class HomeActivity extends Activity {
                 startActivity(InjectedActivity.class);
             }
         });
-
     }
 
     private void startActivity(Class<? extends Activity> activityClass) {

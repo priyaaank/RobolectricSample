@@ -15,7 +15,8 @@ import org.junit.runner.RunWith;
 
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -70,12 +71,20 @@ public class ApiGatewayTest {
                 (CredentialsProvider) sentHttpRequestData.getHttpContext().getAttribute(ClientContext.CREDS_PROVIDER);
         assertThat(credentialsProvider.getCredentials(AuthScope.ANY).getUserPrincipal().getName(), CoreMatchers.equalTo("spongebob"));
         assertThat(credentialsProvider.getCredentials(AuthScope.ANY).getPassword(), CoreMatchers.equalTo("squarepants"));
+    }
+
+    @Test
+    public void shouldDispatchUponReceivingResponse() throws Exception {
+        Robolectric.addPendingHttpResponse(200, "response body");
+
+        apiGateway.makeRequest(new TestApiRequest(), responseCallbacks);
+        Robolectric.backgroundScheduler.runOneTask();
 
         assertThat(responseCallbacks.successResponse, nullValue());
 
         Robolectric.uiThreadScheduler.runOneTask();
 
-        assertThat(responseCallbacks.successResponse, not(nullValue()));
+        assertThat(responseCallbacks.successResponse.getResponseBody(), equalTo("response body\n"));
     }
 
     private class TestApiRequest extends ApiRequest {
