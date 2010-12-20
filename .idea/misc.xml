@@ -6,6 +6,9 @@
   </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="com.xtremelabs.robolectric.util.Implementation" />
+    </list>
   </component>
   <component name="IdProvider" IDEtalkID="AE24A4CA10E5901DDEFC78AED92F3E0C" />
   <component name="JavadocGenerationManager">
