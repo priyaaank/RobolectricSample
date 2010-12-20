@@ -6,8 +6,6 @@ There are caveats:
     - This project was initially setup to use IntelliJ (Pivotal's Java IDE of choice), however Eclipse support is now
     included, so please let us know if you have any problems running under Eclipse.
 
-    - Currently the library has some requirements on using the Google API's versions of the SDK.
-
     - Sometimes IntelliJ's module settings dialog re-adds the "code/gen" directory as a source in the main Android
       module, causing an error to appear; just manually remove it to fix.
 
@@ -69,8 +67,8 @@ enabled, text, checked, and src) are currently parsed and applied to inflated vi
 
 GETTING STARTED
 
-For now we recommend that you start with this skeleton application and add your code to it. For buggy and wrong pointers
-on how to convert your existing project, see CONVERTING-EXISTING-APPS.
+For more information about how to get projects running in your IDE see:
+http://pivotal.github.com/robolectric/quick-start.html
 
 
 CONTRIBUTING
