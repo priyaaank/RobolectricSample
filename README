@@ -22,6 +22,10 @@ To install the sample app on the emulator:
     ant debug
     adb -e install [-r] <your-project-name>-debug.apk
 
+For more information about how to get projects running in your IDE see:
+http://pivotal.github.com/robolectric/quick-start.html
+
+
 PROJECT LAYOUT
 
 The project moves the source (and test) directory into a plain old Java module (named the code module) so IntelliJ
@@ -63,12 +67,6 @@ access to the shadow objects backing the real Android objects (shadowOf()).
 
 Robolectric handles inflation of views, string resource lookups, etc. Only some view attributes (id, visibility,
 enabled, text, checked, and src) are currently parsed and applied to inflated views.
-
-
-GETTING STARTED
-
-For more information about how to get projects running in your IDE see:
-http://pivotal.github.com/robolectric/quick-start.html
 
 
 CONTRIBUTING
