@@ -3,7 +3,7 @@ package com.pivotallabs.api;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowAsyncTask;
-import com.xtremelabs.robolectric.util.HttpRequestData;
+import com.xtremelabs.robolectric.util.HttpRequestInfo;
 import org.apache.http.HttpRequest;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.client.CredentialsProvider;
@@ -63,7 +63,7 @@ public class ApiGatewayTest {
 
         ShadowAsyncTask.getAsyncTaskScheduler().runOneTask();
 
-        HttpRequestData sentHttpRequestData = Robolectric.getSentHttpRequestData(0);
+        HttpRequestInfo sentHttpRequestData = Robolectric.getSentHttpRequestInfo(0);
         HttpRequest sentHttpRequest = sentHttpRequestData.getHttpRequest();
         assertThat(sentHttpRequest.getRequestLine().getUri(), equalTo("www.example.com"));
         assertThat(sentHttpRequest.getRequestLine().getMethod(), equalTo(HttpGet.METHOD_NAME));

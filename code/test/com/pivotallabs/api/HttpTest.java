@@ -3,7 +3,7 @@ package com.pivotallabs.api;
 import com.google.inject.internal.Maps;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
-import com.xtremelabs.robolectric.util.HttpRequestData;
+import com.xtremelabs.robolectric.util.HttpRequestInfo;
 import com.xtremelabs.robolectric.util.Strings;
 import org.apache.http.HttpRequest;
 import org.apache.http.auth.AuthScope;
@@ -58,7 +58,7 @@ public class HttpTest {
     public void testGet_FormsCorrectRequest_withBasicAuth() throws Exception {
         Robolectric.addPendingHttpResponse(200, "OK");
         new Http().get("www.example.com", Maps.<String, String>newHashMap(), "username", "password");
-        HttpRequestData sentHttpRequestData = Robolectric.getSentHttpRequestData(0);
+        HttpRequestInfo sentHttpRequestData = Robolectric.getSentHttpRequestInfo(0);
 
         CredentialsProvider credentialsProvider =
                 (CredentialsProvider) sentHttpRequestData.getHttpContext().getAttribute(ClientContext.CREDS_PROVIDER);
