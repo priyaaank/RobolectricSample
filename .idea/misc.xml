@@ -43,12 +43,7 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
-    </option>
-    <option name="activeProfiles">
-      <list>
-        <option value="ant-deps" />
+        <option value="$PROJECT_DIR$/robolectric/pom.xml" />
       </list>
     </option>
   </component>

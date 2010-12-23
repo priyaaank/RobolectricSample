@@ -4,6 +4,7 @@ bin/
 .DS_Store
 .idea/workspace.xml
 .idea/dictionaries/
+.idea/libraries/
 out
 local.properties
 emulator15SdCard.*
