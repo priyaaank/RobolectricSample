@@ -21,7 +21,7 @@
         <dependency>
             <groupId>com.pivotallabs</groupId>
             <artifactId>robolectric</artifactId>
-            <version>0.9.4-SNAPSHOT</version>
+            <version>0.9.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
