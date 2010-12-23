@@ -105,7 +105,7 @@
                destdir="${out.test-classes.absolute.dir}"
                verbose="${verbose}" classpath="${robolectric.sample.external.libs.dir}">
             <src path="${test.absolute.dir}"/>
-            <src path="robolectric/src"/>
+            <src path="robolectric/src/main/java"/>
             <classpath>
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <path refid="android.target.classpath"/>
