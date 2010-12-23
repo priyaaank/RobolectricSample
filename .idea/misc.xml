@@ -15,6 +15,9 @@
       <facet-type id="android">
         <modules>
           <module name="RobolectricSample" />
+          <module name="RobolectricSample (1)" />
+          <module name="RobolectricSample (2)" />
+          <module name="RobolectricSampleApp" />
         </modules>
       </facet-type>
     </autodetection-disabled>

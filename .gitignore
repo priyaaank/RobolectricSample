@@ -1,6 +1,4 @@
-gen/
-aidls/gen/
-code/gen/
+RobolectricSampleApp/gen/
 IntegrationTests/gen/
 bin/
 .DS_Store
@@ -13,3 +11,4 @@ temp.json
 temp.xml
 temp.txt
 tmp/
+target/
