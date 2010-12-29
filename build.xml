@@ -81,11 +81,13 @@
     <condition property="build.number" value="${env.BUILD_NUMBER}" else="unknown">
         <isset property="env.BUILD_NUMBER"/>
     </condition>
-    <exec command="date" outputproperty="build.date"/>
+    <exec executable="date" outputproperty="build.date"/>
 
     <!-- Generates java classes from .aidl files. -->
     <target name="-aidl" depends="-dirs">
         <echo>Compiling aidl files into Java classes...</echo>
+        <mkdir dir="${aidl.absolute.dir}" />
+
         <apply executable="${aidl}" failonerror="true">
             <arg value="-p${android.aidl}" />
             <arg value="-I${source.absolute.dir}" />
