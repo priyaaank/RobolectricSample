@@ -74,7 +74,6 @@
     <property name="test.absolute.dir" location="${test.dir}"/>
     <property name="out.test-classes.dir" value="${out.absolute.dir}/testClasses"/>
     <property name="out.test-classes.absolute.dir" value="${out.test-classes.dir}"/>
-    <property name="test.external.libs.dir" value="code/lib/test"/>
     <property name="test.external.libs.absolute.dir" location="${test.external.libs.dir}"/>
     <property name="publish.dir" location="${out.absolute.dir}/publish"/>
 
@@ -127,7 +126,7 @@
             <formatter type="plain"/>
             <formatter type="xml"/>
             <batchtest todir="${basedir}/out/reports/tests">
-                <fileset dir="${basedir}/code/test">
+                <fileset dir="${test.absolute.dir}">
                     <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>
