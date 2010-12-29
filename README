@@ -28,25 +28,25 @@ http://pivotal.github.com/robolectric/quick-start.html
 
 PROJECT LAYOUT
 
-The project moves the source (and test) directory into a plain old Java module (named the code module) so IntelliJ
-won't run the really slow dex step every time the project is built (every time you run tests).  The code module has a
-compile dependency on android the sdk library, allowing you to write your classes as you normally would. If you are
-running in Eclipse you should not include the code/test folder as a source folder and follow the instructions in the
+The project moves the source (and test) directory into a plain old Java module (named the src module) so IntelliJ
+won't run the really slow dex step every time the project is built (i.e. every time you run tests).  The src module has a
+compile dependency on the android sdk library, allowing you to write your classes as you normally would. If you are
+running in Eclipse you should not include the src/test/java folder as a source folder and follow the instructions in the
 Robolectric Quick Start guide instead of creating an Android test project. This document can be found at:
 http://pivotal.github.com/robolectric/quick-start.html
 
-The Android resources generated classes (R.class) is generated into the code module, so your code can refer to it.
+The Android resources generated classes (R.class) is generated into the src module, so your code can refer to it.
 
-The main Android module depends on the code module, and performs the dex build step.
+The main Android module depends on the src module, and performs the dex build step.
 
-The optional aidls module contains any service aidls for your project. The main module has a dependency to it, but code
-does not. Code generated from aidls is generated into the code module by the Android build task.
+The optional aidls module contains any service aidls for your project. The main module has a dependency to it, but src
+does not. Code generated from aidls is generated into the src module by the Android build task.
 
 
 ANT
 
 The project contains a build.xml configured for the layout of the project.  The file extends the standard Android
-build.xml to support the layout of the project files.  The build.xml file defines a test target.
+build.xml modified to support the layout of the project files.  The build.xml file defines a test target.
 
 This sample project and build.xml file also has support for the aidls your application may define. Currently there are
 no samples demonstrating this, but we have successfully used this setup on projects that define aidls.
