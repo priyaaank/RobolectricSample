@@ -3,70 +3,44 @@ your build file, how to layout your project, sample tests, etc.
 
 There are caveats:
 
-    - This project was initially setup to use IntelliJ (Pivotal's Java IDE of choice), however Eclipse support is now
-    included, so please let us know if you have any problems running under Eclipse.
+    - This project uses Maven and can be imported into IntelliJ (open the pom.xml) or Eclipse (using M2Eclipse).
 
-    - Sometimes IntelliJ's module settings dialog re-adds the "code/gen" directory as a source in the main Android
-      module, causing an error to appear; just manually remove it to fix.
+    - We recommend building with Maven, but this project can also be built using ant.
+
+
+INSTALLATION
 
 To install this sample app and run the tests:
 
     git clone git://github.com/pivotal/RobolectricSample.git
     cd RobolectricSample
-    git submodule update --init
     android update project -p .
 
+For more information about how to get projects running in your IDE see:
+http://pivotal.github.com/robolectric/quick-start.html
+
+
+BUILDING WITH MAVEN
+
+To build and run tests:
+    mvn clean test
+
+To install the sample app on the emulator:
+    mvn android:deploy
+
+
+BUILDING WITH ANT
+
+To build and run tests:
+    git submodule update --init
     ant clean test
 
 To install the sample app on the emulator:
     ant debug
     adb -e install [-r] <your-project-name>-debug.apk
 
-For more information about how to get projects running in your IDE see:
-http://pivotal.github.com/robolectric/quick-start.html
-
-
-PROJECT LAYOUT
-
-The project moves the source (and test) directory into a plain old Java module (named the src module) so IntelliJ
-won't run the really slow dex step every time the project is built (i.e. every time you run tests).  The src module has a
-compile dependency on the android sdk library, allowing you to write your classes as you normally would. If you are
-running in Eclipse you should not include the src/test/java folder as a source folder and follow the instructions in the
-Robolectric Quick Start guide instead of creating an Android test project. This document can be found at:
-http://pivotal.github.com/robolectric/quick-start.html
-
-The Android resources generated classes (R.class) is generated into the src module, so your code can refer to it.
-
-The main Android module depends on the src module, and performs the dex build step.
-
-The optional aidls module contains any service aidls for your project. The main module has a dependency to it, but src
-does not. Code generated from aidls is generated into the src module by the Android build task.
-
-
-ANT
-
 The project contains a build.xml configured for the layout of the project.  The file extends the standard Android
 build.xml modified to support the layout of the project files.  The build.xml file defines a test target.
-
-This sample project and build.xml file also has support for the aidls your application may define. Currently there are
-no samples demonstrating this, but we have successfully used this setup on projects that define aidls.
-
-
-WRITING TESTS
-
-If you're reading this, you probably know that the Android SDK jar is basically unusable outside of the Emulator or a
-device.  All sdk methods throw RuntimeExceptions("STUB!"). Robolectric de-fangs the sdk jar by rewriting the contents of
-all the methods in the sdk at runtime. By default, the methods are rewritten to do nothing and return null.
-You may provide a shadow class to handle specific method calls.  Robolectric provides many shadow objects, but it
-is not complete, or necessarily completely realistic.  Most of what you'll need is there, but don't be surprised if you
-have to write a shadow for the functionality you're testing.
-
-Robolectric requires that tests classes are loaded with a custom test runner so that it has a chance to prepare for
-calls into the sdk.  Tests can then be written as you normally would write them.  Helper methods exist to provide
-access to the shadow objects backing the real Android objects (shadowOf()).
-
-Robolectric handles inflation of views, string resource lookups, etc. Only some view attributes (id, visibility,
-enabled, text, checked, and src) are currently parsed and applied to inflated views.
 
 
 CONTRIBUTING

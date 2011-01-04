@@ -68,9 +68,6 @@
     -->
     <setup/>
 
-    <property name="aidl.dir" location="${aidl.dir}"/>
-    <property name="aidl.absolute.dir" location="${aidl.dir}"/>
-
     <property name="test.absolute.dir" location="${test.dir}"/>
     <property name="out.test-classes.dir" value="${out.absolute.dir}/testClasses"/>
     <property name="out.test-classes.absolute.dir" value="${out.test-classes.dir}"/>
@@ -82,21 +79,6 @@
         <isset property="env.BUILD_NUMBER"/>
     </condition>
     <exec executable="date" outputproperty="build.date"/>
-
-    <!-- Generates java classes from .aidl files. -->
-    <target name="-aidl" depends="-dirs">
-        <echo>Compiling aidl files into Java classes...</echo>
-        <mkdir dir="${aidl.absolute.dir}" />
-
-        <apply executable="${aidl}" failonerror="true">
-            <arg value="-p${android.aidl}" />
-            <arg value="-I${source.absolute.dir}" />
-            <arg value="-o${gen.absolute.dir}" />
-            <fileset dir="${aidl.absolute.dir}">
-                <include name="**/*.aidl" />
-            </fileset>
-        </apply>
-    </target>
 
     <target name="compile.tests" depends="compile"
             description="compile module source; test classes" unless="skip.tests">
