@@ -68,13 +68,9 @@
     -->
     <setup/>
 
-    <property name="aidl.dir" location="${aidl.dir}"/>
-    <property name="aidl.absolute.dir" location="${aidl.dir}"/>
-
     <property name="test.absolute.dir" location="${test.dir}"/>
     <property name="out.test-classes.dir" value="${out.absolute.dir}/testClasses"/>
     <property name="out.test-classes.absolute.dir" value="${out.test-classes.dir}"/>
-    <property name="test.external.libs.dir" value="code/lib/test"/>
     <property name="test.external.libs.absolute.dir" location="${test.external.libs.dir}"/>
     <property name="publish.dir" location="${out.absolute.dir}/publish"/>
 
@@ -82,20 +78,7 @@
     <condition property="build.number" value="${env.BUILD_NUMBER}" else="unknown">
         <isset property="env.BUILD_NUMBER"/>
     </condition>
-    <exec command="date" outputproperty="build.date"/>
-
-    <!-- Generates java classes from .aidl files. -->
-    <target name="-aidl" depends="-dirs">
-        <echo>Compiling aidl files into Java classes...</echo>
-        <apply executable="${aidl}" failonerror="true">
-            <arg value="-p${android.aidl}" />
-            <arg value="-I${source.absolute.dir}" />
-            <arg value="-o${gen.absolute.dir}" />
-            <fileset dir="${aidl.absolute.dir}">
-                <include name="**/*.aidl" />
-            </fileset>
-        </apply>
-    </target>
+    <exec executable="date" outputproperty="build.date"/>
 
     <target name="compile.tests" depends="compile"
             description="compile module source; test classes" unless="skip.tests">
@@ -105,7 +88,7 @@
                destdir="${out.test-classes.absolute.dir}"
                verbose="${verbose}" classpath="${robolectric.sample.external.libs.dir}">
             <src path="${test.absolute.dir}"/>
-            <src path="robolectric/src"/>
+            <src path="robolectric/src/main/java"/>
             <classpath>
                 <pathelement path="${out.classes.absolute.dir}"/>
                 <path refid="android.target.classpath"/>
@@ -127,7 +110,7 @@
             <formatter type="plain"/>
             <formatter type="xml"/>
             <batchtest todir="${basedir}/out/reports/tests">
-                <fileset dir="${basedir}/code/test">
+                <fileset dir="${test.absolute.dir}">
                     <include name="**/*Test.java"/>
                 </fileset>
             </batchtest>

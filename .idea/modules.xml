@@ -5,7 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/RobolectricSample.iml" filepath="$PROJECT_DIR$/RobolectricSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/aidls/aidls.iml" filepath="$PROJECT_DIR$/aidls/aidls.iml" />
       <module fileurl="file://$PROJECT_DIR$/code/code.iml" filepath="$PROJECT_DIR$/code/code.iml" />
-      <module fileurl="file://$PROJECT_DIR$/robolectric/robolectric.iml" filepath="$PROJECT_DIR$/robolectric/robolectric.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/robolectric.iml" filepath="$PROJECT_DIR$/.idea/robolectric.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/src.iml" filepath="$PROJECT_DIR$/src/src.iml" />
     </modules>
   </component>
 </project>
