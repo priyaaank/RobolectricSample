@@ -7,6 +7,9 @@ IntegrationTests/gen/
 .idea/workspace.xml
 .idea/dictionaries/
 .idea/libraries/
+*.ipr
+*.iws
+*.iml
 .DS_Store
 local.properties
 emulator15SdCard.*
