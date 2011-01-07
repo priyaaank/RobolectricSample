@@ -50,7 +50,8 @@ CONTRIBUTING
 
 We welcome contributions. Please fork and submit pull requests!
 
-* This method leaves your pom.xml in an edited state. You can avoid this by running an alternative ant target and adding
+* This method leaves your pom.xml in an edited state. If you know the path to the Android SDK (it gets stored as
+"sdk.dir" in your local.properties file) you can avoid this by running an alternative ant target and adding
 an xml snippet to your ~/.m2/settings.xml file:
 
     ant maven-install-jars
@@ -59,7 +60,9 @@ and in the "profiles" section of the settings.xml file:
     <profile>
         <id>android</id>
         <properties>
-            <android.sdk.path>/Users/pivotal/android</android.sdk.path>
+            <android.sdk.path>
+                PATH / TO / THE / ANDROID / SDK
+            </android.sdk.path>
         </properties>
     </profile>
 
