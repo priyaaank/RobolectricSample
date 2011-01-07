@@ -129,7 +129,7 @@
 
     <target name="maven-setup" depends="maven-set-android-sdk, maven-install-jars" description="Set the path to the Android SDK and install jars"/>
     
-    <target name="maven-install-jars" description="Set the path to the Android SDK in the pom.xml file">
+    <target name="maven-install-jars" description="Install the jar files that Maven can't find for itself">
         <exec executable="mvn">
             <arg line="install:install-file -DgroupId=com.google.inject -DartifactId=guice -Dversion=2.0 -Dclassifier=no-aop -Dpackaging=jar -Dfile=lib/main/guice-2.0-no_aop.jar" />
         </exec>
