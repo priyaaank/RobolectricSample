@@ -22,6 +22,9 @@ http://pivotal.github.com/robolectric/quick-start.html
 
 BUILDING WITH MAVEN
 
+Once only:
+    ant maven-setup
+
 To build and run tests:
     mvn clean test
 
