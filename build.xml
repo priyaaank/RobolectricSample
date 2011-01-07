@@ -127,7 +127,8 @@
         <fail if="junit.failure" message="Unit test(s) failed.  See reports!"/>
     </target>
 
-    <target name="maven-setup" depends="maven-set-android-sdk" description="Set the path to the Android SDK and install jars"/>
+    <target name="maven-setup" depends="maven-set-android-sdk, maven-install-jars" description="Set the path to the Android SDK and install jars"/>
+    
     <target name="maven-install-jars" description="Set the path to the Android SDK in the pom.xml file">
         <exec executable="mvn">
             <arg line="install:install-file -DgroupId=com.google.android.maps -DartifactId=maps -Dversion=8_r2 -Dpackaging=jar -Dfile=${sdk.dir}/add-ons/addon_google_apis_google_inc_8/libs/maps.jar" />
@@ -137,7 +138,7 @@
         <!--</exec>-->
     </target>
 
-    <target name="maven-set-android-sdk" description="Set the path to the Android SDK in the pom.xml file"/>
+    <target name="maven-set-android-sdk" description="Set the path to the Android SDK in the pom.xml file">
         <copy file="pom.xml" tofile="pom.xml.tmp">
             <filterchain>
                 <tokenfilter>
