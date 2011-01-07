@@ -22,7 +22,7 @@ http://pivotal.github.com/robolectric/quick-start.html
 
 BUILDING WITH MAVEN
 
-Once only:
+Once only*:
     ant maven-setup
 
 To build and run tests:
@@ -49,3 +49,17 @@ build.xml modified to support the layout of the project files.  The build.xml fi
 CONTRIBUTING
 
 We welcome contributions. Please fork and submit pull requests!
+
+* This method leaves your pom.xml in an edited state. You can avoid this by running an alternative ant target and adding
+an xml snippet to your ~/.m2/settings.xml file:
+
+    ant maven-install-jars
+
+and in the "profiles" section of the settings.xml file:
+    <profile>
+        <id>android</id>
+        <properties>
+            <android.sdk.path>/Users/pivotal/android</android.sdk.path>
+        </properties>
+    </profile>
+
