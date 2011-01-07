@@ -131,11 +131,11 @@
     
     <target name="maven-install-jars" description="Set the path to the Android SDK in the pom.xml file">
         <exec executable="mvn">
+            <arg line="install:install-file -DgroupId=com.google.inject -DartifactId=guice -Dversion=2.0 -Dclassifier=no-aop -Dpackaging=jar -Dfile=lib/main/guice-2.0-no_aop.jar" />
+        </exec>
+        <exec executable="mvn">
             <arg line="install:install-file -DgroupId=com.google.android.maps -DartifactId=maps -Dversion=8_r2 -Dpackaging=jar -Dfile=${sdk.dir}/add-ons/addon_google_apis_google_inc_8/libs/maps.jar" />
         </exec>
-        <!--<exec executable="mvn">-->
-            <!--<arg line="lib/main/guice-2.0-no_aop.jar" />-->
-        <!--</exec>-->
     </target>
 
     <target name="maven-set-android-sdk" description="Set the path to the Android SDK in the pom.xml file">
