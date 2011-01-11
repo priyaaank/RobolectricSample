@@ -56,13 +56,20 @@ an xml snippet to your ~/.m2/settings.xml file:
 
     ant maven-install-jars
 
-and in the "profiles" section of the settings.xml file:
-    <profile>
-        <id>android</id>
-        <properties>
-            <android.sdk.path>
-                PATH / TO / THE / ANDROID / SDK
-            </android.sdk.path>
-        </properties>
-    </profile>
-
+and make your settings.xml file look something like this:
+    <settings>
+        <profiles>
+            <profile>
+                <id>android</id>
+                <properties>
+                    <android.sdk.path>
+                        PATH / TO / THE / ANDROID / SDK
+                    </android.sdk.path>
+                </properties>
+            </profile>
+        </profiles>
+        <activeProfiles>
+            <!--make the profile active all the time -->
+            <activeProfile>android</activeProfile>
+        </activeProfiles>
+    </settings>
