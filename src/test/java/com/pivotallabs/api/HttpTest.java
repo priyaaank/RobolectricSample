@@ -26,7 +26,7 @@ import static org.junit.Assert.assertThat;
 public class HttpTest {
     @Test
     public void testGet_FormsCorrectRequest_noBasicAuth() throws Exception {
-        Robolectric.addPendingHttpResponse(1, "OK");
+        Robolectric.addPendingHttpResponse(200, "OK");
 
         new Http().get("www.example.com", Maps.<String, String>newHashMap(), null, null);
 
@@ -35,7 +35,7 @@ public class HttpTest {
 
     @Test
     public void testGet_shouldApplyCorrectHeaders() throws Exception {
-        Robolectric.addPendingHttpResponse(1, "OK");
+        Robolectric.addPendingHttpResponse(200, "OK");
 
         HashMap<String,String> headers = Maps.newHashMap();
         headers.put("foo", "bar");
@@ -47,7 +47,7 @@ public class HttpTest {
 
     @Test
     public void testGet_ShouldUseCorrectHttpMethod() throws Exception {
-        Robolectric.addPendingHttpResponse(1, "OK");
+        Robolectric.addPendingHttpResponse(200, "OK");
 
         new Http().get("www.example.com", Maps.<String, String>newHashMap(), null, null);
         HttpUriRequest sentHttpRequest = (HttpUriRequest) Robolectric.getSentHttpRequest(0);
@@ -78,7 +78,7 @@ public class HttpTest {
 
     @Test
     public void testPost_ShouldUseCorrectMethod() throws Exception {
-        Robolectric.addPendingHttpResponse(1, "OK");
+        Robolectric.addPendingHttpResponse(200, "OK");
 
         new Http().post("www.example.com", Maps.<String, String>newHashMap(), "a post body", null, null);
 
@@ -88,7 +88,7 @@ public class HttpTest {
 
     @Test
     public void testPost_ShouldIncludePostBody() throws Exception {
-        Robolectric.addPendingHttpResponse(1, "OK");
+        Robolectric.addPendingHttpResponse(200, "OK");
 
         new Http().post("www.example.com", Maps.<String, String>newHashMap(), "a post body", null, null);
 
