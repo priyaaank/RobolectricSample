@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.entity.StringEntity;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,6 +25,11 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(RobolectricTestRunner.class)
 public class HttpTest {
+    @Before
+    public void setup() {
+        Robolectric.setDefaultHttpResponse(200, "OK");
+    }
+
     @Test
     public void testGet_FormsCorrectRequest_noBasicAuth() throws Exception {
         Robolectric.addPendingHttpResponse(200, "OK");
@@ -35,8 +41,6 @@ public class HttpTest {
 
     @Test
     public void testGet_shouldApplyCorrectHeaders() throws Exception {
-        Robolectric.addPendingHttpResponse(200, "OK");
-
         HashMap<String,String> headers = Maps.newHashMap();
         headers.put("foo", "bar");
         new Http().get("www.example.com", headers, null, null);
@@ -47,8 +51,6 @@ public class HttpTest {
 
     @Test
     public void testGet_ShouldUseCorrectHttpMethod() throws Exception {
-        Robolectric.addPendingHttpResponse(200, "OK");
-
         new Http().get("www.example.com", Maps.<String, String>newHashMap(), null, null);
         HttpUriRequest sentHttpRequest = (HttpUriRequest) Robolectric.getSentHttpRequest(0);
         assertThat(sentHttpRequest.getMethod(), equalTo(HttpGet.METHOD_NAME));
@@ -78,8 +80,6 @@ public class HttpTest {
 
     @Test
     public void testPost_ShouldUseCorrectMethod() throws Exception {
-        Robolectric.addPendingHttpResponse(200, "OK");
-
         new Http().post("www.example.com", Maps.<String, String>newHashMap(), "a post body", null, null);
 
         HttpUriRequest sentHttpRequest = (HttpUriRequest) Robolectric.getSentHttpRequest(0);
@@ -88,8 +88,6 @@ public class HttpTest {
 
     @Test
     public void testPost_ShouldIncludePostBody() throws Exception {
-        Robolectric.addPendingHttpResponse(200, "OK");
-
         new Http().post("www.example.com", Maps.<String, String>newHashMap(), "a post body", null, null);
 
         HttpPost sentHttpRequest = (HttpPost) Robolectric.getSentHttpRequest(0);
