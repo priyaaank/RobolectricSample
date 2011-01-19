@@ -39,8 +39,8 @@
         <dependency>
             <groupId>com.pivotallabs</groupId>
             <artifactId>robolectric</artifactId>
-            <!--<version>0.9.6</version>-->
-            <version>0.9.7-SNAPSHOT</version>
+            <version>0.9.7</version>
+            <!--<version>0.9.8-SNAPSHOT</version>-->
             <scope>test</scope>
         </dependency>
 
