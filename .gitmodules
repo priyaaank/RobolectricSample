@@ -1,3 +1,0 @@
-[submodule "robolectric"]
-	path = robolectric
-	url = git://github.com/pivotal/robolectric.git
