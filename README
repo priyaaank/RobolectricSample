@@ -35,7 +35,6 @@ To install the sample app on the emulator:
 BUILDING WITH ANT
 
 To build and run tests:
-    git submodule update --init
     ant clean test
 
 To install the sample app on the emulator:
